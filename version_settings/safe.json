@@ -1,0 +1,50 @@
+{
+    "permissions": {
+      "allow": [
+        "AskUserQuestion",
+        "Bash(just:*)",
+        "Bash(pre-commit --version)",
+        "Bash(pre-commit install:*)",
+        "Bash(pre-commit run:*)"
+      ],
+      "ask": [
+        "Bash(aws:*)",
+        "Bash(awscli:*)",
+        "Bash(rm -rf:*)",
+        "Bash(rm -r:*)",
+        "Bash(rm -f:*)",
+        "Bash(git push --force:*)",
+        "Bash(git push -f:*)",
+        "Bash(git reset --hard:*)",
+        "Bash(git clean:*)",
+        "Bash(git branch -D:*)",
+        "Bash(kill :*)",
+        "Bash(kill -:*)",
+        "Bash(pkill:*)",
+        "Bash(killall:*)",
+        "Bash(dd :*)",
+        "Bash(mkfs:*)",
+        "Bash(fdisk:*)",
+        "Bash(truncate:*)",
+        "Bash(shred:*)",
+        "Bash(chmod 777:*)",
+        "Bash(chmod -R:*)"
+      ],
+      "defaultMode": "dontAsk"
+    },
+    "enabledPlugins": {
+      "code-review@claude-plugins-official": true,
+      "adlc@teamworks-claude": true,
+      "flywheel@teamworks-claude": true,
+      "worktrees@teamworks-claude": true,
+      "foundations@teamworks-claude": true
+    },
+    "extraKnownMarketplaces": {
+      "teamworks-claude": {
+        "source": {
+          "source": "git",
+          "url": "git@gitlab.com:teamworksdev/performance/data-gen-ai/agenticengineeringacademy.git"
+        }
+      }
+    }
+  }
