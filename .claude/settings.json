@@ -32,7 +32,6 @@
       "Bash(glab repo search *)",
       "Bash(glab repo contributors *)",
       "Bash(glab user events *)",
-      "Bash(python *)",
       "Bash(aws s3 ls *)",
       "Bash(AWS_PROFILE=datalake-stg aws s3 ls *)",
       "Bash(make *)",
@@ -43,7 +42,6 @@
       "Bash(just *)",
       "Bash(poetry run *)",
       "Bash(uv run *)",
-      "Bash(grep *)",
       "Bash(bd *)",
       "Bash(bd update *)",
       "Bash(bv --robot-triage --format toon)",
@@ -58,16 +56,12 @@
       "Bash(do echo *)",
       "Bash(done)",
       "Bash(ls *)",
-      "Bash(cp *)",
       "Read(/Users/cecil/Code/*)",
       "Write(/Users/cecil/Code/*)",
-      "Edit",
-      "Write",
       "Skill(update-config)"
     ],
     "deny": [
       "Bash(git switch*)",
-      "Bash(git checkout*)",
       "Bash(git push --force*)",
       "Bash(git push -f*)",
       "Bash(git reset --hard*)",
@@ -131,6 +125,10 @@
       "Write(/System/*)"
     ],
     "ask": [
+      "Bash(python *)",
+      "Bash(cp *)",
+      "Bash(grep *)",
+      "Bash(git checkout*)",
       "Bash(glab api *)",
       "Bash(glab auth logout *)",
       "Bash(glab auth configure-docker *)",
