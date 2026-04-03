@@ -3,12 +3,19 @@
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
   "permissions": {
+    "additionalDirectories": [
+      "/Users/cecil/Code/agenticengineeringacademy",
+      "/Users/cecil/.claude"
+    ],
     "allow": [
       "mcp__linear-server__*",
       "mcp__fff__find_files",
       "mcp__fff__grep",
       "mcp__fff__multi_grep",
+      "Bash(find /Users/cecil/Code/*)",
+      "Bash(grep *)",
       "Bash(ls *)",
+      "Bash(bandit:*)",
       "Bash(claude mcp list)",
       "Bash(glab version)",
       "Bash(glab auth login *)",
@@ -52,6 +59,7 @@
       "Bash(git status *)",
       "Bash(git status)",
       "Bash(git log *)",
+      "Bash(git checkout*)",
       "Bash(git log)",
       "Bash(git diff *)",
       "Bash(git diff)",
@@ -61,6 +69,7 @@
       "Bash(git branch)",
       "Bash(git add *)",
       "Bash(git commit *)",
+      "Bash(git switch*)",
       "Bash(git push *)",
       "Bash(git pull *)",
       "Bash(git pull)",
@@ -103,7 +112,53 @@
       "Bash(npm show:*)",
       "Bash(bash /Users/cecil/Code/genai/.claude/skills/pull-main/pull-main.sh)",
       "Bash(bash /Users/cecil/Code/genai/.claude/skills/branch-setup/sync-main.sh)",
-      "Bash(cd /Users/cecil/Code/*)"
+      "Bash(cd /Users/cecil/Code/*)",
+      "Bash(sort -k4 -rn)",
+      "Bash(sort -k4 -n)",
+      "Bash(helm version:*)",
+      "Bash(helm lint:*)",
+      "Bash(helm template:*)",
+      "WebFetch(domain:gitlab.com)",
+      "Bash(git -C /Users/cecil/Code/genai branch --show-current)",
+      "Bash(git -C /Users/cecil/Code/genai status --porcelain)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\([k for k in d.get\\('mcpServers',{}\\).keys\\(\\)]\\)\")",
+      "Read(//Users/cecil/.claude/**)",
+      "Bash(glab --version)",
+      "Bash(cp *)",
+      "Bash(terraform init*)",
+      "Bash(terraform plan*)",
+      "Bash(terraform validate*)",
+      "Bash(terraform fmt*)",
+      "Bash(terraform show*)",
+      "Bash(terraform output*)",
+      "Bash(terraform state list*)",
+      "Bash(terraform state show*)",
+      "Bash(kubectl get *)",
+      "Bash(kubectl describe *)",
+      "Bash(kubectl logs *)",
+      "Bash(kubectl explain *)",
+      "Bash(kubectl top *)",
+      "Bash(kubectl version *)",
+      "Bash(kubectl cluster-info *)",
+      "Bash(aws sts get-caller-identity*)",
+      "Bash(aws configure list*)",
+      "Bash(aws sso login*)",
+      "Bash(aws ec2 describe-*)",
+      "Bash(aws s3 cp *)",
+      "Bash(aws eks describe-*)",
+      "Bash(aws eks list-*)",
+      "Bash(aws msk describe-*)",
+      "Bash(aws msk list-*)",
+      "Bash(aws mwaa get-*)",
+      "Bash(aws mwaa list-*)",
+      "Bash(aws glue get-*)",
+      "Bash(aws glue list-*)",
+      "Bash(aws sqs get-*)",
+      "Bash(aws sqs list-*)",
+      "Bash(aws kms describe-*)",
+      "Bash(aws kms list-*)",
+      "Bash(aws iam get-*)",
+      "Bash(aws iam list-*)"
     ],
     "deny": [
       "Bash(git push --force*)",
@@ -160,11 +215,7 @@
     "ask": [
       "Bash(python *)",
       "Bash(cp *)",
-      "Bash(grep *)",
-      "Bash(git checkout*)",
       "Bash(gc*)",
-      "Bash(git switch*)",
-      "Bash(find *)",
       "Bash(xargs *)",
       "Bash(for *)",
       "Bash(while *)",
@@ -476,9 +527,22 @@
   "extraKnownMarketplaces": {
     "teamworks-claude": {
       "source": {
-        "source": "git",
-        "url": "git@gitlab.com:teamworksdev/performance/data-gen-ai/agenticengineeringacademy.git"
+        "source": "directory",                                                                                                                         
+        "path": "/Users/cecil/Code/agenticengineeringacademy"
       }
     }
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "case \"$CLAUDE_TOOL_INPUT_FILE_PATH\" in *.py) ruff check --fix \"$CLAUDE_TOOL_INPUT_FILE_PATH\" ;; esac"
+          }
+        ]
+      }
+    ]
   }
 }
