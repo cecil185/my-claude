@@ -5,6 +5,7 @@
   "permissions": {
     "additionalDirectories": [
       "/Users/cecil/Code/agenticengineeringacademy",
+      "/Users/cecil/Code/me/my-claude/.claude",
       "/Users/cecil/.claude"
     ],
     "allow": [
