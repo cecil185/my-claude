@@ -1,5 +1,5 @@
 ---
-name: claude-code-effectiveness
+name: tool-review
 description: >-
   Assess effectiveness of Claude Code usage, evaluate skill quality, suggest
   new skills to add, review settings.local.json files for safety issues, and
