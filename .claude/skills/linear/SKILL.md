@@ -1,9 +1,10 @@
 ---
 name: linear-best-practices
 description: >-
-  Best practices for creating and managing Linear tickets. Use when creating issues,
-  updating tickets, or any interaction with Linear via MCP. Covers defaults, description
-  style, assignment, and when to ask for clarification.
+  Best practices for creating and managing Linear tickets per Data & Gen AI process.
+  Use when creating issues, updating tickets, or any Linear MCP interaction. Covers
+  governance, intake routing, defaults, statuses, descriptions, assignment, support
+  triage, and when to ask for clarification.
 ---
 
 # Linear Best Practices
@@ -16,24 +17,38 @@ If the MCP server exposes an `mcp_auth` tool, call it before any other Linear op
 
 ## Defaults
 
+- **Team**: Data & Gen AI
 - **Assignee**: Cecil Ash (`cash@teamworks.com`)
-- **State**: Todo (for new tickets)
+- **State**: **To Do** for normal engineer-facing work the user wants queued — unless the issue is **support/triage** or severity is unknown, then prefer **Triage**
 
 Always apply these defaults unless the user explicitly overrides them.
+
+## Issue Model (Company Requirements)
+
+Every issue needs:
+
+- **Clear title** — specific outcome, not “Fix table” / “Bug”.
+- **Acceptance criteria** — observable “done” (bullets).
+
+**Engineers write and refine their own issues** (even if someone else created the ticket, the assignee should tighten it before starting). Product owns *what/why* in the PRD; issues carry the *how* at a useful granularity.
 
 ## Writing Descriptions
 
 Keep descriptions **short and scannable**. Avoid walls of text.
 
 **Do:**
+
 - 2-4 sentences max for the objective
 - Bullet lists for acceptance criteria
-- Link to relevant code, MRs, or docs instead of duplicating content
+- Link to relevant code, MRs, PRDs, or docs instead of duplicating content
+- For **bugs**: reproduction steps, expected vs actual, scope/severity when known
+- For **support-originated** work: note **Salesforce (or source) ticket link** when the user provides it
 
-**Don't:**
+**Don’t:**
+
 - Write multi-paragraph narratives
-- Include implementation details that belong in code comments or MR descriptions
-- Repeat information already in the title
+- Put full implementation specs here (MR / code comments)
+- Repeat the title
 
 **Example:**
 
@@ -47,11 +62,17 @@ Add retry logic to the S3 upload path for transient failures.
 - Raises after final failure with original exception
 ```
 
+## Projects & Estimates (When Relevant)
+
+- Issues usually sit under a **Project**; **link the project** in Linear when the MCP supports it and the user named one.
+- **Projects** are ~**1–4 weeks**, **1–3 people**; if bigger, split. **T-shirt sizes (S/M/L/XL)** apply at **project** level; **L** and **XL** imply **milestones** (meaningful, verifiable). Individual issues **don’t** need point estimates unless the user asks.
+- **Scope discipline:** new work **outside** the project’s original acceptance criteria → **new project** (or explicit EM/Product decision), not an ever-growing same-date bucket.
+
 ## Clarifying Intent
 
 **Before creating a ticket, ask the user to clarify if any of these are ambiguous:**
 
-- What problem this solves or why it's needed
+- What problem this solves or why it’s needed
 - Which system/component is affected
 - Whether this is a feature, bug, or chore
 
@@ -68,4 +89,11 @@ mcp__linear-server__save_issue(
 )
 ```
 
-For sub-tickets, include the `parentId`. For bugs, include reproduction steps. For features, include acceptance criteria.
+- For **sub-tasks**, include **`parentId`** when known.
+- For **bugs**, include **reproduction steps** and severity if known.
+- For **features**, include **acceptance criteria** bullets.
+- Set **state** to **Triage** vs **To Do** per intake rules above when the MCP allows.
+
+## Support & Bug Week (Pointers)
+
+Support issues should be **triaged** (repro, duplicates, severity), **linked to the external ticket**, worked **high before medium** severity, moved to **In Review** when the fix is ready and **customer/support needs to confirm**, then **Done** after confirmation. **Stale In Review** is a known gap — PM/EM may need to chase closure; mention if an issue has been waiting on customer confirmation a long time.
