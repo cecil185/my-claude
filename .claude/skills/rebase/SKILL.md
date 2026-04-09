@@ -2,6 +2,7 @@
 description: Rebase current branch onto its base branch
 allowed-tools: Bash(git:*), Read, Edit, Grep, Glob
 model: sonnet
+effort: low
 ---
 
 Rebase the current branch onto the latest version of its upstream base branch. Follow these steps carefully:

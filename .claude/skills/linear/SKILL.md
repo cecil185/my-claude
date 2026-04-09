@@ -5,6 +5,8 @@ description: >-
   Use when creating issues, updating tickets, or any Linear MCP interaction. Covers
   governance, intake routing, defaults, statuses, descriptions, assignment, support
   triage, and when to ask for clarification.
+model: sonnet
+effort: low
 ---
 
 # Linear Best Practices

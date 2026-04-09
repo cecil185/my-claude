@@ -3,6 +3,8 @@ name: commit
 description: >-
   Use when the user asks to commit, stage, or save changes — runs lint, tests,
   then stages, commits, pushes, and opens a merge request in one chained command.
+model: sonnet
+effort: low
 ---
 
 # Commit Workflow

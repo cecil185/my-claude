@@ -6,6 +6,8 @@ description: >-
   do” section for To Do and In Progress tickets. Use when the user asks for a
   weekly update, status summary, sprint recap, or “what did I do this week on
   Linear.”
+model: sonnet
+effort: medium
 ---
 
 # Weekly Linear Project Update

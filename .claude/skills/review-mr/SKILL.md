@@ -3,6 +3,8 @@ name: review-mr
 description: >-
   Review a GitLab merge request and surface the most important issues.
   Use when asked to review an MR, critique a diff, or look at a merge request.
+model: claude-opus-4-6
+effort: high
 ---
 
 # Review Merge Request

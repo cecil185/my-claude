@@ -5,6 +5,8 @@ description: >-
   or send a Slack message — e.g. "draft a slack message about X", "clean up
   this message", "how should I word this in Slack?". Outputs a ready-to-send
   message, not commentary about one.
+model: sonnet
+effort: low
 ---
 
 # Slack Message

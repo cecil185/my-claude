@@ -6,6 +6,7 @@ description: >-
   or find current information. Returns a short answer with linked sources;
   user can ask follow-up for more depth.
 model: claude-opus-4-6
+effort: high
 ---
 
 # Research

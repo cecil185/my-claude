@@ -6,6 +6,8 @@ description: >-
   update settings.json with improvements. Use when asked to evaluate how well
   Claude Code is being used, review Claude config files, audit skills, or
   improve the my-claude setup.
+model: claude-opus-4-6
+effort: high
 ---
 
 # Claude Code Effectiveness Review
