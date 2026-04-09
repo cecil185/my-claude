@@ -60,15 +60,11 @@
       }
     },
     "slack": {
-      "type": "stdio",
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-slack"
-      ],
-      "env": {
-        "SLACK_BOT_TOKEN": <insert>,
-        "SLACK_TEAM_ID": <insert>,
+      "type": "http",
+      "url": "https://mcp.slack.com/mcp",
+      "oauth": {
+        "clientId": "<insert>",
+        "callbackPort": 3118
       }
     }
   },
