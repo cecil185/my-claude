@@ -1,13 +1,16 @@
 {
+  "model": "sonnet",
+  "effortLevel": "medium",
   "env": {
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
+  "defaultMode": "default",
+  "additionalDirectories": [
+    "/Users/cecil/Code/agenticengineeringacademy",
+    "/Users/cecil/Code/me/my-claude/.claude",
+    "/Users/cecil/.claude"
+  ]
   "permissions": {
-    "additionalDirectories": [
-      "/Users/cecil/Code/agenticengineeringacademy",
-      "/Users/cecil/Code/me/my-claude/.claude",
-      "/Users/cecil/.claude"
-    ],
     "allow": [
       "mcp__linear-server__*",
       "mcp__fff__find_files",
@@ -101,9 +104,10 @@
       "Bash(git worktree *)",
       "Bash(wc -l *)",
       "WebFetch(domain:github.com)",
+      "WebFetch(domain:www.notion.so)",
       "WebFetch(domain:linear.app)",
       "WebSearch",
-      "Read(/Users/cecil/Code/**)",
+      "Read(*)",
       "Write(/Users/cecil/Code/**)",
       "Edit(/Users/cecil/Code/**)",
       "Write(/Users/cecil/.claude/**)",
@@ -136,7 +140,6 @@
       "Bash(git -C /Users/cecil/Code/genai branch --show-current)",
       "Bash(git -C /Users/cecil/Code/genai status --porcelain)",
       "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\([k for k in d.get\\('mcpServers',{}\\).keys\\(\\)]\\)\")",
-      "Read(/Users/cecil/.claude/**)",
       "Bash(glab --version)",
       "Bash(terraform init*)",
       "Bash(terraform plan*)",
@@ -528,24 +531,7 @@
       "Bash(aws workspaces reboot-workspaces *)",
       "Bash(aws storagegateway delete-gateway *)",
       "Bash(aws kafka reboot-broker *)"
-    ],
-    "defaultMode": "default"
-  },
-  "enabledPlugins": {
-    "code-review@claude-plugins-official": false,
-    "review@claude-plugins-official": false,
-    "adlc@teamworks-claude": true,
-    "flywheel@teamworks-claude": true,
-    "worktrees@teamworks-claude": true,
-    "foundations@teamworks-claude": true
-  },
-  "extraKnownMarketplaces": {
-    "teamworks-claude": {
-      "source": {
-        "source": "directory",                                                                                                                         
-        "path": "/Users/cecil/Code/agenticengineeringacademy"
-      }
-    }
+    ]
   },
   "hooks": {
     "PostToolUse": [
@@ -559,5 +545,25 @@
         ]
       }
     ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "input=$(cat); model=$(echo \"$input\" | jq -r '.model.display_name // empty'); effort=$(echo \"$input\" | jq -r '.effortLevel // empty'); used=$(echo \"$input\" | jq -r '.context_window.used_percentage // empty'); parts=\"\"; [ -n \"$model\" ] && parts=\"$model\"; [ -n \"$effort\" ] && parts=\"$parts | effort: $effort\"; [ -n \"$used\" ] && parts=\"$parts | ctx: $(printf '%.0f' \"$used\")%\" || parts=\"$parts | ctx: -\"; echo \"$parts\""
+  },
+  "enabledPlugins": {
+    "code-review@claude-plugins-official": false,
+    "review@claude-plugins-official": false,
+    "adlc@teamworks-claude": true,
+    "flywheel@teamworks-claude": true,
+    "worktrees@teamworks-claude": true,
+    "foundations@teamworks-claude": true
+  },
+  "extraKnownMarketplaces": {
+    "teamworks-claude": {
+      "source": {
+        "source": "directory",
+        "path": "/Users/cecil/Code/agenticengineeringacademy"
+      }
+    }
   }
 }
