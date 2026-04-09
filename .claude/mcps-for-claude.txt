@@ -1,0 +1,74 @@
+  "mcpServers": {
+    "fff": {
+      "type": "stdio",
+      "command": "/Users/cecil/.local/bin/fff-mcp",
+      "args": [],
+      "env": {}
+    },
+    "aws-docs": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": [
+        "awslabs.aws-documentation-mcp-server@latest"
+      ],
+      "env": {
+        "AWS_PROFILE": "datalake-stg"
+      }
+    },
+    "aws-core": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": [
+        "awslabs.core-mcp-server@latest"
+      ],
+      "env": {
+        "AWS_PROFILE": "datalake-stg",
+        "AWS_REGION": "us-east-1"
+      }
+    },
+    "aws-api": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": [
+        "awslabs.aws-api-mcp-server@latest"
+      ],
+      "env": {
+        "AWS_PROFILE": "datalake-stg",
+        "AWS_REGION": "us-east-1"
+      }
+    },
+    "aws-cloudwatch": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": [
+        "awslabs.cloudwatch-mcp-server@latest"
+      ],
+      "env": {
+        "AWS_PROFILE": "datalake-stg",
+        "AWS_REGION": "us-east-1"
+      }
+    },
+    "aws-eks": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": [
+        "awslabs.eks-mcp-server@latest"
+      ],
+      "env": {
+        "AWS_PROFILE": "datalake-stg",
+        "AWS_REGION": "us-east-1"
+      }
+    },
+    "slack": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-slack"
+      ],
+      "env": {
+        "SLACK_BOT_TOKEN": <insert>,
+        "SLACK_TEAM_ID": <insert>,
+      }
+    }
+  },

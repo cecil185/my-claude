@@ -1,24 +1,19 @@
 {
-  "model": "sonnet",
-  "effortLevel": "medium",
   "env": {
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
-  "defaultMode": "default",
-  "additionalDirectories": [
-    "/Users/cecil/Code/agenticengineeringacademy",
-    "/Users/cecil/Code/me/my-claude/.claude",
-    "/Users/cecil/.claude"
-  ]
   "permissions": {
     "allow": [
       "mcp__linear-server__*",
+      "mcp__gitlab__*",
+      "mcp__GitLab__*",
       "mcp__fff__find_files",
       "mcp__fff__grep",
       "mcp__fff__multi_grep",
       "Bash(find *)",
       "Bash(grep *)",
       "Bash(rg *)",
+      "Bash(ripgrep *)",
       "Bash(cat *)",
       "Bash(head *)",
       "Bash(tail *)",
@@ -171,9 +166,36 @@
       "Bash(aws sqs get-*)",
       "Bash(aws sqs list-*)",
       "Bash(aws kms describe-*)",
-      "Bash(aws kms list-*)"
+      "Bash(aws kms list-*)",
+      "Bash(trunk check:*)",
+      "Bash(command -v pre-commit)",
+      "Bash(pre-commit --version)",
+      "Bash(echo \"pre-commit $\\(pre-commit --version\\)\")",
+      "Bash(pre-commit install:*)",
+      "Bash(python3 -c \"import pre_commit; print\\('found'\\)\")",
+      "WebFetch(domain:docs.onehouse.ai)",
+      "Bash(pre-commit uninstall:*)",
+      "Bash(rm .pre-commit-config.yaml)",
+      "Bash(aws elbv2 describe-load-balancers:*)",
+      "Bash(aws ssm describe-instance-information:*)",
+      "Bash(curl -s \"https://raw.githubusercontent.com/awslabs/mcp/main/README.md\")",
+      "Bash(curl -s \"https://api.github.com/repos/gitlab-org/gitlab-mcp\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(d.get\\('message','found'\\), d.get\\('full_name',''\\), d.get\\('description',''\\)\\)\")",
+      "WebFetch(domain:awslabs.github.io)",
+      "Bash(python3:*)",
+      "Bash(aws sqs send-message:*)",
+      "WebFetch(domain:registry.terraform.io)",
+      "WebFetch(domain:docs.gitlab.com)",
+      "Bash(claude mcp:*)",
+      "Read(//Users/cecil/Code/me/my-claude/.claude/**)"
     ],
     "deny": [
+      "mcp__slack__slack_post_message",
+      "mcp__slack__slack_reply_to_thread",
+      "mcp__slack__slack_add_reaction",
+      "mcp__slack__slack_delete_message",
+      "mcp__slack__slack_edit_message",
+      "mcp__slack__slack_update_message",
       "Bash(git push --force*)",
       "Bash(git push -f*)",
       "Bash(git reset --hard*)",
@@ -228,6 +250,8 @@
       "Bash(python -m pytest *)"
     ],
     "ask": [
+      "mcp__gitlab__manage_pipeline",
+      "mcp__GitLab__manage_pipeline",
       "Bash(cp *)",
       "Bash(mv *)",
       "Bash(chmod *)",
@@ -533,7 +557,21 @@
       "Bash(aws kafka reboot-broker *)"
     ]
   },
+  "model": "sonnet",
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/pre-commit-gate.sh",
+            "timeout": 300,
+            "statusMessage": "Running lint, tests, and snyk before commit/push..."
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "matcher": "Write|Edit",
@@ -565,5 +603,12 @@
         "path": "/Users/cecil/Code/agenticengineeringacademy"
       }
     }
-  }
+  },
+  "effortLevel": "high",
+  "defaultMode": "default",
+  "additionalDirectories": [
+    "/Users/cecil/Code/agenticengineeringacademy",
+    "/Users/cecil/Code/me/my-claude/.claude",
+    "/Users/cecil/.claude"
+  ]
 }

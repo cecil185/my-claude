@@ -42,4 +42,4 @@ Merge repo-level `settings.local.json` files into the central settings file, ded
 
 5. **Write** — save the merged target file
 
-6. **DO NOT EDIT** source files at any point for any reason.
+6. **Clean up sources** — for each source file that existed and was merged, truncate it to `{}` (empty JSON object). Do not delete the files.
