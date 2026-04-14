@@ -214,7 +214,15 @@
       "WebFetch(domain:registry.terraform.io)",
       "WebFetch(domain:docs.gitlab.com)",
       "Bash(claude mcp:*)",
-      "Read(//Users/cecil/Code/me/my-claude/.claude/**)"
+      "Read(//Users/cecil/Code/me/my-claude/.claude/**)",
+      "Bash(git -C /Users/cecil/Code/genai/ingestion-terraform-upgrade-modules remote -v)",
+      "WebFetch(domain:docs.slack.dev)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(git gtr:*)",
+      "Bash(git revert:*)",
+      "Bash(gtr list:*)",
+      "Bash(glab pipeline:*)",
+      "Bash(aws secretsmanager describe-secret:*)"
     ],
     "deny": [
       "mcp__slack__slack_post_message",
@@ -613,6 +621,16 @@
             "command": "bash \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/pre-commit-gate.sh",
             "timeout": 300,
             "statusMessage": "Running lint, tests, and snyk before commit/push..."
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "input=$(cat); cmd=$(printf \"%s\" \"$input\" | jq -r '.tool_input.command // \"\"'); if printf \"%s\" \"$cmd\" | grep -qE 'cd\\s+\\S+.*(&&|;)'; then printf '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"Compound cd command blocked. Use separate Bash tool calls for cd and subsequent commands (CLAUDE.md rule).\"},\"systemMessage\":\"BLOCKED: Compound cd command. Run cd and subsequent commands as separate Bash tool calls.\"}'; exit 1; fi",
+            "statusMessage": "Checking for compound cd commands..."
           }
         ]
       }
