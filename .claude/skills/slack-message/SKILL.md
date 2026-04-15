@@ -10,7 +10,7 @@ effort: low
 ---
 
 # Slack Message
-If no message is provide, then summarize the decision or question in discussed in previous few chat messages.
+If no message is provided, then summarize the decision or question in discussed in previous few chat messages.
 
 Revise or draft the message directly. Return a polished, ready-to-send Slack
 message — not a commentary on it.

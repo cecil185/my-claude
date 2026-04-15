@@ -1,8 +1,9 @@
 ---
+name: rebase
 description: Rebase current branch onto its base branch
 allowed-tools: Bash(git:*), Read, Edit, Grep, Glob
 model: sonnet
-effort: low
+effort: high
 ---
 
 Rebase the current branch onto the latest version of its upstream base branch. Follow these steps carefully:
@@ -66,4 +67,4 @@ After successful rebase:
 - If the branch has a remote tracking branch, print a brief summary that includes:
   - Number of commits replayed and base branch
   - Any files that had conflicts and how each was resolved (one line per file)
-  - Then run `git push --force-with-lease` — the permission prompt will handle user approval, do NOT ask separately
+  - Then inform the user: "Rebase complete. Run `git push --force-with-lease` to update the remote." Do NOT attempt to run it — `git push --force*` is blocked by the deny list in settings.json. The user must run it in the terminal directly (use `! git push --force-with-lease`).

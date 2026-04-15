@@ -214,15 +214,18 @@
       "WebFetch(domain:registry.terraform.io)",
       "WebFetch(domain:docs.gitlab.com)",
       "Bash(claude mcp:*)",
-      "Read(//Users/cecil/Code/me/my-claude/.claude/**)",
       "Bash(git -C /Users/cecil/Code/genai/ingestion-terraform-upgrade-modules remote -v)",
       "WebFetch(domain:docs.slack.dev)",
       "WebFetch(domain:raw.githubusercontent.com)",
       "Bash(git gtr:*)",
+      "Bash(git -C * gtr *)",
       "Bash(git revert:*)",
       "Bash(gtr list:*)",
       "Bash(glab pipeline:*)",
-      "Bash(aws secretsmanager describe-secret:*)"
+      "Bash(aws secretsmanager describe-secret:*)",
+      "Bash(pre-commit run *)",
+      "Bash(tflint *)",
+      "Bash(terraform version *)"
     ],
     "deny": [
       "mcp__slack__slack_post_message",
@@ -608,7 +611,8 @@
       "Bash(aws workspaces reboot-workspaces *)",
       "Bash(aws storagegateway delete-gateway *)",
       "Bash(aws kafka reboot-broker *)"
-    ]
+    ],
+    "defaultMode": "auto"
   },
   "model": "sonnet",
   "hooks": {
@@ -667,11 +671,12 @@
       }
     }
   },
-  "effortLevel": "high",
-  "defaultMode": "acceptEdits",
+  "effortLevel": "medium",
   "additionalDirectories": [
     "/Users/cecil/Code/agenticengineeringacademy",
     "/Users/cecil/Code/me/my-claude/.claude",
-    "/Users/cecil/.claude"
-  ]
+    "/Users/cecil/.claude",
+    "/Users/cecil/worktrees"
+  ],
+  "skipAutoPermissionPrompt": true
 }

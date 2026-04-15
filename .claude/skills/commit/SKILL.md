@@ -19,24 +19,30 @@ effort: low
 
 Run `just lint` from the repo root. If lint fails, fix the issues and re-run until clean.
 
+**If `just lint` is unavailable:**, skip this step.
+
 ## 3. Run tests
 
 Run `just test` from the repo root. If tests fail, stop and report the failures — do not proceed.
 
+**If `just test` is unavailable:**, skip this step.
+
 ## 4. Stage, commit, push, and open MR
 
-Run everything as a single chained command so it either all succeeds or stops at the first failure:
+Substitute `{TICKET}` and `{Title}` with the actual ticket identifier and a concise title:
 
 ```bash
-git add . && \
+git add -p && \
 git commit -m "$(cat <<'EOF'
-DP-600: Fix failing ingestion tests
+{TICKET}: {Title}
 EOF
 )" && \
 git push -u origin HEAD && \
 glab mr create --fill --target-branch main
 ```
 
+- Use `git add -p` (interactive staging) or name specific files rather than `git add .` to avoid accidentally staging `.env` or other sensitive files.
 - Commit message format: `TICKET: Title` (e.g. `DP-600: Fix failing ingestion tests`)
 - `--fill` auto-populates the MR title/description from the commit(s).
 - If `glab mr create` reports an MR already exists, that's fine — the push still landed.
+- If the user only wants to commit without opening an MR, drop the `glab mr create` line.

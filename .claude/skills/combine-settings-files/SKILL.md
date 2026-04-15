@@ -17,6 +17,8 @@ Merge repo-level `settings.local.json` files into the central settings file, ded
 - `/Users/cecil/Code/genai/.claude/settings.local.json`
 - `/Users/cecil/Code/genai/ingestion/.claude/settings.local.json`
 - `/Users/cecil/Code/genai/ingestion-dags/.claude/settings.local.json`
+- `/Users/cecil/Code/genai/ingestion-terraform/.claude/settings.local.json`
+- `/Users/cecil/Code/slack-mcp-plugin/.claude/settings.local.json`
 
 ## Target file
 
