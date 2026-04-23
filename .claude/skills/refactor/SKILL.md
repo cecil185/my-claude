@@ -17,6 +17,8 @@ Improve code structure without changing behavior. Tests prove behavior is unchan
 
 **The safety net:** Tests are your proof that behavior didn't change. No tests = no safety net = do not refactor until you have them.
 
+**Reviewer-friendly diffs:** Use the fewest changes that fix each smell—prefer smaller steps, fewer files, and less churn per PR so reviewers can verify behavior quickly. When many smells apply, ship the highest-value fixes first and defer the rest to follow-up work instead of one large diff.
+
 ---
 
 ## Phase 1 — Scope and Read
@@ -174,6 +176,7 @@ Get implicit or explicit sign-off before proceeding if:
 - More than 3 files will change
 - Any smell is marked Defer (confirm it should become a ticket, not be fixed now)
 - The change requires updating tests
+- The plan would produce a noisy or hard-to-follow diff (split work or narrow scope so each change stays easy to review)
 
 ---
 
@@ -201,6 +204,8 @@ Get implicit or explicit sign-off before proceeding if:
 
 Never make two changes simultaneously. Never refactor and add behavior in the same step.
 
+When several fixes would work, pick the one with the smallest diff that still addresses the smell—reviewers should not have to untangle unrelated edits.
+
 ---
 
 ## Phase 5 — Verify
@@ -215,6 +220,7 @@ just ci   # Must pass before declaring done
 - [ ] No behavior changed — only structure
 - [ ] Every Major smell from Phase 2 is resolved
 - [ ] Every Defer smell has a Linear ticket
+- [ ] Diff is as small as practical for what was fixed (no extra files or cosmetic churn unrelated to the refactor)
 
 ---
 
@@ -227,6 +233,7 @@ just ci   # Must pass before declaring done
 - Do not extract a one-use helper unless it measurably clarifies the caller
 - Do not introduce abstractions for hypothetical future cases (YAGNI)
 - Do not refactor when tests are red — fix the tests first or stop
+- Do not widen scope for "while we're here" cleanup—keep each batch of changes reviewable
 
 ---
 

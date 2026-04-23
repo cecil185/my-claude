@@ -5,7 +5,7 @@ description: >-
   quota limits, and resource-not-found errors. Use when an AWS CLI command,
   SDK call, or infrastructure operation fails with an AWS error code.
 model: sonnet
-effort: low
+effort: high
 ---
 
 # Debug AWS Error

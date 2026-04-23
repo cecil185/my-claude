@@ -51,3 +51,15 @@ If there are meaningfully different ways to frame the message (e.g., direct
 ask vs. soft update), offer two short variants labeled **Option A** and
 **Option B** — but only when the choice materially affects how it lands, not
 as a default.
+
+## File Output
+
+After outputting the message, prepend it to `/Users/cecil/Code/genai/CLAUDE_OUTPUT.txt` so
+it appears at the top of the file. Use the Bash tool:
+
+```bash
+{ echo "<message>"; echo ""; cat /Users/cecil/Code/genai/CLAUDE_OUTPUT.txt; } > /tmp/claude_output_tmp && mv /tmp/claude_output_tmp /Users/cecil/Code/genai/CLAUDE_OUTPUT.txt
+```
+
+Replace `<message>` with the actual message text. Do this silently — no need to
+tell the user it was written.

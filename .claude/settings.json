@@ -8,6 +8,8 @@
       "mcp__gitlab__*",
       "mcp__GitLab__*",
       "mcp__fff__find_files",
+      "mcp__fff__grep",
+      "mcp__fff__multi_grep",
       "Bash(gtr --help)",
       "Bash(git ls-remote:*)",
       "mcp__slack__slack_get_channel_history",
@@ -20,10 +22,6 @@
       "mcp__slack__slack_search_public",
       "mcp__slack__slack_search_public_and_private",
       "mcp__slack__slack_search_users",
-      "mcp__fff__grep",
-      "mcp__fff__multi_grep",
-      "Bash(find *)",
-      "Bash(grep *)",
       "Bash(rg *)",
       "Bash(ripgrep *)",
       "Bash(cat *)",
@@ -180,7 +178,6 @@
       "Bash(kubectl cluster-info *)",
       "Bash(aws sts get-caller-identity*)",
       "Bash(aws configure list*)",
-      "Bash(aws sso login*)",
       "Bash(aws ec2 describe-*)",
       "Bash(aws eks describe-*)",
       "Bash(aws eks list-*)",
@@ -210,7 +207,6 @@
       "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(d.get\\('message','found'\\), d.get\\('full_name',''\\), d.get\\('description',''\\)\\)\")",
       "WebFetch(domain:awslabs.github.io)",
       "Bash(python3:*)",
-      "Bash(aws sqs send-message:*)",
       "WebFetch(domain:registry.terraform.io)",
       "WebFetch(domain:docs.gitlab.com)",
       "Bash(claude mcp:*)",
@@ -228,6 +224,8 @@
       "Bash(terraform version *)"
     ],
     "deny": [
+      "Bash(find *)",
+      "Bash(grep *)",
       "mcp__slack__slack_post_message",
       "mcp__slack__slack_reply_to_thread",
       "mcp__slack__slack_add_reaction",
@@ -356,6 +354,8 @@
       "Bash(glab snippet *)",
       "Bash(glab label *)",
       "Bash(glab runner *)",
+      "Bash(aws sso login*)",
+      "Bash(aws sqs send-message:*)",
       "Bash(aws iam *)",
       "Bash(aws iam get-*)",
       "Bash(aws iam list-*)",
@@ -614,7 +614,7 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "sonnet",
+  "model": "claude-haiku-4-5",
   "hooks": {
     "PreToolUse": [
       {
