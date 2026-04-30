@@ -15,6 +15,10 @@ If no message is provided, then summarize the decision or question in discussed 
 Revise or draft the message directly. Return a polished, ready-to-send Slack
 message — not a commentary on it.
 
+**Always read and follow the [writing-style skill](../writing-style/SKILL.md)
+first** to match Cecil's voice. The principles below are Slack-specific
+additions on top of that style guide.
+
 ## Principles
 
 - **Concise over comprehensive** — cut anything the reader doesn't need. If a

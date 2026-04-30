@@ -99,8 +99,7 @@ Summarize findings **in chat only**. Do NOT post comments on the MR.
 - Rank every issue by severity:
   - **⛰ Critical** — Blocking, requires immediate action (e.g. fundamentally wrong approach, data loss)
   - **🧱 Major** — Blocking, but other work can continue (e.g. wrong API endpoint, broken logic)
-  - **🪨 Minor** — Non-blocking, requires future action (e.g. missing edge case handling)
-  - Skip nit-level feedback entirely — it's not worth mentioning.
+  - Skip minor & knit-level feedback entirely — it's not worth mentioning.
 - Every issue must cite the exact file path and line number. If you can't point to a line, don't raise it.
 - Include a concrete suggestion, not just "this is bad."
 - Do not pad with minor observations to seem thorough.

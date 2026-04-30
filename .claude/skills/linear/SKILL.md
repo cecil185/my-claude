@@ -1,10 +1,9 @@
 ---
 name: linear-best-practices
 description: >-
-  Best practices for creating and managing Linear tickets per Data & Gen AI process.
+  Best practices for creating and managing Linear tickets.
   Use when creating issues, updating tickets, or any Linear MCP interaction. Covers
-  governance, intake routing, defaults, statuses, descriptions, assignment, support
-  triage, and when to ask for clarification.
+  governance, descriptions, assignment, and when to ask for clarification.
 model: sonnet
 effort: low
 ---
@@ -20,7 +19,8 @@ If the MCP server exposes an `mcp_auth` tool, call it before any other Linear op
 ## Defaults
 
 - **Team**: Data & Gen AI
-- **Assignee**: Cecil Ash (`cash@teamworks.com`)
+- **Assignee**: Cecil Ash (`cash@teamworks.com`) — always set, no exceptions
+- **Project**: required on every issue — if the user hasn't named one, **ask before creating**
 - **State**: **To Do** for normal engineer-facing work the user wants queued — unless the issue is **support/triage** or severity is unknown, then prefer **Triage**
 
 Always apply these defaults unless the user explicitly overrides them.
@@ -64,9 +64,9 @@ Add retry logic to the S3 upload path for transient failures.
 - Raises after final failure with original exception
 ```
 
-## Projects & Estimates (When Relevant)
+## Projects & Estimates
 
-- Issues usually sit under a **Project**; **link the project** in Linear when the MCP supports it and the user named one.
+- Every issue **must** have a **Project**. If the user hasn't named one, ask: *"Which project should this go under?"* — do not create the ticket until you have an answer.
 - **Projects** are ~**1–4 weeks**, **1–3 people**; if bigger, split. **T-shirt sizes (S/M/L/XL)** apply at **project** level; **L** and **XL** imply **milestones** (meaningful, verifiable). Individual issues **don’t** need point estimates unless the user asks.
 - **Scope discipline:** new work **outside** the project’s original acceptance criteria → **new project** (or explicit EM/Product decision), not an ever-growing same-date bucket.
 

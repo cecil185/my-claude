@@ -267,6 +267,7 @@
       "Bash(pkill*)",
       "Bash(truncate*)",
       "Bash(shred*)",
+      "Bash(kubectl delete *)",
       "Bash(history -c*)",
       "Bash(docker system prune*)",
       "Bash(docker rm -f*)",
@@ -614,7 +615,7 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "claude-haiku-4-5",
+  "model": "sonnet",
   "hooks": {
     "PreToolUse": [
       {
@@ -672,11 +673,11 @@
     }
   },
   "effortLevel": "medium",
+  "skipAutoPermissionPrompt": true,
   "additionalDirectories": [
     "/Users/cecil/Code/agenticengineeringacademy",
     "/Users/cecil/Code/me/my-claude/.claude",
     "/Users/cecil/.claude",
     "/Users/cecil/worktrees"
-  ],
-  "skipAutoPermissionPrompt": true
+  ]
 }
