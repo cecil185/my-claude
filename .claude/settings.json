@@ -137,9 +137,7 @@
       "mcp__aws-eks__*",
       "mcp__aws-api__*",
       "Bash(python3 -m json.tool)",
-      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(list\\(d.get\\(''''mcpServers'''', {}\\).keys\\(\\)\\), indent=2\\)\\)\")",
-      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(list\\(d.get\\(''''mcpServers'''', {}\\).keys\\(\\)\\)\\)\")",
-      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(f''''Total coverage: {d[\"\"totals\"\"][\"\"percent_covered\"\"]:.1f}%''''\\)\")",
+      "Bash(python3 -c \"import *)",
       "Bash(python3 -m pytest tests/ --collect-only -q)",
       "Bash(python pytest *)",
       "Bash(python -m pytest *)",
@@ -685,6 +683,7 @@
     }
   },
   "effortLevel": "medium",
+  "theme": "light",
   "skipAutoPermissionPrompt": true,
   "additionalDirectories": [
     "/Users/cecil/Code/agenticengineeringacademy",
