@@ -34,16 +34,27 @@ When reviewing an MR, **before writing any feedback**:
 
 ## Gather the Diff
 
-Use one of these approaches depending on what the user provides:
+**Fetch via GitLab MCP only.** Never use a web URL fetch, browser navigation,
+or copy-pasted diff. If the GitLab MCP server is not authenticated, stop and
+ask the user to authenticate via `/mcp` before continuing — do not fall back
+to web scraping.
 
 | Input | How to get the diff |
 |---|---|
-| MR URL | `mcp__gitlab__get_merge_request_diffs` (preferred) or open in browser |
-| Branch name | `git diff main...{branch} --stat` then `git diff main...{branch}` |
-| MR number + repo | `mcp__gitlab__get_merge_request_diffs(project_id="{repo}", mr_iid={number})` |
+| MR URL | Parse project path + MR IID from URL, then `mcp__GitLab__get_merge_request_diffs` |
+| Branch name | `mcp__GitLab__get_merge_request` to find the MR for the branch, then `mcp__GitLab__get_merge_request_diffs` |
+| MR number + repo | `mcp__GitLab__get_merge_request_diffs(project_id="{repo}", mr_iid={number})` |
 | Nothing specified | Ask which MR to review |
 
-Also check: MR description, linked tickets, and any test changes.
+Also fetch via MCP: MR description, linked tickets, existing review comments,
+and any test changes.
+
+## Editing policy
+
+**Do NOT make any code edits, file writes, commits, or MR comments as part
+of a review.** This skill is read-only. Output the review in chat only. If
+the user wants the issues fixed, they will ask in a follow-up message — only
+then make changes.
 
 **For a deep architectural/security review on a large MR**, use `Skill(adlc:code-reviewer)` instead — it dispatches specialist sub-agents for security and performance. This skill handles focused, fast reviews of normal-sized diffs.
 
@@ -64,19 +75,28 @@ Focus on things that **will cause problems** — not style nits. Only comment on
 
 ## Output
 
-Summarize findings **in chat only**. Do NOT post comments on the MR.
+Summarize findings **in chat only**. Do NOT post comments on the MR or edit
+any files (see Editing policy above).
 
 ### Format
 
 ```
 ## MR Review: [title or branch]
 
-**Verdict:** [Approve / Request changes]
+### Verification Table
 
-### Issues (ranked by severity: critical > major > minor)
+Map every claim in this review to the source evidence that supports it.
+A row exists for each issue raised below. No issue may appear in the
+ranked list without a corresponding verified row.
 
-1. **[Severity] [Category]:** [One-sentence description]
-   - Where: `file:line` (exact path and line number)
+| Claim | File:Line | Evidence (quoted snippet) | Verified? |
+|---|---|---|---|
+| [one-line claim] | `path/to/file.py:42` | `quoted code` | ✓ / [UNVERIFIED] |
+
+### Issues (ranked: critical → major → minor)
+
+1. **[Critical | Major | Minor] [Category]:** [One-sentence description]
+   - Where: `file:line`
    - Code: (quote the problematic snippet)
    - Why it matters: [impact if shipped as-is]
    - Suggestion: [concrete fix]
@@ -86,20 +106,24 @@ Summarize findings **in chat only**. Do NOT post comments on the MR.
 ### What's done well (optional, 1 sentence max)
 [Only if something is genuinely notable — skip if nothing stands out]
 
-### Overall Assessment
-[One paragraph: summarize the MR's quality, risk level, and readiness.]
-
-**Recommendation:** [Approve / Request changes]
+**Verdict:** approve | request-changes | comment
 ```
 
 ### Rules
 
-- **1–3 issues max.** Only the ones that absolutely matter. If nothing is
-  wrong, say "No issues — looks good to ship."
-- Rank every issue by severity:
-  - **⛰ Critical** — Blocking, requires immediate action (e.g. fundamentally wrong approach, data loss)
-  - **🧱 Major** — Blocking, but other work can continue (e.g. wrong API endpoint, broken logic)
-  - Skip minor & knit-level feedback entirely — it's not worth mentioning.
-- Every issue must cite the exact file path and line number. If you can't point to a line, don't raise it.
+- The review **must end with a single-line verdict**: exactly one of
+  `approve`, `request-changes`, or `comment`. Nothing after it.
+- Rank every issue by severity (`critical`, `major`, `minor`). Drop nits.
+  - **Critical** — Blocking, requires immediate action (e.g. data loss, wrong approach)
+  - **Major** — Blocking, but other work can continue (e.g. wrong API, broken logic)
+  - **Minor** — Worth raising but not blocking (include sparingly)
+- Every issue must appear in the **Verification Table** with a quoted
+  source snippet. If you cannot quote the source, mark the row
+  `[UNVERIFIED]` and do not raise it as a ranked issue.
+- **1–3 issues max.** If nothing is wrong, say "No issues — looks good to ship."
+- Every issue must cite the exact file path and line number. If you can't
+  point to a line, don't raise it.
 - Include a concrete suggestion, not just "this is bad."
 - Do not pad with minor observations to seem thorough.
+- **Do not make any code edits.** Review only. Wait for an explicit
+  follow-up if the user wants fixes applied.

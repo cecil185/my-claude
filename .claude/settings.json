@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "env": {
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
@@ -627,7 +628,37 @@
   },
   "model": "sonnet",
   "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "case \"$CLAUDE_TOOL_INPUT_FILE_PATH\" in *.py) ruff check --fix \"$CLAUDE_TOOL_INPUT_FILE_PATH\" ;; esac"
+          }
+        ]
+      }
+    ],
     "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "input=$(cat); cmd=$(printf \"%s\" \"$input\" | jq -r '.tool_input.command // \"\"'); if printf \"%s\" \"$cmd\" | grep -qE 'cd\\s+\\S+.*(&&|;)'; then printf '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"Compound cd command blocked. Use separate Bash tool calls for cd and subsequent commands (CLAUDE.md rule).\"},\"systemMessage\":\"BLOCKED: Compound cd command. Run cd and subsequent commands as separate Bash tool calls.\"}'; exit 1; fi",
+            "statusMessage": "Checking for compound cd commands..."
+          }
+        ]
+      },
+      {
+        "matcher": ".*save_issue",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$CLAUDE_PROJECT_DIR/scripts/enforce-linear-assignment.sh"
+          }
+        ]
+      },
       {
         "matcher": "Bash",
         "hooks": [
@@ -644,19 +675,11 @@
         "hooks": [
           {
             "type": "command",
-            "command": "input=$(cat); cmd=$(printf \"%s\" \"$input\" | jq -r '.tool_input.command // \"\"'); if printf \"%s\" \"$cmd\" | grep -qE 'cd\\s+\\S+.*(&&|;)'; then printf '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"Compound cd command blocked. Use separate Bash tool calls for cd and subsequent commands (CLAUDE.md rule).\"},\"systemMessage\":\"BLOCKED: Compound cd command. Run cd and subsequent commands as separate Bash tool calls.\"}'; exit 1; fi",
-            "statusMessage": "Checking for compound cd commands..."
-          }
-        ]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "Write|Edit",
-        "hooks": [
+            "command": "$CLAUDE_PROJECT_DIR/scripts/enforce-mr-title.sh"
+          },
           {
             "type": "command",
-            "command": "case \"$CLAUDE_TOOL_INPUT_FILE_PATH\" in *.py) ruff check --fix \"$CLAUDE_TOOL_INPUT_FILE_PATH\" ;; esac"
+            "command": "$CLAUDE_PROJECT_DIR/scripts/enforce-linear-assignment.sh"
           }
         ]
       }
@@ -667,12 +690,12 @@
     "command": "input=$(cat); model=$(echo \"$input\" | jq -r '.model.display_name // empty'); effort=$(echo \"$input\" | jq -r '.effortLevel // empty'); used=$(echo \"$input\" | jq -r '.context_window.used_percentage // empty'); parts=\"\"; [ -n \"$model\" ] && parts=\"$model\"; [ -n \"$effort\" ] && parts=\"$parts | effort: $effort\"; [ -n \"$used\" ] && parts=\"$parts | ctx: $(printf '%.0f' \"$used\")%\" || parts=\"$parts | ctx: -\"; echo \"$parts\""
   },
   "enabledPlugins": {
-    "code-review@claude-plugins-official": false,
-    "review@claude-plugins-official": false,
     "adlc@teamworks-claude": true,
+    "code-review@claude-plugins-official": false,
     "flywheel@teamworks-claude": true,
-    "worktrees@teamworks-claude": true,
-    "foundations@teamworks-claude": true
+    "foundations@teamworks-claude": true,
+    "review@claude-plugins-official": false,
+    "worktrees@teamworks-claude": true
   },
   "extraKnownMarketplaces": {
     "teamworks-claude": {
@@ -688,6 +711,7 @@
   "additionalDirectories": [
     "/Users/cecil/Code/agenticengineeringacademy",
     "/Users/cecil/Code/me/my-claude/.claude",
+    "/Users/cecil/Code/me/wiki-workflow",
     "/Users/cecil/.claude",
     "/Users/cecil/worktrees"
   ]
