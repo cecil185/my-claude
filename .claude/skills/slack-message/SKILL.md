@@ -21,18 +21,11 @@ additions on top of that style guide.
 
 ## Principles
 
-- **Concise over comprehensive** — cut anything the reader doesn't need. If a
-  sentence can be removed without losing meaning, remove it.
+- **Shortest possible** — default to the minimum viable message. Aggressively cut bullets, headers, and context the reader doesn't strictly need. If a sentence can be removed without losing the core ask, remove it.
 - **Signal competence quietly** — precise word choice and clean structure do
   more than technical jargon. Never use complexity to sound smart.
-- **Infer and complete** — if the draft is missing context (recipient, outcome,
-  ask), infer the most natural interpretation and fill it in. Don't ask
-  follow-up questions unless the message is genuinely ambiguous in a way that
-  changes its meaning.
 - **Match the register** — a quick status update in a team channel reads
   differently than an escalation to leadership. Adapt tone accordingly.
-- **One clear ask** — every message should have one thing it wants the reader
-  to do or know. Identify it and make sure it lands.
 
 ## Format Guidelines
 

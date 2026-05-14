@@ -626,7 +626,11 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "sonnet",
+  "model": "opus",
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "linear-server"
+  ],
   "hooks": {
     "PostToolUse": [
       {
@@ -708,6 +712,12 @@
   "effortLevel": "medium",
   "theme": "light",
   "skipAutoPermissionPrompt": true,
+  "autoMode": {
+    "allow": [
+      "$defaults",
+      "Edit(/Users/cecil/.claude/skills/**)"
+    ]
+  },
   "additionalDirectories": [
     "/Users/cecil/Code/agenticengineeringacademy",
     "/Users/cecil/Code/me/my-claude/.claude",

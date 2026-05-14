@@ -35,20 +35,31 @@ A message is urgent **only if** one or more of these is true:
 
 ---
 
-## Step 1 — Slack: Check DMs and @mentions
+## Step 1 — Slack: Check DMs and specific channels
 
-Use `mcp__slack__slack_search_public_and_private` with query:
-```
-to:me OR @cash is:unread after:yesterday
-```
+Run all of these in parallel:
 
-Also search for blocking language in recent messages:
-```
-blocking OR "waiting on" OR "need you" OR urgent is:unread after:yesterday
-```
+1. **All DMs** — `mcp__slack__slack_search_public_and_private` with:
+   - `query: "to:me after:<yesterday's date>"` (use )
+   - `channel_types: "im,mpim"`
+
+2. **#alerts-data-platform-datadog** (C0APZDC6Y20) — `mcp__slack__slack_search_public_and_private` with:
+   - `query: "in:<#C0APZDC6Y20> after:<yesterday's date>"`
+
+3. **#team-eng-data-platform** (C0A7BPT91HQ) — `mcp__slack__slack_search_public_and_private` with:
+   - `query: "in:<#C0A7BPT91HQ> after:<yesterday's date>"`
+
+4. **#alerts-data-platform-merge-requests** (C0AQQ4DSVEU) — `mcp__slack__slack_search_public_and_private` with:
+   - `query: "in:<#C0AQQ4DSVEU> after:<yesterday's date>"`
+
+5. **Blocking language scan** — `mcp__slack__slack_search_public_and_private` with:
+   - `query: "blocking OR \"waiting on\" OR \"need you\" OR urgent after:<yesterday's date>"`
+   - `channel_types: "public_channel,private_channel,mpim,im"`
+
+For each result, use yesterday's actual date (not a literal string — compute `after:YYYY-MM-DD` based on today's date at runtime).
 
 From results, keep only messages where:
-- You are directly addressed (`to:me`, `@cash`, your name)
+- You are directly addressed (`to:me`, `@cash`, your name) — for DMs and channel searches
 - The content matches urgency criteria above
 - Message is from a human (not a bot/integration)
 
@@ -60,7 +71,7 @@ For each candidate, note: channel/DM, sender, timestamp, and the key sentence th
 
 Call `mcp__claude_ai_Gmail__search_threads` with:
 - `query: "is:unread is:inbox -category:promotions -category:social -category:updates"`
-- `maxResults: 30`
+- `maxResults: 100`
 
 For each thread, read the subject and snippet. Apply urgency filter. Skip anything that looks like:
 - Automated notifications (GitHub, Jira, Sentry, CircleCI, newsletters)
@@ -77,7 +88,7 @@ Run these calls in parallel:
 
 1. `mcp__claude_ai_Linear__list_issues` with `assignee: "me"`, `priority: 1` (Urgent) — get any urgent issues assigned to you
 2. `mcp__claude_ai_Linear__list_issues` with `assignee: "me"`, `state: "In Progress"` — get your in-progress issues
-3. Search for recent comments on your issues: `mcp__claude_ai_Linear__list_comments` — look for comments in the last 6 hours on issues assigned to you
+3. Search for recent comments on your issues: `mcp__claude_ai_Linear__list_comments` — look for comments in the last 24 hours on issues assigned to you
 
 For each item, check if:
 - Priority is Urgent (1) or High (2) and someone has commented asking for your input

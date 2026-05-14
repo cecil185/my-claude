@@ -15,6 +15,10 @@ Before claiming something is missing or wrong, **search the source files** to
 confirm — do not assume. If you cannot verify a concern, label it `[UNVERIFIED]`
 and state what you'd need to check.
 
+## Before reading any code
+
+Get the ticket number from the MR name or description and then read the Linear ticket to understand the goal of the MR.
+
 ## Before writing feedback
 
 When reviewing an MR, **before writing any feedback**:
