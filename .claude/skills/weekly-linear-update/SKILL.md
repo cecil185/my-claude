@@ -3,9 +3,10 @@ name: weekly-linear-update
 description: >-
   Builds a weekly project update from Linear: progress in the last seven days
   across all issue states for the user’s assigned work, plus a clear “still to
-  do” section for To Do and In Progress tickets. Use when the user asks for a
-  weekly update, status summary, sprint recap, or “what did I do this week on
-  Linear.”
+  do” section for To Do and In Progress tickets. Optionally accepts a Linear
+  project name or URL to scope the update to a single project. Use when the
+  user asks for a weekly update, status summary, sprint recap, or “what did I
+  do this week on Linear.”
 model: sonnet
 effort: medium
 ---
@@ -15,6 +16,15 @@ effort: medium
 ## When to use
 
 Apply this skill when the user wants a **weekly** rollup of their Linear work: accomplishments over the past week and what remains in **To Do** and **In Progress**.
+
+## Arguments
+
+- **`project`** *(optional)* — a Linear **project name** (e.g. `"Ingestion Platform"`) or a **project URL** (e.g. `https://linear.app/teamworks/project/ingestion-platform-abc123`). When provided, scope the entire update to that project only:
+  - If a URL is given, extract the project slug/ID from the path and resolve it via the Linear MCP (use the project lookup/search tool — read its schema first).
+  - If a name is given, search projects (case-insensitive); if multiple match, ask the user to disambiguate before proceeding.
+  - Apply the project filter to **both** sections (Progress this week and Still to do).
+  - Include the resolved project name in the report header, e.g. `## Weekly update — [date range] — [Project Name]`.
+- When no `project` is provided, behave as before (all of the user's assigned work across projects).
 
 ## Prerequisites
 

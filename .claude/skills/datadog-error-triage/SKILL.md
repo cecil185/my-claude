@@ -12,28 +12,16 @@ effort: medium
 
 # Datadog Error Triage
 
-Goal: turn a wall of `status:error` logs into a short report — what is noise,
-what is real, what to fix in the Datadog log pipeline so the noise stops.
+Turn a wall of `status:error` logs into a short report: what is noise, what is real, what to fix.
 
-## When to use
+## Inputs
 
-- "Search Datadog for status:error in [account/env] for the past N hours"
-- "There's a lot of error noise in Datadog, help me sort through it"
-- "Are we seeing any real errors right now?"
-- After an incident, before declaring the alert noisy/genuine
-
-## Inputs to confirm
-
-Before running, make sure you have:
-- **Scope filter** (one of): `aws_account:<id>`, `service:<name>`, or some other narrowing tag. Account-wide is fine, but a fully unfiltered query is not.
-Default filters if not specified should be: status:error aws_account:322609035462 -service:intelligence-data-api 
-- **Time window** (default `now-4h`)
-
-If the user gave a specific filter, use it verbatim. Don't add or drop tags.
+Args are always inline — don't ask, just run. Parse:
+- **DD filter string** — use verbatim. Default: `status:error aws_account:322609035462 -service:intelligence-data-api`
+- **Time window** — default `now-4h`
+- **Natural-language question** — answer it at the end of the report after the structured analysis
 
 ## Step 1 — Volume by service
-
-Run this first. It tells you where to focus.
 
 ```
 analyze_datadog_logs:
@@ -42,8 +30,7 @@ analyze_datadog_logs:
   sql_query: SELECT service, count(*) as cnt FROM logs GROUP BY service ORDER BY cnt DESC LIMIT 50
 ```
 
-Anything emitting more than a few hundred errors/hour is almost always
-misclassified — real error rates that high would be a full outage.
+Hundreds of errors/hour from a single service is almost always misclassification — real rates that high would be a full outage.
 
 ## Step 2 — Cluster patterns per service
 
@@ -55,25 +42,20 @@ search_datadog_logs:
   pattern_group_by: ["service"]
 ```
 
-For each pattern, ask: does the message text actually look like an error?
-Common tells of MISCLASSIFICATION:
+Common misclassification tells:
 
 | Tell | Meaning |
 |---|---|
-| Message starts with `INFO`, `DEBUG`, `WARN`, `W0429`, or has `level=info` | Stderr stream tagged as error by default DD parser |
-| Message is empty or just whitespace | Blank stderr line tagged as error |
-| Message is a fragment: `~~~~^^^^`, `File "...", line N`, single token like `^`, `)`, `main()` | Multiline traceback split on newline; only the first line is a real error |
-| Dd-trace `failed to send, dropping N traces` | Datadog agent connectivity, not app error |
-| `cannot scrape target ... node-exporter` (vmagent) | Scrape warn, not app error |
-| `kube-system` / CSI / operator reconciliation INFO logs | Controller informational, not error |
+| Starts with `INFO`, `DEBUG`, `WARN`, `W0429`, or has `level=info` | Stderr tagged error by default DD parser |
+| Empty or whitespace | Blank stderr line |
+| Fragment: `~~~~^^^^`, `File "...", line N`, single token `^` `)` | Multiline traceback split per line |
+| `failed to send, dropping N traces` | DD agent connectivity |
+| `cannot scrape target ... node-exporter` | vmagent scrape warn |
+| `kube-system` / CSI / operator reconciliation INFO | Controller informational |
 
-Real errors usually look like: a stack trace's *first* line, an HTTP error
-("404 Client Error", "5xx"), an app-level error message, an auth failure, a
-DB OperationalError.
+Real errors: stack trace first line, HTTP 4xx/5xx, auth failure, DB OperationalError.
 
 ## Step 3 — Drill into suspected real errors
-
-For each service with non-noise patterns, fetch raw logs:
 
 ```
 search_datadog_logs:
@@ -82,49 +64,29 @@ search_datadog_logs:
   max_tokens: 2500
 ```
 
-Read carefully. Distinguish:
-- **Expected business errors** (vendor 404 for missing resource) — usually
-  routine, but worth flagging if rate spikes
-- **Real failures** (DB connection drops, OperationalError, auth token
-  invalid) — needs a follow-up ticket
-- **Infrastructure noise** (DD agent can't reach trace intake) — platform
-  team
+Classify each:
+- **Expected business errors** (vendor 404 for missing resource) — routine, flag if rate spikes
+- **Real failures** (connection drops, auth token invalid) — needs a ticket
+- **Infrastructure noise** (DD agent trace intake) — platform team
 
 ## Step 4 — Report
 
-Output a short report with three sections:
-
 ### A. Misclassified (noise to fix)
-Table: service | count | pattern | proposed pipeline fix
+Table: service | count | pattern | proposed fix
 
 Pipeline fix is almost always one of:
-- **Datadog Logs Pipeline → Status Remapper** to read `level` / `severity`
-  out of the parsed JSON (or via grok extracting `INFO|WARN|ERROR` from the
-  message text) instead of defaulting to stderr=error.
-- **Multi-line aggregator** processor in the pipeline so Python tracebacks
-  ship as a single log entry rather than per-line fragments.
-- **Exclusion filter** for known-noisy patterns (e.g. dd-trace flush
-  failures) at the pipeline level — but prefer fixing the status, not
-  dropping data.
-
-Note: this skill cannot modify DD pipelines via MCP. Surface the recommended
-fix; the user applies it in the Datadog UI under Logs → Pipelines.
+- **Status Remapper** — read `level`/`severity` from parsed JSON instead of defaulting stderr → error
+- **Multi-line aggregator** — so Python tracebacks ship as one entry
+- **Exclusion filter** — for known-noisy patterns; prefer fixing the status over dropping data
 
 ### B. Real errors found
-Bullet list, one line each: `service — what happened — count — link`.
-Include the Datadog Logs Explorer URL from the search response so the user
-can click through.
+One line each: `service — what happened — count — link`
 
 ### C. Recommended follow-ups
-Tickets to file, owners to ping. Keep it under 5 items.
+Tickets to file, owners to ping. Max 5 items.
 
 ## Notes
 
-- Don't try to enumerate every error — cluster, summarize, and link.
-- Prefer `analyze_datadog_logs` for counts and `use_log_patterns: true` for
-  message clustering. Raw `search_datadog_logs` is for drilling into one
-  service after you know it's real.
-- Time window: default 4h. Shorter (1h) if user is reacting to an alert,
-  longer (24h) if doing a hygiene audit.
-- If a single pattern is over ~5k logs in 4h, treat it as misclassified
-  until proven otherwise.
+- Cluster and summarize — don't enumerate every log.
+- Use `analyze_datadog_logs` for counts, `use_log_patterns: true` for clustering. Raw `search_datadog_logs` only once you've confirmed a service is worth drilling into.
+- If a pattern exceeds ~5k logs in 4h, treat as misclassified until proven otherwise.
