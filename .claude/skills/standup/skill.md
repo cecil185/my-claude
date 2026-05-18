@@ -14,14 +14,16 @@ Produce a standup Slack message in two sections: **Yesterday** and **Today**.
 
 ---
 
-## Step 1 — Fetch Linear tickets updated in the last 24 hours
+## Step 1 — Fetch Linear tickets updated recently
+
+First, check today's day of the week. If today is **Monday**, use a 72-hour lookback (`-P3D`) to cover the weekend and include Friday's activity. Otherwise, use a 24-hour lookback (`-P1D`).
 
 Call `mcp__linear-server__list_issues` with:
 - `assignee: "me"`
-- `updatedAt: "-P1D"`
+- `updatedAt: "-P3D"` (Monday) or `"-P1D"` (all other days)
 - `limit: 250`
 
-From the results, identify **actual status changes** by checking `startedAt`, `completedAt`, and `canceledAt` timestamps — if they fall within the last 24 hours, that ticket had a status change. Ignore tickets where only `updatedAt` changed (those are likely description/label edits).
+From the results, identify **actual status changes** by checking `startedAt`, `completedAt`, and `canceledAt` timestamps — if they fall within the lookback window, that ticket had a status change. Ignore tickets where only `updatedAt` changed (those are likely description/label edits).
 
 ---
 
@@ -42,7 +44,7 @@ For each ticket that moved to **Done** yesterday, call `mcp__GitLab__search` wit
 - `search: "<TICKET-ID>"` (e.g. `"DP-812"`)
 - `state: "merged"`
 
-Filter results to only those where `merged_at` is within the last 24 hours. Extract the `title` and which repo it merged into (parse from `references.full`).
+Filter results to only those where `merged_at` is within the lookback window (72 hours on Monday, 24 hours otherwise). Extract the `title` and which repo it merged into (parse from `references.full`).
 
 Run these searches in parallel across all Done tickets.
 
@@ -66,7 +68,7 @@ Use this structure exactly:
 
 ### Formatting rules
 
-- **Yesterday** includes: tickets whose `completedAt` or `startedAt` (→ In Review / In Progress) fell in the last 24 hours. Group merged MRs under their ticket as sub-bullets.
+- **Yesterday** includes: tickets whose `completedAt` or `startedAt` (→ In Review / In Progress) fell within the lookback window. On Mondays, label this section `*Since Friday*` instead of `*Yesterday*`. Group merged MRs under their ticket as sub-bullets.
 - **Today** includes: all currently In Progress and In Review tickets, plus any tickets completed today (same day, not yesterday).
 - Keep titles short — strip boilerplate like "Phase N:", "feat:", "fix:" prefixes where they add no meaning.
 - Repo short name: extract the last segment of `references.full` (e.g. `ingestion-dags!38` → `ingestion-dags`).
