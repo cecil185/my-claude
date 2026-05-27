@@ -1,11 +1,16 @@
 ---
 name: axis-sprint
 description: >-
-  Launch a team of up to 5 parallel agents on the axis project — each claims
-  one ready bead, implements it with TDD, commits, and picks up more work.
-  When all agents finish, outputs a UI test checklist based on what shipped.
+  Launches a team of up to 5 parallel agents on the axis project — each claims one
+  ready bead, implements it with TDD, commits, and picks up more work. When all agents
+  finish, outputs a UI test checklist based on what shipped. Use when user says "run a
+  sprint", "work on axis", "implement ready beads", or "run the axis agents".
+when_to_use: >-
+  Trigger when user says "run a sprint", "work on axis", "implement ready beads",
+  "run the axis agents", "ship ready work on axis", or "parallelize axis work".
 model: sonnet
 effort: high
+disable-model-invocation: true
 ---
 
 # Axis Sprint — Parallel Agent Team

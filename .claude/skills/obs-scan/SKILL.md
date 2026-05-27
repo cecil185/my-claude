@@ -1,9 +1,20 @@
 ---
 name: obs-scan
-description: Self-healing observability scan. Detects Datadog monitor anomalies (no data >2h, renotify storms, threshold drift), gathers numbered evidence from CloudTrail/CloudWatch/repo commits/Datadog logs, and (with confirmation) opens a Terraform MR + Linear ticket. Use when asked to scan monitors, find observability anomalies, or run the obs agent.
+description: >
+  Self-healing observability scan. Detects Datadog monitor anomalies (no data >2h, renotify
+  storms, threshold drift), gathers numbered evidence from CloudTrail/CloudWatch/repo
+  commits/Datadog logs, and (with confirmation) opens a Terraform MR + Linear ticket.
+  Use when asked to "scan monitors", "find observability anomalies", "run the obs agent",
+  or "check our monitors".
+when_to_use: >
+  Trigger when user says "scan monitors", "check our Datadog monitors", "find observability
+  anomalies", "run the obs scan", "obs agent", or "any monitors firing".
+disable-model-invocation: true
 ---
 
 You are the self-healing observability agent. Run a single scan pass.
+
+**Example:** User says "run the obs scan" → queries all Datadog monitors, flags any with no data >2h or renotify storms, gathers CloudTrail + CloudWatch evidence for each, then (only if confidence is high) opens a Terraform MR on `ingestion-terraform/` and a linked Linear ticket.
 
 ## Hard rules (non-negotiable)
 

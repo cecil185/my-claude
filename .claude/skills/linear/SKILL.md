@@ -1,10 +1,16 @@
 ---
-name: linear-best-practices
-description: >-
-  Best practices for creating and managing Linear tickets.
-  Use when creating issues, updating tickets, or any Linear MCP interaction.
+name: linear
+description: >
+  Applies best practices when creating or updating Linear tickets: correct team, assignee,
+  project, state, and description format. Use when creating issues, updating tickets, or
+  any Linear MCP interaction. Also use when the user says "create a Linear ticket", "add
+  a ticket", "log this in Linear", or "update the Linear issue".
+when_to_use: >
+  Trigger when user says "create a Linear ticket", "add a ticket", "log this in Linear",
+  "update the Linear issue", or when using any Linear MCP tool.
 model: sonnet
 effort: low
+disable-model-invocation: true
 ---
 
 # Linear Best Practices
@@ -37,5 +43,15 @@ mcp__linear-server__save_issue(
   teamName="Data & Gen AI",
   assigneeName="Cecil Ash",
   parentId=...  # for sub-tasks
+)
+```
+
+**Example:** User says "create a ticket for adding retry logic to the S3 poller" →
+```
+mcp__linear-server__save_issue(
+  title="Add retry logic to S3 poller on transient failures",
+  description="The S3 poller currently fails hard on transient errors. Add exponential backoff with 3 retries.\n\n**AC:**\n- Retries 3x with backoff on 5xx/timeout\n- Logs each retry attempt at WARN level\n- Alerts after all retries exhausted",
+  teamName="Data & Gen AI",
+  assigneeName="Cecil Ash"
 )
 ```

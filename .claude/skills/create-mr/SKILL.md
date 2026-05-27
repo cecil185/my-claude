@@ -1,11 +1,17 @@
 ---
 name: create-mr
 description: >-
-  Create a GitLab merge request from the current branch. Determines the correct
+  Creates a GitLab merge request from the current branch. Determines the correct
   repo path, constructs the MR title/description, and runs glab without compound
-  cd commands (CLAUDE.md rule). Use when asked to create MR.
-model: haiku
+  cd commands (CLAUDE.md rule). Use when asked to create MR, open a merge request,
+  or push and open a review.
+when_to_use: >-
+  Trigger when user says "create an MR", "open a merge request", "push and open MR",
+  "create merge request for DP-XXX", or "open a review". Also trigger after commits
+  are complete and user asks to submit work for review.
+model: sonnet
 effort: low
+disable-model-invocation: true
 ---
 
 # Create MR Workflow
@@ -14,11 +20,6 @@ effort: low
 
 Identify which repo the work lives in (ingestion, ingestion-helm, ingestion-terraform, etc.)
 based on context. Get the absolute path — e.g. `/Users/cecil/Code/genai/ingestion`.
-
-cd to the branch
-```bash
-cd /path/to/repo push
-```
 
 ## 2. Confirm branch and ticket
 

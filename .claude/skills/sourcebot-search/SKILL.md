@@ -5,6 +5,10 @@ description: >-
   Use when asked to find symbols, trace call paths, read files, diff commits,
   or ask natural-language questions about the codebase. Covers all repos:
   ingestion, ingestion-dags, ingestion-helm, ingestion-argo, ingestion-terraform.
+when_to_use: >-
+  Trigger when user says "find where X is defined", "show me all usages of Y",
+  "read the file at path Z", "how does X work", "search the codebase for",
+  "trace the call path for", or "what changed in commit".
 model: claude-sonnet-4-6
 effort: high
 ---
@@ -43,3 +47,21 @@ Teamworks ingestion platform.
 - Include `repo:path:line` references so the user can navigate directly.
 - Keep prose minimal — code and file locations speak for themselves.
 - No summaries of what tools you called; just results.
+
+## Example
+
+User: "Where is `BasePoller` defined and what classes extend it?"
+
+1. `find_symbol_definitions("BasePoller")` → `ingestion/platform_ingestion/poller/base_poller.py:12`
+2. `find_symbol_references("BasePoller")` → finds `DynamoPoller`, `ForceDecksPoller`, `SmartSpeedPoller`
+3. `read_file` on each to confirm inheritance
+
+Output:
+```
+`BasePoller` defined at ingestion:platform_ingestion/poller/base_poller.py:12
+
+Subclasses:
+- DynamoPoller — platform_ingestion/poller/dynamo_poller.py:8
+- ForceDecksPoller — platform_ingestion/poller/force_decks_poller.py:6
+- SmartSpeedPoller — platform_ingestion/poller/smart_speed_poller.py:5
+```

@@ -1,12 +1,16 @@
 ---
 name: refactor
 description: >-
-  Refactor code to match project conventions and clean code principles.
-  Use when asked to clean up, improve, or refactor existing code — identifies
-  smells, improves structure, names, testability, debuggability, and maintainability
-  without changing behavior.
+  Refactors code to match project conventions and clean code principles. Identifies smells,
+  improves structure, names, testability, debuggability, and maintainability without changing
+  behavior. Use when asked to "clean up", "refactor", "improve this code", or "this function
+  is getting messy".
+when_to_use: >-
+  Trigger when user says "refactor", "clean up this code", "improve this function", "this is
+  getting messy", "rename and reorganize", or "fix the code smells".
 model: claude-opus-4-6
 effort: high
+disable-model-invocation: true
 ---
 
 # Code Refactor

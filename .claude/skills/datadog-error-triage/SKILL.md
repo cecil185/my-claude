@@ -1,11 +1,15 @@
 ---
 name: datadog-error-triage
 description: >-
-  Triage `status:error` logs in Datadog over a time window — separate
+  Triages `status:error` logs in Datadog over a time window — separates
   misclassified noise (INFO/warn on stderr, multiline traceback fragments,
-  blank-line tokens) from real errors, and produce a short report with
+  blank-line tokens) from real errors, and produces a short report with
   pipeline-fix recommendations. Use when asked to look at error logs, sort
   through Datadog noise, find real errors, or audit log status accuracy.
+when_to_use: >-
+  Trigger when user says "look at error logs", "triage Datadog errors", "sort
+  through the noise", "find real errors in Datadog", "audit log status accuracy",
+  "what errors are real", "check status:error logs", or "clean up Datadog noise".
 model: sonnet
 effort: medium
 ---

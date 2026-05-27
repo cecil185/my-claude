@@ -1,9 +1,16 @@
 ---
 name: rebase
-description: Rebase current branch onto its base branch
-allowed-tools: Bash(git:*), Read, Edit, Grep, Glob
+description: >
+  Rebases the current branch onto the latest version of its upstream base branch (typically
+  main), resolving conflicts automatically where safe. Use when the user says "rebase my
+  branch", "bring my branch up to date", "rebase onto main", or "sync with main".
+when_to_use: >
+  Trigger when user says "rebase", "rebase my branch", "bring up to date with main",
+  "sync with main", "rebase onto main", or "I have conflicts to resolve".
+allowed-tools: Bash(git *), Read, Edit, Grep, Glob
 model: sonnet
 effort: high
+disable-model-invocation: true
 ---
 
 Rebase the current branch onto the latest version of its upstream base branch. Follow these steps carefully:

@@ -1,6 +1,10 @@
 ---
 name: writing-style
 description: Cecil Ash's personal writing style guide. Use this skill whenever Cecil asks Claude to write, draft, or edit anything in his voice — including Slack messages, Notion docs, Linear tickets, blog posts, LinkedIn posts, performance reviews, technical specs, runbooks, or any other written content. Also use when he says "write this for me", "draft this", "in my style", or "make this sound like me".
+when_to_use: >-
+  Trigger when user says "write this for me", "draft this", "in my style",
+  "make this sound like me", "use my voice", or when writing any content
+  (Slack, doc, ticket, post, review) that should match Cecil's voice.
 ---
 
 # Cecil Ash — Writing Style Guide

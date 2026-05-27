@@ -6,6 +6,12 @@ description: >-
   genuinely urgent items so you can enter deep focus without missing a blocker.
   Use when asked to check for urgent messages, do a focus check, or scan for
   anything blocking before going heads-down.
+when_to_use: >-
+  Trigger when user says "anything urgent?", "check for blockers", "focus
+  check", "safe to go heads-down?", "anyone waiting on me?", or "scan for
+  urgent messages".
+model: sonnet
+effort: medium
 ---
 
 # Urgent Check — Deep Focus Gate
@@ -86,9 +92,9 @@ Keep only threads where a human is waiting for your reply or decision.
 
 Run these calls in parallel:
 
-1. `mcp__claude_ai_Linear__list_issues` with `assignee: "me"`, `priority: 1` (Urgent) — get any urgent issues assigned to you
-2. `mcp__claude_ai_Linear__list_issues` with `assignee: "me"`, `state: "In Progress"` — get your in-progress issues
-3. Search for recent comments on your issues: `mcp__claude_ai_Linear__list_comments` — look for comments in the last 24 hours on issues assigned to you
+1. `mcp__claude_ai_Linear_HTTP__list_issues` with `assignee: "me"`, `priority: 1` (Urgent) — get any urgent issues assigned to you
+2. `mcp__claude_ai_Linear_HTTP__list_issues` with `assignee: "me"`, `state: "In Progress"` — get your in-progress issues
+3. Search for recent comments on your issues: `mcp__claude_ai_Linear_HTTP__list_comments` — look for comments in the last 24 hours on issues assigned to you
 
 For each item, check if:
 - Priority is Urgent (1) or High (2) and someone has commented asking for your input

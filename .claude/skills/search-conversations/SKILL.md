@@ -5,6 +5,10 @@ description: >-
   asked to find a past conversation, recall what was discussed, look up a
   previous solution, or search for how something was done before. Returns
   matching excerpts with file/branch/date context so you can locate the session.
+when_to_use: >-
+  Trigger when user says "find a past conversation", "what did we discuss about X",
+  "how did we solve X before", "search my history for", "look up a previous session",
+  "recall when we", or "search conversations".
 model: claude-sonnet-4-6
 effort: low
 ---
@@ -15,19 +19,7 @@ Search Claude Code conversation history stored in `~/.claude/projects/`.
 
 ## Step 1 — Run the search
 
-Run this Python one-liner, substituting `QUERY` with the search term(s):
-
-```bash
-python3 - <<'EOF'
-import json, os, sys, re
-from pathlib import Path
-from datetime import datetime
-
-query = " ".join(sys.argv[1:]) if len(sys.argv) > 1 else ""
-EOF
-```
-
-Actually, run the full script below as a single bash heredoc. Replace `QUERY_TERMS` with the user's search terms (lowercase, space-separated):
+Run this script as a single bash heredoc. Replace `QUERY_TERMS` with the user's search terms (lowercase, space-separated):
 
 ```bash
 python3 - QUERY_TERMS <<'PYEOF'
@@ -80,7 +72,6 @@ for project_dir in sorted(projects_dir.iterdir()):
             msg = d.get("message", {})
             content = msg.get("content", "")
 
-            # Extract text
             text = ""
             if isinstance(content, str):
                 text = content
@@ -101,7 +92,6 @@ for project_dir in sorted(projects_dir.iterdir()):
                 except Exception:
                     ts_fmt = ts[:16] if ts else "unknown"
 
-                # Snippet: find term position, show 150 chars around it
                 idx = text_lower.find(terms[0])
                 start = max(0, idx - 60)
                 end = min(len(text), idx + 120)

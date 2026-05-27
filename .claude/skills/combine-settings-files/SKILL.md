@@ -1,11 +1,16 @@
 ---
 name: combine-settings-files
 description: >-
-  Consolidate Claude Code settings.local.json files from workspace repositories
+  Consolidates Claude Code settings.local.json files from workspace repositories
   into the central my-claude settings.json. Use when asked to combine settings,
   merge permissions, sync settings files, or clean up local settings.
+when_to_use: >-
+  Trigger when user says "combine settings", "merge permissions", "sync settings
+  files", "clean up local settings", "consolidate my settings", or "move permissions
+  to the central file".
 model: sonnet
 effort: low
+disable-model-invocation: true
 ---
 
 # Combine Settings Files

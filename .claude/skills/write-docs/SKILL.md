@@ -1,6 +1,10 @@
 ---
 name: write-docs
 description: Write or improve technical documentation — runbooks, API docs, architecture guides, onboarding pages, READMEs. Use when asked to "document X", "write a runbook for Y", "create a guide for Z", "improve this doc", or "make this readable". Applies Cecil's doc style: summary-first, header-structured, no repetition, follow-up references for depth.
+when_to_use: >-
+  Trigger when user says "document X", "write a runbook", "create a guide",
+  "improve this doc", "make this readable", "write a README", "write an
+  architecture doc", or "document this for the team".
 ---
 
 # write-docs

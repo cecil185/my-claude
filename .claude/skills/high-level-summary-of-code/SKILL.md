@@ -1,7 +1,14 @@
 ---
 name: high-level-summary-of-code
-description: Tell the agent to zoom out and give broader context or a higher-level perspective. Use when you're unfamiliar with a section of code or need to understand how it fits into the bigger picture.
-disable-model-invocation: true
+description: >
+  Zooms out to give broader context and a higher-level map of the code. Use when the user says
+  "I don't know this area", "give me the big picture", "how does this fit together", or "map
+  out the relevant modules".
+when_to_use: >
+  Trigger when user says "I'm unfamiliar with this code", "zoom out", "give me the big picture",
+  "how does X fit into the rest of the codebase", or "map the relevant modules".
 ---
 
 I don't know this area of code well. Go up a layer of abstraction. Give me a map of all the relevant modules and callers, using the project's domain glossary vocabulary.
+
+**Example:** User says "I'm unfamiliar with how polling works here" → maps the poller entry point, which SQS queues it reads from, which processor it calls, what Kafka topic it writes to, and which DAG triggers it — all using domain terms (Poller, Processor, SQS Message, Kafka Topic) not internal class names.

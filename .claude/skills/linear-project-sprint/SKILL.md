@@ -1,13 +1,17 @@
 ---
 name: linear-project-sprint
 description: >-
-  Loop through all Backlog tickets in a Linear project and attempt to solve
-  them in parallel using agent teams. Creates branches off main, runs the ADLC
-  execution workflow per ticket, creates GitLab MRs for completed work, and
-  leaves descriptive comments on tickets that could not be fully resolved.
-  Use when given a Linear project URL and asked to work through its backlog.
+  Loops through all Backlog tickets in a Linear project and attempts to solve them in parallel
+  using agent teams. Creates branches off main, runs the ADLC execution workflow per ticket,
+  creates GitLab MRs for completed work, and leaves investigation notes on tickets that could
+  not be fully resolved. Use when given a Linear project URL and asked to "sprint through the
+  backlog", "work through this project", or "execute all tickets in this project".
+when_to_use: >-
+  Trigger when user provides a Linear project URL and asks to "sprint through the backlog",
+  "work through this project", "execute all tickets", or "run the sprint".
 model: sonnet
 effort: medium
+disable-model-invocation: true
 ---
 
 # Linear Project Sprint
@@ -15,6 +19,9 @@ effort: medium
 Execute all **Backlog** tickets in a Linear project in parallel, branching off
 `main`, creating GitLab MRs for completed work, and commenting on anything
 that could not be resolved.
+
+**Example:** `/linear-project-sprint https://linear.app/teamworks/project/improve-production-resiliency-6b1052fc3cd7/issues`
+→ fetches Backlog tickets, classifies each, spawns up to 8 agents, creates MRs for completed work, moves blocked tickets to Paused with investigation notes.
 
 ## Prerequisites
 

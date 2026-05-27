@@ -2,9 +2,12 @@
 name: research
 description: >-
   Web research skill — answers questions with sourced, concise summaries.
-  Use when asked to look something up, research a topic, compare options,
-  or find current information. Returns a short answer with linked sources;
-  user can ask follow-up for more depth.
+  Use when asked to "look this up", "research a topic", "compare options",
+  "what's the current state of X", or "find information about Y".
+  Returns a short answer with linked sources; user can ask follow-up for more depth.
+when_to_use: >-
+  Trigger when user says "look this up", "research", "what is X", "compare A vs B",
+  "find information about", "what's the latest on", or "search for".
 model: claude-opus-4-6
 effort: high
 ---

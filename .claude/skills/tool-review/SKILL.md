@@ -6,6 +6,10 @@ description: >-
   update settings.json with improvements. Use when asked to evaluate how well
   Claude Code is being used, review Claude config files, audit skills, or
   improve the my-claude setup.
+when_to_use: >-
+  Trigger when user says "review my Claude setup", "audit my skills",
+  "evaluate how I'm using Claude Code", "review Claude config files",
+  "check my settings.local.json", or "improve my my-claude setup".
 model: claude-opus-4-6
 effort: high
 ---

@@ -1,10 +1,15 @@
 ---
 name: create-linear-ticket
 description: >-
-  Create a single Linear ticket with specified project, assignee, status, and description.
+  Creates a single Linear ticket with specified project, assignee, status, and description.
   Use when the user wants to create a ticket and provides (or you can infer) the key fields.
+when_to_use: >-
+  Trigger when user says "create a ticket", "file a Linear issue", "add a ticket for X",
+  "log a bug in Linear", "create a chore for X", or "make a Linear ticket". Also trigger
+  when user describes a task/bug/feature and says "track this" or "let's ticket this".
 model: sonnet
 effort: low
+disable-model-invocation: true
 ---
 
 # Create Linear Ticket

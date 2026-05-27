@@ -9,6 +9,10 @@ description: >-
   do this week on Linear.”
 model: sonnet
 effort: medium
+when_to_use: >-
+  Trigger when user says "weekly update", "status summary", "sprint recap",
+  "what did I do this week", "weekly Linear update", or "what have I been
+  working on".
 ---
 
 # Weekly Linear Project Update

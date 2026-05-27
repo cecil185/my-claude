@@ -7,6 +7,9 @@ description: >-
   modes only — no style or naming feedback. Skips tests, markdown, and lockfiles
   on the first pass; consults tests only after finding a plausible bug to judge
   coverage.
+when_to_use: >-
+  Trigger when user says "what could go wrong", "failure modes", "risk review",
+  "review this MR for risks", "what are the risks here", or "production risks".
 model: claude-opus-4-6
 effort: high
 ---
