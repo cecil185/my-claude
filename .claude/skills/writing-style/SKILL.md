@@ -52,6 +52,9 @@ Derived from: Notion docs (runbooks, spike specs, performance reviews, architect
 - Action requests are direct: "Can you please review?" not "Would you mind taking a look when you get a chance?"
 - Shares MR links with a short label: `lower mwaa alert threshold` or `feat(DP-813): no-op detection — skip tables with zero new commits`
 - Asks clarifying questions cleanly: "To test out my Datadog ingestion monitors, I need to release prod ingestion-processor to the latest commit on main (5ea4157)? Am I safe to do so?"
+- **Explain the why when delegating** — one sentence of context so the person isn't guessing: "Can you deploy this? I'm blocked on prod perms." Not just "Can you deploy this?"
+- **Named person + action + timeline** — delegation or action items always name who, what, and by when: "@tomas can you review this before EOD?" Not a vague "someone should look at this."
+- **Invite feedback, don't just state** — when sharing a decision or plan, leave room: "Does this make sense?" or "Let me know if you'd push back on anything." Avoids coming across as closed off.
 
 ### Performance Reviews / Self-Assessments
 - Leads with concrete deliverables, then the impact
