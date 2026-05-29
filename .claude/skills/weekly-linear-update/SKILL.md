@@ -23,12 +23,12 @@ Apply this skill when the user wants a **weekly** rollup of their Linear work: a
 
 ## Arguments
 
-- **`project`** *(optional)* — a Linear **project name** (e.g. `"Ingestion Platform"`) or a **project URL** (e.g. `https://linear.app/teamworks/project/ingestion-platform-abc123`). When provided, scope the entire update to that project only:
+- **`project`** *(required)* — a Linear **project name** (e.g. `"Ingestion Platform"`) or a **project URL** (e.g. `https://linear.app/teamworks/project/ingestion-platform-abc123`).
+  - **If not provided, stop and ask the user for it before doing anything else.**
   - If a URL is given, extract the project slug/ID from the path and resolve it via the Linear MCP (use the project lookup/search tool — read its schema first).
   - If a name is given, search projects (case-insensitive); if multiple match, ask the user to disambiguate before proceeding.
   - Apply the project filter to **both** sections (Progress this week and Still to do).
   - Include the resolved project name in the report header, e.g. `## Weekly update — [date range] — [Project Name]`.
-- When no `project` is provided, behave as before (all of the user's assigned work across projects).
 
 ## Prerequisites
 
@@ -94,3 +94,4 @@ Tone: **factual, concise**, no boilerplate apologies. Prefer **past tense** for 
 - **No issues in the window**: Say so explicitly; still output **Still to do** if any To Do / In Progress exist.
 - **MCP unavailable**: Tell the user to configure Linear MCP; do not fabricate tickets.
 - **Pagination / limits**: Respect MCP limits; summarize if the list is long (e.g. top by priority or project, with a count of omitted items).
+- **Cross-team tickets**: When a project URL or name is provided, verify that every issue's `projectId` matches the resolved project ID. Even if the Linear API returns issues from other teams (e.g. a PLATENG ticket tagged to a DP project), **exclude any issue whose team does not match the project's primary team(s)**. Do not include cross-team tickets in the update unless the user explicitly asks for them.

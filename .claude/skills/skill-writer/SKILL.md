@@ -109,17 +109,11 @@ Use "MUST" / "ALWAYS" only for low-freedom constraints that have actually caused
 
 ## Dynamic context injection
 
-Use `` !`command` `` to run shell commands before Claude sees the skill. Output replaces the line.
+Use an exclamation mark followed by a shell command wrapped in backticks on its own line. The harness executes it and substitutes the output before Claude sees the skill body.
 
-```yaml
-## Current diff
-!`git diff HEAD`
+Example: a line reading `!` + `` `git diff HEAD` `` injects the current diff inline.
 
-## Instructions
-Summarise the changes above…
-```
-
-Multi-line commands use a fenced ` ```! ` block.
+Multi-line commands use a fenced `!` code block (opening fence is three backticks followed by `!`).
 
 **Caution:** Dynamic commands run in the session's working directory. Commands like `git diff HEAD` fail if the working directory is not a git repo (e.g. a workspace root containing multiple sub-repos). Guard with `2>/dev/null || echo "(no output)"` or only use dynamic injection for commands that are safe to fail.
 
