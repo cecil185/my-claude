@@ -1,12 +1,12 @@
 ---
 name: new-doc-skill-opportunities
 description: >-
-  Scans Slack, DMs, and Linear to identify knowledge gaps for the Data Platform
-  team — missing Notion docs or team Claude skills — outline top 3
-  opportunities to #team-eng-data-platform. Each opportunity recommends Notion
-  vs skill (or both), with links, content outline, and a skill workflow sketch
-  when a skill is the better fit. Does not write docs or skills — surfaces gaps
-  and how to close them.
+  Scans Slack, DMs, and Linear to identify knowledge gaps for any team —
+  missing Notion docs or team Claude skills — and surfaces the top 3
+  opportunities. Each opportunity recommends Notion vs skill (or both), with
+  links, content outline, and a skill workflow sketch when a skill is the
+  better fit. Does not write docs or skills — surfaces gaps and how to close
+  them.
   Use when asked to "find doc gaps", "what needs documenting", "doc opportunity scan",
   "identify missing documentation", "skill gaps", or "what should we document this week".
 when_to_use: >-
@@ -17,25 +17,45 @@ model: sonnet
 effort: medium
 ---
 
-# Knowledge Gap Scanner — Data Platform
+# Knowledge Gap Scanner
 
-Identify the top 3 knowledge opportunities for the Data Platform team.
+Identify the top 3 knowledge opportunities for a team.
 Gathers signals from Slack, DMs, and Linear, then cross-references existing Notion
 docs **and** team Claude skills to surface the most impactful gaps — with a clear
 recommendation for each: **Notion doc**, **Claude skill**, or **both**.
 
-**Outputs:** 3 richly described opportunities for new docs or SKILLs that will help the team save time
+**Outputs:** 3 richly described opportunities for new docs or skills that will help the team save time
+
+---
+
+## Step 0 — Gather team configuration
+
+Before fetching any data, ask the user for their team-specific details in a single message:
+
+> To run the scan, I need a few details:
+> 1. **Slack channel(s)** — Which channel(s) should I scan? (e.g. `#team-eng-data-platform`) — comma-separate if multiple
+> 2. **Notion root page URL** — Your team's docs root page (or leave blank to skip Notion)
+> 3. **Linear team key** — e.g. `DP`, `ENG`, `PROD` (or leave blank to skip Linear)
+> 4. **Skills directory path** — Where your team Claude skills live (or leave blank to skip)
+
+Wait for the user's reply. Store the four values as:
+- `CHANNELS` — list of channel names, parsed from the comma-separated input
+- `NOTION_URL` — the Notion root page URL, or null
+- `LINEAR_KEY` — the Linear team key string, or null
+- `SKILLS_DIR` — the filesystem path, or null
+
+Then proceed to Step 1.
 
 ---
 
 ## Step 1 — Gather signals in parallel
 
-Run all five fetches simultaneously.
+Run all fetches simultaneously using the team configuration from Step 0.
 
-### 1a. #team-eng-data-platform (past 30 days)
+### 1a. Team Slack channel(s) (past 30 days)
 
-`mcp__claude_ai_Slack__slack_search_public_and_private` with:
-- `query: "in:#team-eng-data-platform after:<date 30 days ago YYYY-MM-DD>"`
+For each channel provided, run `mcp__claude_ai_Slack__slack_search_public_and_private` with:
+- `query: "in:<channel> after:<date 30 days ago YYYY-MM-DD>"`
 - Compute the date at runtime; do not hard-code it.
 
 Look for: repeated questions, "how do I…", "where is…", confusion about a process,
@@ -53,10 +73,12 @@ Look for: questions you had to answer manually, requests for "how does X work",
 any "can you explain…" or "do we have docs on…" messages. Repeated multi-step
 walkthroughs you gave more than once are strong **skill** candidates.
 
-### 1c. New Linear tickets — team DP (past 30 days)
+### 1c. New Linear tickets (past 30 days)
+
+Skip if the user left the Linear team key blank.
 
 `mcp__claude_ai_Linear_HTTP__list_issues` with:
-- `teamKey: "DP"`
+- `teamKey: "<user-provided team key>"`
 - `createdAt: "-P30D"`
 - `limit: 100`
 
@@ -67,32 +89,32 @@ the same topic; chores to automate a recurring workflow.
 
 ### 1d. Existing Notion docs index
 
-`mcp__claude_ai_Notion__notion-fetch` the Team Docs root page:
-`https://www.notion.so/teamworksoss/Team-Docs-2fae43737ba2802fb028ea23efbaf4fb`
+Skip if the user left the Notion URL blank.
+
+`mcp__claude_ai_Notion__notion-fetch` the provided root page URL.
 
 Extract the list of existing pages/sections. This is the **Notion coverage map**.
 
 ### 1e. Existing team Claude skills index
 
-List and read frontmatter from every team skill:
+Skip if the user left the skills directory blank.
+
+List and read frontmatter from every team skill in the provided directory:
 
 ```bash
-find ~/Code/me/my-claude/.claude/skills -iname 'SKILL.md' -o -iname 'skill.md'
+find <skills-directory> -iname 'SKILL.md' -o -iname 'skill.md'
 ```
 
 For each file, extract `name` and `description` (and `when_to_use` if present).
 This is the **skills coverage map** — use it to avoid recommending skills that
 already exist and to spot gaps where a skill would duplicate a thin doc.
 
-If the user names another repo with team skills (e.g. a service repo with
-`.claude/skills/`), include that path in the same pass.
-
 ---
 
 ## Step 2 — Extract gap signals
 
 For each signal collected above, extract a candidate gap with:
-- **Topic** — what's missing (e.g., "Kafka consumer lag runbook", "add a new DAG")
+- **Topic** — what's missing (e.g., "deploy rollback runbook", "how to add a new integration")
 - **Signal type** — `repeated-question`, `dm-explanation`, `linear-ticket`,
   `spike-topic`, `onboarding-friction`, `manual-workflow`, `agent-request`
 - **Frequency** — how many times this surfaced across sources
@@ -122,13 +144,14 @@ investigation for…", frustration that docs exist but nobody follows them under
 **Notion-fit signals:** "where is the doc for…", architecture decisions, onboarding
 narrative, cross-team context, compliance or design rationale.
 
-When recommending `skill`, you will draft a **workflow sketch** in Step 5 (not a full SKILL.md).
+When recommending `skill`, include a **workflow sketch** in the output (not a full SKILL.md) — see the output template in Step 5.
 
 ---
 
 ## Step 3 — Cross-reference coverage
 
-For each candidate, check **both** maps from Steps 1d and 1e.
+For each candidate, check **both** maps from Steps 1d and 1e (skip whichever the
+user omitted).
 
 **Notion**
 - Doc exists and is adequate → not a Notion gap for this topic.
@@ -167,13 +190,17 @@ three identical format types unless signals demand it).
 
 ---
 
+## Step 5 — Present findings
 
-### Present your findings in this format
+Use the actual scanned channel names and provided Notion URL in the summary line.
+Build the "Scanned" sentence dynamically — include only the sources the user enabled.
+Omit "Team docs" from the footer if `NOTION_URL` is null.
+Omit "Team skills" from the footer if `SKILLS_DIR` is null.
 
 ```
-*Knowledge Gap Scan — <today's date, e.g. May 29>* 📋
+*Knowledge Gap Scan — <today's date, e.g. June 1>* 📋
 
-Scanned Slack (#team-eng-data-platform + DMs), Linear (DP, past 30 days), Notion Team Docs, and team Claude skills.
+Scanned Slack (#channel-1, #channel-2 + DMs) [and Linear (TEAM, past 30 days)] [and Notion Team Docs] [and team Claude skills].
 Here are 3 opportunities worth picking up:
 
 ---
@@ -192,8 +219,8 @@ Here are 3 opportunities worth picking up:
 *Skill workflow* (if Claude skill or Both):
 • *Triggers:* "<phrase>", "<phrase>"
 • *Process:* <numbered steps — what the agent does, which MCP tools or commands, what it outputs; 4–8 steps max>
-• *Suggested name:* `<kebab-case-skill-name>` in `my-claude/.claude/skills/<name>/`
-• *Implement with:* `/skill-writer` or copy an existing skill (e.g. `datadog-error-investigate` for triage shape)
+• *Suggested name:* `<kebab-case-skill-name>` in `<skills-directory>/<name>/`
+• *Implement with:* `/skill-writer` or copy an existing skill
 
 ---
 
@@ -207,7 +234,7 @@ Here are 3 opportunities worth picking up:
 
 ---
 
-Team docs: <Notion Team Docs URL>
-Team skills: `~/Code/me/my-claude/.claude/skills/`
+Team docs: <Notion URL>
+Team skills: `<skills-directory>`
 Want to claim one? Reply with Notion or skill 👇
 ```
