@@ -73,8 +73,11 @@ The correctness and value call is the human's. The skill's output is decision-su
 One file per candidate, named only by an opaque label. If the user points elsewhere, use
 those — same rule: nothing in the name or contents may reveal the source.
 
-**Never edit or overwrite the candidate files.** They are the assessment record. Synthesis
-(Phase 4) writes a new file, `.bakeoff/<TICKET>/SYNTHESIS.md`, leaving A/B/C untouched.
+**Never edit or overwrite the candidate files.** They are the assessment record. The skill
+writes two of its own files, never touching A/B/C:
+
+- `.bakeoff/<TICKET>/ANALYSIS.md` — the Phase 3 assessment (written every run; see Phase 3).
+- `.bakeoff/<TICKET>/SYNTHESIS.md` — the optional Phase 4 synthesis.
 
 ## Phase 0 — Require a ticket, then confirm the set exists
 
@@ -136,7 +139,7 @@ From the matrix, extract the four things a human actually needs:
 
 ## Phase 3 — Present the assessment (Purpose 1: keep candidates distinct)
 
-Output, in this order — candidates stay distinct, nothing is merged:
+Produce the assessment in this order — candidates stay distinct, nothing is merged:
 
 1. **Groundedness** — per candidate, references checked and any cited-as-existing that don't
    exist. Facts.
@@ -145,6 +148,12 @@ Output, in this order — candidates stay distinct, nothing is merged:
 4. **Different approaches** — the divergences, each as a question the human must answer with
    codebase knowledge ("SQS vs Kafka here — which fits the existing consumer?").
 5. **Claims to verify** — flagged assumptions, by label.
+
+**Always write the full assessment to `.bakeoff/<TICKET>/ANALYSIS.md`** (using the Write
+tool), AND present it in the chat response. This happens on every run — no need to ask.
+`ANALYSIS.md` contains the five sections above plus the blinded-log block; it is the skill's
+durable output and must leave A/B/C pristine. If `ANALYSIS.md` already exists from a prior
+run, overwrite it with the current assessment.
 
 Then stop. Do **not** say which plan is "best" or score them. Every observation must carry
 evidence. A flagged observation a human couldn't quickly see is allowed ("B contradicts the
