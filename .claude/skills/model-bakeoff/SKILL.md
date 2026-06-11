@@ -56,36 +56,50 @@ The correctness and value call is the human's. The skill's output is decision-su
 One file per candidate, named only by an opaque label. If the user points elsewhere, use
 those — same rule: nothing in the name or contents may reveal the source.
 
-## Phase 0 — Identify the set & the goal
+## Phase 0 — Require a ticket, then confirm the set exists
 
-1. Glob the candidate files for the one ticket.
-2. Read the **source of truth**: the Linear ticket and the refined Specification the plans
+1. **A Linear ticket is required.** If the user did not provide one with the invocation,
+   **ask for it and stop** until they do — without the ticket there is no goal to compare
+   the plans against.
+2. **Confirm the candidate set exists.** Glob `.bakeoff/<TICKET>/*.md`. There must be **≥2
+   `.md` files**. If the directory is missing or holds fewer than two, **stop and tell the
+   user** what was found (e.g. "no `.bakeoff/DP-123/` directory" or "only one candidate") —
+   there is nothing to compare.
+3. Read the **source of truth**: the Linear ticket and the refined Specification the plans
    were written from. You need the goal to map the plans against it.
-3. Confirm ≥2 candidates. If only one, there is nothing to compare — say so and stop.
 
 ## Phase 1 — Objective groundedness check (facts, not judgment)
 
-For each candidate, extract every concrete reference — file paths, functions, classes,
-modules, config keys, existing patterns — and verify each EXISTS via `mcp__fff__grep` /
-`mcp__fff__find_files`. Report per candidate: total references, and a **list of any that
-don't exist** (the actual bad reference, not just a count). Present these as facts. This is
+**Run this as parallel subagents — one per candidate file.** Each check is independent and
+the work (reading a full plan, many greps) is best kept out of the main context. Dispatch
+one Agent per `*.md`, each given only its single candidate. Each subagent extracts every
+concrete reference — file paths, functions, classes, modules, config keys, existing
+patterns — verifies each EXISTS via `mcp__fff__grep` / `mcp__fff__find_files`, and returns
+**total references + a list of any that don't exist** (the actual bad reference, not just a
+count). Collect the per-candidate results in the main loop. Present them as facts — this is
 the one dimension the skill states with confidence.
 
 ## Phase 2 — Map the comparison (blind)
 
+**Do this in the main loop — NOT in subagents.** Comparison is cross-document: it requires
+all candidates in the same context window at once. A per-candidate subagent can't diff what
+it can't see.
+
 Decompose the work into the **union of sub-topics/steps** the plans raise (derive from the
 candidates plus the Specification). Build a coverage matrix: for each sub-topic, what does
-each candidate say — covered / differs / silent. A subagent at `model: 'opus'` may do this
-diff, given only the anonymized contents and the goal.
+each candidate say — covered / differs / silent.
 
 From the matrix, extract the four things a human actually needs:
 
 - **Common ground** — what all candidates agree on (likely safe, skim-only).
 - **Unique contributions** — what each candidate raises that the others miss (A's backfill
-  step, B's rollback path). The value often hides here.
-- **Decision points** — where candidates propose *different approaches to the same thing*
-  (A: SQS, B/C: Kafka). Phrase each as a question for the human to adjudicate. These are the
-  heart of the output.
+  step, B's rollback path). The value often hides here. **Guard-rail:** if a unique
+  contribution is actually a meaningful fork — i.e. doing it vs. not doing it materially
+  changes the plan — promote it to **Different approaches** so it gets adjudicated, not
+  skimmed. Keep here only the additive "nice to also have" items.
+- **Different approaches** — where candidates propose *different ways to do the same thing*
+  (A: SQS, B/C: Kafka), plus any promoted forks from above. Phrase each as a question for
+  the human to adjudicate. These are the heart of the output.
 - **Claims to verify** — assertions about the codebase or system behavior the human should
   confirm before trusting, cross-referenced with Phase 1 groundedness.
 
@@ -96,24 +110,21 @@ Output, in this order:
 1. **Groundedness** — per candidate, references checked and any that don't exist. Facts.
 2. **Coverage matrix** — sub-topic × candidate (covered / differs / silent).
 3. **Unique contributions** — per candidate, what only it raised.
-4. **Decision points** — the divergences, each as a question the human must answer with
+4. **Different approaches** — the divergences, each as a question the human must answer with
    codebase knowledge ("SQS vs Kafka here — which fits the existing consumer?").
 5. **Claims to verify** — flagged assumptions, by label.
 
-Then stop. Do **not** declare a winner, assign scores, or say which plan is "best." If you
-have a genuinely useful observation a human couldn't quickly see — e.g. "B's approach is
-incompatible with the spec's stated constraint X" — state it as a flagged observation with
-evidence, not as a verdict. End by handing the decision explicitly to the human: they pick
-what's valuable, optionally cherry-picking the best parts of each.
+Then stop. Do **not** say which plan is "best." All your observations must have
+evidence. You may suggest cherry-picking the best parts of output if that adds real value.
+Human makes the final decision about which original output was the best and what combination of outputs to proceed with.
 
-## Optional — blinded note for the user's own log
+## Blinded note for the user's own log
 
-If the user wants to track patterns across tickets, emit a copy-pasteable blinded block
-they can file against their own private key (the skill never sees the key):
+Emit a copy-pasteable blinded block the user can file against their own private key (the skill never sees the key):
 
 ```
 Ticket: <TICKET>   Artifact: plan   Date: <session or user-supplied>
-A: refs_ok=__/__  unique_contribs=__  in_decision_points=__
+A: refs_ok=__/__  unique_contribs=__  in_different_approaches=__
 B: ...
 C: ...
 (Human note: which labels' content I ended up using = ____)
