@@ -1,138 +1,130 @@
 ---
 name: model-bakeoff
 description: >-
-  Grades and compares different outputs from the
-  same /adlc:refine or /adlc:plan task, using objective groundedness checks plus a
-  blinded LLM-judge rubric, and appends results to a cross-ticket log. Does NOT
-  generate the outputs — human produces those by running the command on each model first.
+  Blindly compares 2–3 candidate plans for one ticket and produces decision-support for
+  a human — NOT a score or a winner. Verifies what is objectively checkable (groundedness),
+  lays the plans side by side, isolates where they diverge (the real decision points), and
+  flags claims to verify. Refers to candidates ONLY as A/B/C and never learns which model
+  produced which; the human holds that mapping and makes the final call on correctness and
+  value. Does NOT generate the candidates.
 when_to_use: >-
-  Trigger when the user says "grade these model outputs", "model bakeoff", "compare
-  refine/plan across models", "which model did this best", "judge these outputs", or
-  points at a set of <ticket>.<phase>.<model>.md files to compare.
+  Trigger when the user says "model bakeoff", "compare these plans", "compare and contrast
+  these outputs", "what's different between these plans", "which of these should I trust",
+  or points at a set of .bakeoff/<TICKET>/*.md candidate files to compare.
 model: claude-opus-4-8
 effort: high
 ---
 
-# Model Bakeoff (grade-only)
+# Model Bakeoff (blind compare-and-contrast)
 
-Compare 2–3 outputs of the **same** `/adlc:refine` or `/adlc:plan` task and
-recommend the best output **for that phase**. The value of this skill is consistency:
-the same rubric, the same blinding, and the same objective checks applied every time,
-with results accumulated across tickets so a per-phase pattern emerges.
+Compare 2–3 candidate **plans** for the **same** ticket and hand the human what they need
+to decide which content is valuable and correct. The skill does the tedious, reliable work
+— verifying references and mapping differences across three documents — and stops short of
+the judgment a human must make.
 
-This skill **grades only**. The outputs must already exist — see the file contract.
-Do not generate or regenerate outputs.
+## What this skill does and does NOT do
 
-## Outputs can't mention their model
+An AI cannot reliably judge whether a plan is *correct* or *complete* — that needs codebase
+ground truth and engineering judgment. So this skill **does not score plans, rate quality,
+or pick a winner.** Doing so would dress an unreliable guess as rigor.
 
-**self-preference bias only operates when the judge knows which output is its own.**
-A judge given anonymized A/B/C content with
-identity stripped cannot favor itself — it doesn't know which is itself. So:
+It limits itself to what an AI does reliably:
 
-1. **Blinding is mandatory and carries most of the weight** (steps below).
-2. **Objective checks are model-agnostic** — groundedness greps can't be gamed by any
-   judge. These get the heaviest weight in the final score.
-3. The judge model is **pinned via subagent override**, independent of the session
-   model, so it's consistent run-to-run. Default judge: **Opus** (strongest reasoning),
-   used blinded. Being a candidate is fine because it's blinded.
-4. For extra rigor, run a **panel**: dispatch the blinded set to a 3-judge ensemble and
-   average — this cancels any residual per-model bias. Use the panel when the objective
-   checks don't already produce a clear winner.
+- **Verify groundedness** — do the files/functions/patterns a plan cites actually exist? (objective, checkable)
+- **Diff the plans** — what each covers, where they agree, where they diverge. (mapping, not judging)
+- **Surface claims to verify** — the assumptions each plan rests on, flagged for the human.
+
+The correctness and value call is the human's. The skill's output is decision-support.
+
+## Two hard rules
+
+1. **You know nothing about the source.** Candidates are `A`, `B`, `C` — never a model name.
+   Do not guess or comment on which model wrote which. If a filename or contents reveal the
+   source, **stop and tell the user** — the set is contaminated. The human holds the
+   label→source key; the skill never sees it. (Blinding keeps the human's later read free of
+   reputation bias too.)
+2. **Compare only.** The candidates already exist. Never generate or regenerate them.
 
 ## File contract
 
-Outputs live in `.bakeoff/` at the repo root (create if absent), one file per model:
-
 ```
-.bakeoff/<TICKET>/<id>.md     e.g. .bakeoff/DP-123/A.md
-```
-
-If you can determine which model produced a file, **stop and say so** - do not continue.
-
-## Phase 0 — Identify the set
-
-1. Glob `.bakeoff/*.md` (or the user-provided paths). Group by `<TICKET>.<phase>`.
-2. Confirm you have the candidates for one (ticket, phase) before grading. If multiple
-   phases are present, grade each phase as its own bakeoff.
-3. Read the **source of truth**: the Linear ticket (and, for `plan`, the Specification
-   it was planned from). You need the goal to judge whether an output actually serves it.
-
-## Phase 1 — Objective checks (model-agnostic, heaviest weight)
-
-Run these yourself with grep/read — no judgment, just facts. Score each output:
-
-| Check | How | Applies to |
-|---|---|---|
-| **Groundedness** | Every file path, function, module, class, or pattern the output references — verify it EXISTS via `mcp__fff__grep` / `find_files`. Count references and hallucinations. Report hallucination rate = bad refs / total refs. | both (critical for `plan`) |
-| **Scope leakage** | Count statements that prescribe HOW (specific code, libraries, algorithms) in a `refine` spec that should describe only WHAT. | `refine` |
-| **Accuracy** | Will the proposed plan work? | `plan` |
-
-Groundedness is decisive: an output that cites nonexistent files is disqualified for that
-phase regardless of how well it reads. Record raw counts, not just impressions.
-
-## Phase 2 — Blinded rubric judgment
-
-1. **Anonymize.** For each output, write a stripped copy to a temp location: remove the
-   filename, any `model:`/"generated by"/self-referential lines, and assign labels by
-   sorting on a content hash (so label↔model is not order-revealing). Keep the
-   label→model map only in your own notes, NOT in what the judge sees.
-2. **Dispatch the judge as a subagent with a pinned model.** Use the Agent tool with
-   `model: 'opus'` (or run the 3-judge panel — one Agent call each at `model: 'opus'`,
-   `'sonnet'`, `'fable'`). Give the subagent ONLY: the ticket goal, the rubric, and the
-   anonymized A/B/C contents. The subagent must not be told which model wrote which.
-3. The judge returns, per dimension, a 1–5 score for A/B/C **with a one-line evidence
-   citation each**, plus an overall **pairwise ranking** (A vs B vs C). Pairwise ranking
-   is more reliable than absolute scores — weight it.
-
-Rubric dimensions (judge scores 1–5, you weight by phase):
-
-**refine:** requirement completeness · scope-boundary clarity · quality of clarifying
-questions · edge-case coverage · testability of the definition-of-done.
-
-**plan:** technical correctness vs the real codebase · architecture soundness & simplicity ·
-step feasibility/completeness · risk identification · groundedness (cross-check vs Phase 1).
-
-If running a panel, average the per-dimension scores across judges before mapping back.
-
-## Phase 3 — Score, map back, recommend
-
-1. Combine: **objective checks (60%)** + **blinded rubric (40%)**. Groundedness failures
-   override — flag any output with a nonzero hallucination rate.
-2. Reveal the label→model map and produce the comparison table:
-
-```
-| Dimension            | Opus | Sonnet | Fable |
-|----------------------|------|--------|-------|
-| Groundedness (halluc)| ...  | ...    | ...   |
-| Structural complete  | ...  | ...    | ...   |
-| (rubric dims...)     | ...  | ...    | ...   |
-| Pairwise rank        | ...  | ...    | ...   |
-| WEIGHTED TOTAL       | ...  | ...    | ...   |
+.bakeoff/<TICKET>/A.md
+.bakeoff/<TICKET>/B.md
+.bakeoff/<TICKET>/C.md
 ```
 
-3. **Recommendation:** name the winning model *for this phase*, one sentence why, and the
-   cost/latency tiebreaker note (Fable cheap+fast, Opus expensive) if scores are close.
-4. State sample size honestly: "Based on N tickets graded so far for this phase." One
-   ticket is not a conclusion.
+One file per candidate, named only by an opaque label. If the user points elsewhere, use
+those — same rule: nothing in the name or contents may reveal the source.
 
-## Phase 4 — Append to the cross-ticket log
+## Phase 0 — Identify the set & the goal
 
-Append one row per (ticket, phase, model) to `~/.claude/model-bakeoff-log.md`
-(create with a header if absent):
+1. Glob the candidate files for the one ticket.
+2. Read the **source of truth**: the Linear ticket and the refined Specification the plans
+   were written from. You need the goal to map the plans against it.
+3. Confirm ≥2 candidates. If only one, there is nothing to compare — say so and stop.
+
+## Phase 1 — Objective groundedness check (facts, not judgment)
+
+For each candidate, extract every concrete reference — file paths, functions, classes,
+modules, config keys, existing patterns — and verify each EXISTS via `mcp__fff__grep` /
+`mcp__fff__find_files`. Report per candidate: total references, and a **list of any that
+don't exist** (the actual bad reference, not just a count). Present these as facts. This is
+the one dimension the skill states with confidence.
+
+## Phase 2 — Map the comparison (blind)
+
+Decompose the work into the **union of sub-topics/steps** the plans raise (derive from the
+candidates plus the Specification). Build a coverage matrix: for each sub-topic, what does
+each candidate say — covered / differs / silent. A subagent at `model: 'opus'` may do this
+diff, given only the anonymized contents and the goal.
+
+From the matrix, extract the four things a human actually needs:
+
+- **Common ground** — what all candidates agree on (likely safe, skim-only).
+- **Unique contributions** — what each candidate raises that the others miss (A's backfill
+  step, B's rollback path). The value often hides here.
+- **Decision points** — where candidates propose *different approaches to the same thing*
+  (A: SQS, B/C: Kafka). Phrase each as a question for the human to adjudicate. These are the
+  heart of the output.
+- **Claims to verify** — assertions about the codebase or system behavior the human should
+  confirm before trusting, cross-referenced with Phase 1 groundedness.
+
+## Phase 3 — Present decision-support (no winner, no scores)
+
+Output, in this order:
+
+1. **Groundedness** — per candidate, references checked and any that don't exist. Facts.
+2. **Coverage matrix** — sub-topic × candidate (covered / differs / silent).
+3. **Unique contributions** — per candidate, what only it raised.
+4. **Decision points** — the divergences, each as a question the human must answer with
+   codebase knowledge ("SQS vs Kafka here — which fits the existing consumer?").
+5. **Claims to verify** — flagged assumptions, by label.
+
+Then stop. Do **not** declare a winner, assign scores, or say which plan is "best." If you
+have a genuinely useful observation a human couldn't quickly see — e.g. "B's approach is
+incompatible with the spec's stated constraint X" — state it as a flagged observation with
+evidence, not as a verdict. End by handing the decision explicitly to the human: they pick
+what's valuable, optionally cherry-picking the best parts of each.
+
+## Optional — blinded note for the user's own log
+
+If the user wants to track patterns across tickets, emit a copy-pasteable blinded block
+they can file against their own private key (the skill never sees the key):
 
 ```
-| date | ticket | phase | model | halluc_rate | weighted_total | pairwise_rank | judge |
+Ticket: <TICKET>   Artifact: plan   Date: <session or user-supplied>
+A: refs_ok=__/__  unique_contribs=__  in_decision_points=__
+B: ...
+C: ...
+(Human note: which labels' content I ended up using = ____)
 ```
 
-Then summarize the running tally: per phase, which model leads across all logged tickets.
-This log is the point — it's where the per-phase verdict earns confidence over time.
+The data point the user records is *which content they chose*, judged with their own
+codebase knowledge — not an AI score.
 
-## Guardrails
+## Out of scope
 
-- Never reveal the model→label map to the judge subagent. If you grade in the main loop
-  without a subagent, you still must score every dimension fully against A/B/C before
-  looking at which model is which.
-- Do not invent quality differences. If two outputs are equivalent, say so.
-- If only one model's output is present, there's nothing to compare — say so and stop.
-- Generation is out of scope. If asked to produce the outputs, point to the separate
-  generation skill (or explain the user must run the command per model interactively).
+- **Generation** — the human runs the planning command per source first; a skill can't
+  faithfully drive interactive model switching.
+- **Other artifacts** — this compares plans. Breakdowns/specs need different comparison
+  shapes and aren't handled here yet.
