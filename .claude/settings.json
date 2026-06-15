@@ -680,7 +680,7 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "fable",
+  "model": "sonnet",
   "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "linear-server"

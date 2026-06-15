@@ -151,9 +151,8 @@ Produce the assessment in this order — candidates stay distinct, nothing is me
 
 **Always write the full assessment to `.bakeoff/<TICKET>/ANALYSIS.md`** (using the Write
 tool), AND present it in the chat response. This happens on every run — no need to ask.
-`ANALYSIS.md` contains the five sections above plus the blinded-log block; it is the skill's
-durable output and must leave A/B/C pristine. If `ANALYSIS.md` already exists from a prior
-run, overwrite it with the current assessment.
+`ANALYSIS.md` is the skill's durable output and must leave A/B/C pristine.
+If `ANALYSIS.md` already exists from a prior run, overwrite it with the current assessment.
 
 Then stop. Do **not** say which plan is "best" or score them. Every observation must carry
 evidence. A flagged observation a human couldn't quickly see is allowed ("B contradicts the
@@ -180,21 +179,6 @@ This produces a **new** artifact; it never edits A/B/C.
 4. **Flag every judgment call you made.** Where assembly required a choice the human didn't
    explicitly give (ordering, reconciling overlapping wording, a gap none covered), mark it
    so they can override. The synthesis is a **draft for human review**, not a final plan.
-
-## Blinded note for the user's own log
-
-Emit a copy-pasteable blinded block the user can file against their own private key (the skill never sees the key):
-
-```
-Ticket: <TICKET>   Artifact: plan   Date: <session or user-supplied>
-A: refs_ok=__/__  unique_contribs=__  in_different_approaches=__
-B: ...
-C: ...
-(Human note: which labels' content I ended up using = ____)
-```
-
-The data point the user records is *which content they chose*, judged with their own
-codebase knowledge — not an AI score.
 
 ## Out of scope
 
