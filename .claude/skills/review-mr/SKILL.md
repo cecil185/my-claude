@@ -13,6 +13,8 @@ effort: high
 
 # Review Merge Request
 
+Fetch the MR diff and Linear ticket, read ALL changed source files, verify each claim against source, then output a structured review. Do not modify code.
+
 Produce a focused, high-signal critique of a merge request. No noise.
 Do not flag anything you haven't verified by reading the actual code.
 Before claiming something is missing or wrong, **search the source files** to

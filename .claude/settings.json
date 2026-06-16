@@ -380,7 +380,6 @@
       "Bash(xargs *)",
       "Bash(for *)",
       "Bash(while *)",
-      "Bash(glab api *)",
       "Bash(glab auth logout *)",
       "Bash(glab auth configure-docker *)",
       "Bash(glab auth docker-helper *)",

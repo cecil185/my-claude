@@ -9,6 +9,8 @@ when_to_use: >-
 
 # Cecil Ash — Writing Style Guide
 
+For Slack messages and blog/LinkedIn drafts, produce a concise, ready-to-send result; iterate on tone rather than expanding scope.
+
 Derived from: Notion docs (runbooks, spike specs, performance reviews, architecture notes), Slack messages across #team-eng-data-platform, #ai-champions, and #alerts-data-platform-merge-requests.
 
 ---
