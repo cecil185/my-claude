@@ -2,7 +2,6 @@
 name: skill-writer
 argument-hint: "[skill-name-or-path]"
 description: Writes or improves a Claude Code SKILL.md file following best practices. Reads the existing skill (if given a name or path), identifies quality issues, and produces a complete ready-to-save SKILL.md with correct frontmatter, sized under 300 lines. Use when asked to create a skill, write a slash command, improve an existing SKILL.md, or review a skill for quality issues.
-when_to_use: Trigger when the user says "create a skill", "write a skill", "improve this skill", "review this SKILL.md", "make a slash command", or passes a skill name/path to audit.
 ---
 
 # Skill Authoring
@@ -20,7 +19,6 @@ All fields are optional except `description` (recommended). Use only what's need
 name: kebab-case-name          # directory name if omitted; max 64 chars, lowercase/numbers/hyphens
 description: >                 # what it does + when to use it; third person; max 1024 chars
   Processes X and does Y. Use when user asks about Z or mentions W.
-when_to_use: >                 # additional trigger phrases, appended to description in listing
   Trigger when user says "...", "...", or "..."
 argument-hint: "[issue-number]"  # shown in autocomplete
 arguments: [arg1, arg2]          # maps to $arg1, $arg2 positional substitutions
@@ -54,7 +52,7 @@ The description is the discovery mechanism — Claude uses it to decide whether 
 - Lead with what it does, follow with when to use it
 - Include exact trigger phrases users would say naturally
 - Be specific: name the artifact, domain, or operation
-- Combined `description` + `when_to_use` is capped at 1,536 chars in the listing
+- `description` is capped at 1,024 chars; fold trigger phrases into it rather than using a separate field
 
 **Good:**
 ```yaml
