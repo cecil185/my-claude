@@ -1,11 +1,8 @@
 ---
 name: standup
 description: >-
-  Generate a daily standup Slack message from Linear ticket status changes and
-  merged GitLab MRs in the last 24 hours. Use when the user asks for a standup,
-  daily update, or status summary.
-when_to_use: >-
-  Trigger when user says "standup", "daily update", "status summary",
+  Generate a daily standup Slack message from Linear ticket status changes and merged GitLab
+  MRs in the last 24 hours. Trigger when user says "standup", "daily update", "status summary",
   "what did I do yesterday", "write my standup", or "generate a standup".
 model: sonnet
 effort: low

@@ -6,8 +6,6 @@ description: >-
   openness to feedback, and signal-to-noise. Rates Linear tickets on
   description completeness, definition of done, and bounded scope.
   Sends report to user via private slack messages.
-  Use when user wants feedback on their communication or ticket quality.
-when_to_use: >-
   Trigger when user says "communication audit", "audit my Slack", "how am I
   communicating", "review my messages", or "how are my tickets written".
 model: claude-opus-4-8

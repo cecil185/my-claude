@@ -3,11 +3,8 @@ name: review-design-doc
 description: >
   Reviews a design document by first summarizing its goals and the reasoning behind it, then
   identifying 3–5 specific, actionable Notion comments to leave — either asking for clarification
-  or suggesting an improvement. Use when the user shares a design doc link or text and says
-  "review this doc", "give me feedback on this design", "what comments should I leave", or
-  "look at this design doc".
-when_to_use: >
-  Trigger when user says "review this doc", "review this design", "what should I comment",
+  or suggesting an improvement. Trigger when user says "review this doc", "review this design",
+  "give me feedback on this design", "what comments should I leave", "what should I comment",
   "give feedback on this spec", "look at this design doc", or shares a Notion/Google Doc URL
   and asks for review.
 argument-hint: "[doc-url-or-content]"

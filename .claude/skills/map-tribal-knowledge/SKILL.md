@@ -1,7 +1,6 @@
 ---
 name: map-tribal-knowledge
-description: Maps undocumented tribal knowledge in a codebase into concise, AI-queryable context files. Runs a multi-phase process (explore → analyse → generate → QA → validate) that extracts non-obvious design patterns, naming conventions, cross-module dependencies, and gotchas that exist only in engineers' heads. Use when asked to document the codebase, create context files, help AI understand the pipelines, or surface tribal knowledge.
-when_to_use: Trigger when user says "document the codebase", "create context files", "surface tribal knowledge", "help agents understand our pipelines", "map the codebase", or "what do new engineers need to know".
+description: Maps undocumented tribal knowledge in a codebase into concise, AI-queryable context files. Runs a multi-phase process (explore → analyse → generate → QA → validate) that extracts non-obvious design patterns, naming conventions, cross-module dependencies, and gotchas that exist only in engineers' heads. Trigger when user says "document the codebase", "create context files", "surface tribal knowledge", "help agents understand our pipelines", "map the codebase", or "what do new engineers need to know".
 disable-model-invocation: true
 ---
 

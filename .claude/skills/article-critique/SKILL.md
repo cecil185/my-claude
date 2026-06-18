@@ -3,14 +3,10 @@ name: article-critique
 description: >-
   Reads a tech article, summarizes it, and self-evaluates its value to Cecil's data
   platform work — returns a rating and applicability report, not questions for him to
-  answer. Use when given an article URL, pasted article text, or asked to "summarize
-  this article", "is this worth reading", "rate this article", or "how does this apply
-  to my work".
-when_to_use: >-
-  Trigger when user provides an article URL or pasted article text, or says "summarize
-  this article", "is this worth reading", "what should I take from this", "rate this
-  article", "how does this apply to my work", or any read-and-evaluate request on tech
-  writing (blog posts, papers, vendor docs, conference talks, newsletters).
+  answer. Trigger when user provides an article URL or pasted article text, or says
+  "summarize this article", "is this worth reading", "what should I take from this",
+  "rate this article", "how does this apply to my work", or any read-and-evaluate
+  request on tech writing (blog posts, papers, vendor docs, conference talks, newsletters).
 argument-hint: "[URL or paste article text]"
 ---
 

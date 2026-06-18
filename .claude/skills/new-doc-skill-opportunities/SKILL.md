@@ -7,11 +7,8 @@ description: >-
   links, content outline, and a skill workflow sketch when a skill is the
   better fit. Does not write docs or skills — surfaces gaps and how to close
   them.
-  Use when asked to "find doc gaps", "what needs documenting", "doc opportunity scan",
-  "identify missing documentation", "skill gaps", or "what should we document this week".
-when_to_use: >-
-  Trigger when user says "find doc gaps", "what needs documenting", "doc scan",
-  "skill gap scan", "identify documentation opportunities", "what should we document",
+  Trigger when user says "find doc gaps", "what needs documenting", "doc scan", "doc opportunity
+  scan", "skill gap scan", "identify documentation opportunities", "what should we document",
   "doc audit", "team skill opportunities", or "post doc gaps to Slack".
 model: sonnet
 effort: medium

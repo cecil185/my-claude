@@ -1,14 +1,9 @@
 ---
 name: slack-message
 description: >-
-  Revise or draft Slack messages. Use when asked to write, improve, polish,
-  or send a Slack message — e.g. "draft a slack message about X", "clean up
-  this message", "how should I word this in Slack?". Outputs a ready-to-send
-  message, not commentary about one.
-when_to_use: >-
-  Trigger when user says "draft a slack message", "write a slack message about X",
-  "clean up this message", "how should I word this in Slack", "polish this",
-  or "send a slack message".
+  Revise or draft Slack messages. Outputs a ready-to-send message, not commentary about one.
+  Trigger when user says "draft a slack message", "write a slack message about X", "clean up
+  this message", "how should I word this in Slack", "polish this", or "send a slack message".
 model: sonnet
 effort: low
 ---

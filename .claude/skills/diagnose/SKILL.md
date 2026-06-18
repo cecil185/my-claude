@@ -3,9 +3,6 @@ name: diagnose
 description: >-
   Runs a disciplined diagnosis loop for hard bugs and performance regressions:
   Reproduce → minimise → hypothesise → instrument → fix → regression-test.
-  Use when user says "diagnose this", "debug this", reports a bug, says something
-  is broken/throwing/failing, or describes a performance regression.
-when_to_use: >-
   Trigger when user says "diagnose this", "debug this", "something is broken",
   "this is throwing an error", "this is failing", "figure out why X isn't working",
   "help me debug", or describes unexpected behavior or a performance regression.

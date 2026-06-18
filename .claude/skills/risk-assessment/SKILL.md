@@ -1,15 +1,12 @@
 ---
 name: risk-assessment
 description: >-
-  Narrow, failure-mode-focused review of a GitLab MR. Returns ≤5 sharp
-  findings ranked by impact × evidence. Use when asked "what could go
-  wrong", "failure modes", or "risk review". Stays on production failure
-  modes only — no style or naming feedback. Skips tests, markdown, and lockfiles
-  on the first pass; consults tests only after finding a plausible bug to judge
-  coverage.
-when_to_use: >-
-  Trigger when user says "what could go wrong", "failure modes", "risk review",
-  "review this MR for risks", "what are the risks here", or "production risks".
+  Narrow, failure-mode-focused review of a GitLab MR. Returns ≤5 sharp findings ranked by
+  impact × evidence. Stays on production failure modes only — no style or naming feedback.
+  Skips tests, markdown, and lockfiles on the first pass; consults tests only after finding
+  a plausible bug to judge coverage. Trigger when user says "what could go wrong", "failure
+  modes", "risk review", "review this MR for risks", "what are the risks here", or
+  "production risks".
 model: claude-opus-4-6
 effort: high
 ---

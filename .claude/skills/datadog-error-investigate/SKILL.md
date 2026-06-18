@@ -7,11 +7,10 @@ description: >-
   Datadog logs for the full picture, uses AWS MCP to verify root cause against
   live infrastructure (SQS, EKS, CloudWatch), and produces a triage report
   ending with a severity classification and proposed next steps.
-when_to_use: >-
   Trigger when the user says "investigate this alert", "what happened with this
-  error", "triage this failure", "look into this Datadog alert", "why did X
-  fail", or pastes a Slack permalink from #alerts-data-platform-datadog. Also
-  triggers with no input — runs against the latest alert in the channel.
+  error", "triage this failure", "look into this Datadog alert", "why did X fail",
+  or pastes a Slack permalink from #alerts-data-platform-datadog. Also triggers with
+  no input — runs against the latest alert in the channel.
 model: sonnet
 effort: medium
 ---

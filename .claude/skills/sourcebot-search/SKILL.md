@@ -1,14 +1,11 @@
 ---
 name: sourcebot-search
 description: >-
-  Search, read, and analyze code across all ingestion repos using Sourcebot.
-  Use when asked to find symbols, trace call paths, read files, diff commits,
-  or ask natural-language questions about the codebase. Covers all repos:
-  ingestion, ingestion-dags, ingestion-helm, ingestion-argo, ingestion-terraform.
-when_to_use: >-
-  Trigger when user says "find where X is defined", "show me all usages of Y",
-  "read the file at path Z", "how does X work", "search the codebase for",
-  "trace the call path for", or "what changed in commit".
+  Search, read, and analyze code across all ingestion repos using Sourcebot. Covers all repos:
+  ingestion, ingestion-dags, ingestion-helm, ingestion-argo, ingestion-terraform. Trigger when
+  user says "find where X is defined", "show me all usages of Y", "read the file at path Z",
+  "how does X work", "search the codebase for", "trace the call path for", "diff commits",
+  or "what changed in commit".
 model: claude-sonnet-4-6
 effort: high
 ---

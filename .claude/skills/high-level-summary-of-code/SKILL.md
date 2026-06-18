@@ -1,12 +1,9 @@
 ---
 name: high-level-summary-of-code
 description: >
-  Zooms out to give broader context and a higher-level map of the code. Use when the user says
-  "I don't know this area", "give me the big picture", "how does this fit together", or "map
-  out the relevant modules".
-when_to_use: >
-  Trigger when user says "I'm unfamiliar with this code", "zoom out", "give me the big picture",
-  "how does X fit into the rest of the codebase", or "map the relevant modules".
+  Zooms out to give broader context and a higher-level map of the code. Trigger when user says
+  "I don't know this area", "I'm unfamiliar with this code", "zoom out", "give me the big
+  picture", "how does X fit into the rest of the codebase", or "map the relevant modules".
 ---
 
 I don't know this area of code well. Go up a layer of abstraction. Give me a map of all the relevant modules and callers, using the project's domain glossary vocabulary.

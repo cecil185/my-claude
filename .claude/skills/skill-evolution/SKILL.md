@@ -1,15 +1,11 @@
 ---
 name: skill-evolution
 description: >-
-  Analyzes recent Claude Code conversation history and usage patterns to identify
-  opportunities to create new skills or improve existing ones. Produces a
-  prioritized list of new/updated skills and writes them to disk. Use when asked
-  to "evolve my skills", "analyze my usage", "improve my skills",
-  "what skills should I add", or "run skill evolution".
-when_to_use: >-
-  Trigger when user says "evolve my skills", "analyze my usage", "improve my skills",
-  "what skills should I add", "run skill evolution", "find skill gaps", or
-  "what workflows should be automated".
+  Analyzes recent Claude Code conversation history and usage patterns to identify opportunities
+  to create new skills or improve existing ones. Produces a prioritized list of new/updated
+  skills and writes them to disk. Trigger when user says "evolve my skills", "analyze my
+  usage", "improve my skills", "what skills should I add", "run skill evolution", "find skill
+  gaps", or "what workflows should be automated".
 model: claude-sonnet-4-6
 effort: high
 ---

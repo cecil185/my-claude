@@ -2,12 +2,9 @@
 name: linear
 description: >
   Applies best practices when creating or updating Linear tickets: correct team, assignee,
-  project, state, and description format. Use when creating issues, updating tickets, or
-  any Linear MCP interaction. Also use when the user says "create a Linear ticket", "add
-  a ticket", "log this in Linear", or "update the Linear issue".
-when_to_use: >
-  Trigger when user says "create a Linear ticket", "add a ticket", "log this in Linear",
-  "update the Linear issue", or when using any Linear MCP tool.
+  project, state, and description format. Trigger when user says "create a Linear ticket",
+  "add a ticket", "log this in Linear", "update the Linear issue", or when using any
+  Linear MCP tool.
 model: sonnet
 effort: low
 disable-model-invocation: true

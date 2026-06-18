@@ -1,14 +1,12 @@
 ---
 name: test-gap-scan
 description: >-
-  Scans the ingestion codebase for two kinds of testing problems: (1) key modules
-  or behaviours with no test coverage at all, and (2) tests that exist but test the
-  wrong thing — asserting "it ran" instead of "it did the right thing". Produces a
-  tiered gap report with concrete write-a-test recommendations.
-when_to_use: >-
-  Trigger when user says "scan for test gaps", "test coverage audit",
-  "find shallow tests", "where are we missing tests", "test quality scan",
-  "what tests are we missing", or "audit our tests".
+  Scans the ingestion codebase for two kinds of testing problems: (1) key modules or behaviours
+  with no test coverage at all, and (2) tests that exist but test the wrong thing — asserting
+  "it ran" instead of "it did the right thing". Produces a tiered gap report with concrete
+  write-a-test recommendations. Trigger when user says "scan for test gaps", "test coverage
+  audit", "find shallow tests", "where are we missing tests", "test quality scan", "what tests
+  are we missing", or "audit our tests".
 ---
 
 # Test Gap Scan

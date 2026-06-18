@@ -1,14 +1,10 @@
 ---
 name: search-conversations
 description: >-
-  Search prior Claude Code conversation history by keyword or topic. Use when
-  asked to find a past conversation, recall what was discussed, look up a
-  previous solution, or search for how something was done before. Returns
-  matching excerpts with file/branch/date context so you can locate the session.
-when_to_use: >-
-  Trigger when user says "find a past conversation", "what did we discuss about X",
-  "how did we solve X before", "search my history for", "look up a previous session",
-  "recall when we", or "search conversations".
+  Search prior Claude Code conversation history by keyword or topic. Returns matching excerpts
+  with file/branch/date context so you can locate the session. Trigger when user says "find
+  a past conversation", "what did we discuss about X", "how did we solve X before", "search
+  my history for", "look up a previous session", "recall when we", or "search conversations".
 model: claude-sonnet-4-6
 effort: low
 ---

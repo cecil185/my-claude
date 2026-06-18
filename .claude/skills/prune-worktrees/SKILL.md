@@ -2,11 +2,9 @@
 name: prune-worktrees
 description: >
   Finds and lists all git worktrees across every repo in the genai workspace, then prints
-  ready-to-run removal commands for each. Use when the user says "list my worktrees",
-  "show worktrees", "clean up branches", or "what worktrees do I have".
-when_to_use: >
-  Trigger when user says "list worktrees", "show my worktrees", "what branches are checked out",
-  "clean up my worktrees", or "prune worktrees".
+  ready-to-run removal commands for each. Trigger when user says "list my worktrees",
+  "show worktrees", "clean up branches", "what worktrees do I have", "list worktrees",
+  "show my worktrees", "what branches are checked out", or "prune worktrees".
 allowed-tools: Bash(git worktree list *), Bash(git worktree prune *), Bash(git -C * worktree list *), Bash(ls *)
 model: sonnet
 effort: low

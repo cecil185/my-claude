@@ -7,11 +7,9 @@ description: >-
   decision-support, NOT a score or a winner. (2) SYNTHESIZE (optional): after the human
   resolves the forks, assemble a new combined plan from the best parts. Refers to candidates
   ONLY as A/B/C and never learns which model produced which. Does NOT generate the candidates.
-when_to_use: >-
-  Trigger when the user says "model bakeoff", "compare these plans", "compare and contrast
-  these outputs", "what's different between these plans", "which of these should I trust",
-  "combine the best of these plans", or points at a set of .bakeoff/<TICKET>/*.md candidate
-  files to compare.
+  Trigger when user says "model bakeoff", "compare these plans", "compare and contrast these
+  outputs", "what's different between these plans", "which of these should I trust", "combine
+  the best of these plans", or points at .bakeoff/<TICKET>/*.md candidate files to compare.
 model: claude-opus-4-8
 effort: high
 ---

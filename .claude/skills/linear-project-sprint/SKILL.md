@@ -4,11 +4,8 @@ description: >-
   Loops through all Backlog tickets in a Linear project and attempts to solve them in parallel
   using agent teams. Creates branches off main, runs the ADLC execution workflow per ticket,
   creates GitLab MRs for completed work, and leaves investigation notes on tickets that could
-  not be fully resolved. Use when given a Linear project URL and asked to "sprint through the
-  backlog", "work through this project", or "execute all tickets in this project".
-when_to_use: >-
-  Trigger when user provides a Linear project URL and asks to "sprint through the backlog",
-  "work through this project", "execute all tickets", or "run the sprint".
+  not be fully resolved. Trigger when user provides a Linear project URL and asks to "sprint
+  through the backlog", "work through this project", "execute all tickets", or "run the sprint".
 model: sonnet
 effort: medium
 disable-model-invocation: true

@@ -2,11 +2,9 @@
 name: review-mr
 description: >-
   Reviews a GitLab merge request and surfaces the most important issues with verified evidence.
-  Use when asked to "review this MR", "critique this diff", "look at merge request !123",
-  or "what do you think of this PR".
-when_to_use: >-
   Trigger when user says "review this MR", "review the merge request", "critique this diff",
-  "look at MR !123", "check this PR", or provides a GitLab MR URL.
+  "look at MR !123", "look at merge request !123", "check this PR", "what do you think of
+  this PR", or provides a GitLab MR URL.
 model: claude-opus-4-6
 effort: high
 ---

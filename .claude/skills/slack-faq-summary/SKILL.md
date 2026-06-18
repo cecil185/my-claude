@@ -1,13 +1,11 @@
 ---
 name: slack-faq-summary
 description: >-
-  Scans #ai-champions, #ai-talk, and #ai-dev-talk for the past month, clusters
-  recurring questions, and presents a numbered list. Then asks which topics to
-  draft documentation for. Use when asked to "summarize AI questions", "what are
-  people asking in AI slack", "slack faq", or "what should we document from slack".
-when_to_use: >-
-  Trigger when user says "slack faq", "summarize ai questions", "what are people
-  asking", "common questions from slack", or "faq from ai channels".
+  Scans #ai-champions, #ai-talk, and #ai-dev-talk for the past month, clusters recurring
+  questions, and presents a numbered list. Then asks which topics to draft documentation for.
+  Trigger when user says "slack faq", "summarize AI questions", "what are people asking in AI
+  slack", "what should we document from slack", "common questions from slack", or "faq from
+  ai channels".
 model: sonnet
 effort: medium
 ---

@@ -2,12 +2,10 @@
 name: debug-aws-error
 description: >-
   Diagnoses and fixes AWS errors: SSO expiry, IAM/SCP permission denials, service
-  quota limits, and resource-not-found errors. Use when an AWS CLI command,
-  SDK call, or infrastructure operation fails with an AWS error code.
-when_to_use: >-
-  Trigger when user pastes an AWS error, says "AWS is failing", "I'm getting an
-  AccessDenied", "SSO expired", "quota exceeded", "resource not found", or any
-  AWS CLI/SDK/Terraform operation returns an error code.
+  quota limits, and resource-not-found errors. Trigger when user pastes an AWS
+  error, says "AWS is failing", "I'm getting an AccessDenied", "SSO expired",
+  "quota exceeded", "resource not found", or any AWS CLI/SDK/Terraform operation
+  returns an error code.
 model: sonnet
 effort: high
 ---

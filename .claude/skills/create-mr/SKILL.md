@@ -3,12 +3,10 @@ name: create-mr
 description: >-
   Creates a GitLab merge request from the current branch. Determines the correct
   repo path, constructs the MR title/description, and runs glab without compound
-  cd commands (CLAUDE.md rule). Use when asked to create MR, open a merge request,
-  or push and open a review.
-when_to_use: >-
-  Trigger when user says "create an MR", "open a merge request", "push and open MR",
-  "create merge request for DP-XXX", or "open a review". Also trigger after commits
-  are complete and user asks to submit work for review.
+  cd commands (CLAUDE.md rule). Trigger when user says "create an MR", "open a
+  merge request", "push and open MR", "create merge request for DP-XXX", or "open
+  a review". Also trigger after commits are complete and user asks to submit work
+  for review.
 model: sonnet
 effort: low
 disable-model-invocation: true

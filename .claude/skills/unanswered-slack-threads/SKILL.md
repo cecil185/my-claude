@@ -1,17 +1,13 @@
 ---
 name: unanswered-slack-threads
 description: >-
-  Scans #team-eng-data-platform, #alerts-data-platform-merge-requests, and
-  #proj-ams-data-platform for threads from the past 21 days (excluding the last
-  3 days) that appear to need a response — unanswered questions, blocked
-  requests, or waiting approvals. Flags each with channel, poster, link,
-  summary, and days open. Then replies in each flagged thread asking if it
-  still needs attention. Use when asked to check for unanswered threads, find
-  stale questions in Slack, or follow up on open data platform threads.
-when_to_use: >-
-  Trigger when user says "check for unanswered threads", "any open questions in
-  slack", "find stale threads", "who's still waiting", "follow up on open
-  threads", or "scan data platform channels for unanswered messages".
+  Scans #team-eng-data-platform, #alerts-data-platform-merge-requests, and #proj-ams-data-platform
+  for threads from the past 21 days (excluding the last 3 days) that appear to need a response —
+  unanswered questions, blocked requests, or waiting approvals. Flags each with channel, poster,
+  link, summary, and days open. Then replies in each flagged thread asking if it still needs
+  attention. Trigger when user says "check for unanswered threads", "any open questions in slack",
+  "find stale threads", "who's still waiting", "follow up on open threads", or "scan data platform
+  channels for unanswered messages".
 model: opus
 effort: high
 ---

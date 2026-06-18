@@ -2,11 +2,9 @@
 name: grill-me
 description: >
   Interviews the user relentlessly about a plan or design, walking each branch of the decision
-  tree until reaching shared understanding. Use when the user says "grill me", "stress-test my
-  plan", "challenge my design", or "ask me hard questions about this".
-when_to_use: >
-  Trigger when user says "grill me", "stress-test my plan", "poke holes in this", "challenge
-  my design", "ask me hard questions", or "I want to think through this".
+  tree until reaching shared understanding. Trigger when user says "grill me", "stress-test my
+  plan", "poke holes in this", "challenge my design", "ask me hard questions", or "I want to
+  think through this".
 ---
 
 Interview me relentlessly about every aspect of this plan until we reach a shared understanding. Walk down each branch of the design tree, resolving dependencies between decisions one-by-one. For each question, provide your recommended answer.
