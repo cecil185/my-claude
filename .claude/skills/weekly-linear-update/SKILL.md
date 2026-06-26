@@ -66,7 +66,16 @@ List **all** issues assigned to the user in **To Do** and **In Progress** (use t
 
 For each issue: **identifier**, **title**, **state**, and **one short line** on what remains (from description, AC, or last comment — do not invent scope).
 
-## Output format
+## Style: match previous project updates
+
+**Before writing the update**, fetch previous status updates for the project using `get_status_updates` (type: `project`, project: resolved project ID). Read the most recent 2–3 updates to extract the format, tone, and section structure the author has established.
+
+- Mirror the exact section headers, bullet style, and level of detail from prior updates.
+- If prior updates use plain `Progress:` / `Still to do:` headers with short bullets and no issue IDs, do that. If they use `## Completed this week` with linked issue IDs, do that instead.
+- Do not impose a different structure — match what already exists.
+- If no prior updates exist, fall back to the default format below.
+
+## Output format (fallback if no prior updates exist)
 
 Produce a **single markdown document** ready to paste into Slack, Notion, or email. Use this structure:
 

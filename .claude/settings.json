@@ -752,13 +752,27 @@
     "flywheel@teamworks-claude": true,
     "foundations@teamworks-claude": true,
     "review@claude-plugins-official": false,
-    "worktrees@teamworks-claude": true
+    "worktrees@teamworks-claude": true,
+    "imbue-code-guardian@imbue-code-guardian": true,
+    "imbue-mngr-skills@imbue-mngr": true
   },
   "extraKnownMarketplaces": {
     "teamworks-claude": {
       "source": {
         "source": "directory",
         "path": "/Users/cecil/Code/agenticengineeringacademy"
+      }
+    },
+    "imbue-code-guardian": {
+      "source": {
+        "source": "github",
+        "repo": "imbue-ai/code-guardian"
+      }
+    },
+    "imbue-mngr": {
+      "source": {
+        "source": "github",
+        "repo": "imbue-ai/mngr-claude-skills"
       }
     }
   },

@@ -836,5 +836,13 @@
   },
   "experimental": {
     "agentTeams": true
+  },
+  "ide": {
+    "hasSeenNudge": true
+  },
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    }
   }
 }
