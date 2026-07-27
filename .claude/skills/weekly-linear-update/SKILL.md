@@ -1,25 +1,17 @@
 ---
 name: weekly-linear-update
 description: >-
-  Builds a weekly project update from Linear: progress in the last seven days
-  across all issue states for the user’s assigned work, plus a clear “still to
-  do” section for To Do and In Progress tickets. Optionally accepts a Linear
-  project name or URL to scope the update to a single project. Use when the
-  user asks for a weekly update, status summary, sprint recap, or “what did I
-  do this week on Linear.”
+  Builds a weekly project update from Linear for a single project: progress in
+  the last seven days across all issue states for the user’s assigned work, plus
+  a clear “still to do” section for To Do and In Progress tickets. Requires a
+  Linear project name or URL to scope the update. Trigger when user says "weekly
+  update", "status summary", "sprint recap", "what did I do this week", "weekly
+  Linear update", or "what have I been working on".
 model: sonnet
 effort: medium
-when_to_use: >-
-  Trigger when user says "weekly update", "status summary", "sprint recap",
-  "what did I do this week", "weekly Linear update", or "what have I been
-  working on".
 ---
 
 # Weekly Linear Project Update
-
-## When to use
-
-Apply this skill when the user wants a **weekly** rollup of their Linear work: accomplishments over the past week and what remains in **To Do** and **In Progress**.
 
 ## Arguments
 

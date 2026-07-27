@@ -10,6 +10,7 @@ description: >-
   channels for unanswered messages".
 model: opus
 effort: high
+disable-model-invocation: true
 ---
 
 # Unanswered Slack Threads

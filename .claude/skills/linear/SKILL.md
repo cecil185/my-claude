@@ -3,8 +3,7 @@ name: linear
 description: >
   Applies best practices when creating or updating Linear tickets: correct team, assignee,
   project, state, and description format. Trigger when user says "create a Linear ticket",
-  "add a ticket", "log this in Linear", "update the Linear issue", or when using any
-  Linear MCP tool.
+  "add a ticket", "log this in Linear", "update the Linear issue", or "file this as an issue".
 model: sonnet
 effort: low
 disable-model-invocation: true
@@ -29,7 +28,6 @@ disable-model-invocation: true
 ## Description Style
 
 Short and scannable. 2-4 sentences objective + bullet acceptance criteria. Link out rather than duplicate. No multi-paragraph narratives, no implementation specs, no title repetition.
-
 
 ## Creating Issues
 

@@ -1,9 +1,13 @@
 ---
 name: write-learn
 description: >-
-  Capture real writing examples from Cecil to refine the skill for that context.
-  Walks through one context at a time, extracts patterns, and updates the
-  relevant write-*/examples.md.
+  Captures real writing examples from Cecil, extracts the patterns in them, and
+  updates the examples.md of the matching write-* skill. Walks through one
+  context at a time. Trigger when user says "learn my writing style", "calibrate
+  my writing skills", "here are examples of how I write", "update my writing
+  examples", or "write-learn".
+model: sonnet
+effort: medium
 ---
 
 # write-learn
@@ -13,7 +17,7 @@ This skill captures real examples of Cecil's writing and extracts patterns to up
 | Context | File to update |
 |---|---|
 | Slack channel post / DM | `../write-slack/examples.md` |
-| Linear project update | `../write-linear/examples.md` |
+| Linear project update | `../write-linear-project-update/examples.md` |
 | Notion doc | `../write-notion-doc/examples.md` |
 | Code doc — MR title | `../write-code-doc/mr-title.md` |
 | Code doc — MR body | `../write-code-doc/mr-body.md` |

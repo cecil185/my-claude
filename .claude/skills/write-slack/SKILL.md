@@ -1,21 +1,19 @@
 ---
 name: write-slack
 description: >-
-  Draft or revise Slack messages — channel posts or DMs. Outputs a
-  ready-to-send message. Trigger when user says "draft a slack message",
-  "write a slack post about X", "clean up this message", "DM so-and-so about X",
-  or "send a slack message".
+  Drafts or revises a Slack message — channel post or DM — and outputs it
+  ready to send. Trigger when user says "draft a slack message", "write a
+  slack post about X", "clean up this message", "DM so-and-so about X", or
+  "send a slack message".
 model: sonnet
 effort: low
-when_to_use: >-
-  Trigger for any Slack message — channel post or DM.
 ---
 
 # write-slack
 
 > **Word limits (first draft)**
 > - Channel post: **30–80 words**
-> - DM / DM: **20–50 words**
+> - DM: **20–50 words**
 
 Always read and apply **[write-style](../write-style/SKILL.md)** first for Cecil's voice. Also read **[examples.md](./examples.md)** for real Slack message patterns before drafting. The rules below are Slack-specific additions.
 
@@ -25,12 +23,12 @@ If no message is provided, summarize the decision or topic from the recent conve
 
 ## Channel Post vs. DM
 
-**Channel post** (30–80 words):
+**Channel post:**
 - May need slightly more context since the audience is broader
 - Can use minimal formatting if the message is multi-part
 - Invite feedback at the end if sharing a decision
 
-**DM / DM** (20–60 words):
+**DM:**
 - Even more informal — fragments are fine
 - No formatting needed
 - Get to the ask in the first sentence

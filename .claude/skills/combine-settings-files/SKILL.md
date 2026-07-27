@@ -14,21 +14,14 @@ disable-model-invocation: true
 
 Merge repo-level `settings.local.json` files into the central settings file, deduplicate, review for safety, then optionally clean up the sources.
 
-## Source files
+## Files
 
-- `/Users/cecil/Code/genai/.claude/settings.local.json`
-- `/Users/cecil/Code/genai/ingestion/.claude/settings.local.json`
-- `/Users/cecil/Code/genai/ingestion-dags/.claude/settings.local.json`
-- `/Users/cecil/Code/genai/ingestion-terraform/.claude/settings.local.json`
-- `/Users/cecil/Code/slack-mcp-plugin/.claude/settings.local.json`
-
-## Target file
-
-`/Users/cecil/Code/me/my-claude/.claude/settings.json`
+- **Sources** — every `.claude/settings.local.json` under `/Users/cecil/Code`, excluding the target repo (`me/my-claude`). Discover them rather than assuming a fixed list.
+- **Target** — `/Users/cecil/Code/me/my-claude/.claude/settings.json`
 
 ## Steps
 
-1. **Read all files** — read each source file and the target file. Skip any source that doesn't exist or is empty.
+1. **Discover and read** — find the source files with `find /Users/cecil/Code -name settings.local.json -path '*/.claude/*' -not -path '*/me/my-claude/*'`, then read each one plus the target. Skip any source that is empty. Report the list of sources found before merging.
 
 2. **Merge** — for each source, merge its contents into the target:
    - `permissions.allow` / `permissions.deny` / `permissions.ask`: append entries that aren't already present (exact string match)

@@ -30,14 +30,7 @@ For each repo directory, run:
 git -C <repo-path> worktree list --porcelain
 ```
 
-Parse the output. Each worktree block has three lines:
-- `worktree <path>`
-- `HEAD <sha>`
-- `branch refs/heads/<branch>` (or `detached`)
-
-The **main worktree** is the first entry in the list — its path equals the repo directory itself. Skip it.
-
-Any subsequent entries are **linked worktrees** — these are candidates for removal.
+Skip the first entry — that is the main worktree (its path equals the repo directory). Every subsequent entry is a linked worktree and a removal candidate.
 
 ## Step 3: Print results
 
@@ -72,8 +65,4 @@ git -C /Users/cecil/Code/genai/ingestion-dags worktree prune
 
 Do NOT run any of the removal commands — only print them. The user decides what to execute.
 
-## Notes
-
-- Never remove the main worktree (the first entry in `git worktree list`).
-- `git worktree prune` cleans up stale metadata even when there's nothing to remove — always include it.
-- If a linked worktree path no longer exists on disk, still include `git worktree prune` so the stale ref is cleaned up.
+Always include `git worktree prune` in each block, even when the worktree path no longer exists on disk, so stale refs get cleaned up.

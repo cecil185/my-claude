@@ -2,7 +2,8 @@
 name: diagnose
 description: >-
   Runs a disciplined diagnosis loop for hard bugs and performance regressions:
-  Reproduce → minimise → hypothesise → instrument → fix → regression-test.
+  build a feedback loop → reproduce → hypothesise → instrument → fix and
+  regression-test → clean up.
   Trigger when user says "diagnose this", "debug this", "something is broken",
   "this is throwing an error", "this is failing", "figure out why X isn't working",
   "help me debug", or describes unexpected behavior or a performance regression.

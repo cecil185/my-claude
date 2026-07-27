@@ -1,7 +1,7 @@
 ---
 name: skill-writer
 argument-hint: "[skill-name-or-path]"
-description: Writes or improves a Claude Code SKILL.md file following best practices. Reads the existing skill (if given a name or path), identifies quality issues, and produces a complete ready-to-save SKILL.md with correct frontmatter, sized under 300 lines. Use when asked to create a skill, write a slash command, improve an existing SKILL.md, or review a skill for quality issues.
+description: Writes or improves a Claude Code SKILL.md file following best practices. Reads the existing skill (if given a name or path), identifies quality issues, and produces a complete ready-to-save SKILL.md with correct frontmatter, sized under 300 lines. Trigger when user says "write a skill", "create a skill for X", "make a slash command", "improve this skill", "review this SKILL.md", "right-size this skill", or "fix my skill's frontmatter".
 ---
 
 # Skill Authoring
@@ -114,13 +114,6 @@ Example: a line reading `!` + `` `git diff HEAD` `` injects the current diff inl
 Multi-line commands use a fenced `!` code block (opening fence is three backticks followed by `!`).
 
 **Caution:** Dynamic commands run in the session's working directory. Commands like `git diff HEAD` fail if the working directory is not a git repo (e.g. a workspace root containing multiple sub-repos). Guard with `2>/dev/null || echo "(no output)"` or only use dynamic injection for commands that are safe to fail.
-
----
-
-## Invocation control
-
-- `disable-model-invocation: true` — for skills with side effects (deploy, commit, send message). You invoke; Claude never auto-triggers.
-- `user-invocable: false` — for background context Claude applies automatically but which isn't a meaningful command for users.
 
 ---
 

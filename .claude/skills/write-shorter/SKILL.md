@@ -1,21 +1,18 @@
 ---
 name: write-shorter
 description: >-
-  Trim existing content — cut repetition, remove filler, reduce to minimum
-  viable length without losing meaning. Trigger when user says "make this
-  shorter", "trim this", "too long", "cut this down", or "fewer words".
+  Trims existing content — cuts repetition, removes filler, reduces to minimum
+  viable length without losing meaning. Works on any existing draft: Slack
+  message, Linear update, Notion doc, MR description, or other written content.
+  Trigger when user says "make this shorter", "trim this", "too long", "cut this
+  down", or "fewer words".
 model: sonnet
 effort: low
-when_to_use: >-
-  Use on any existing draft — Slack message, Linear update, Notion doc, MR
-  description, or any other written content — when it needs to be shorter.
 ---
 
 # write-shorter
 
-> **Goal:** Find the shortest version that preserves all meaning. Cut until removing anything else would lose something real.
-
----
+Find the shortest version that preserves all meaning. Cut until removing anything else would lose something real.
 
 ## What to cut — in order of priority
 
@@ -27,15 +24,11 @@ when_to_use: >-
 6. **Weak endings** — "Let me know if you have any questions", "Thanks!", "Feel free to reach out". Delete unless explicitly requested.
 7. **Padded bullets** — bullet points that could be one clause in a sentence. Collapse them.
 
----
-
 ## What NOT to cut
 
 - Specifics: numbers, names, dates, ticket IDs — these earn their place
 - The why behind a request or decision — one sentence of context is load-bearing
 - Qualifiers that change meaning: "only", "not yet", "blocked" — these aren't hedges
-
----
 
 ## Output
 

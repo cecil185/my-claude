@@ -771,5 +771,6 @@
     "/Users/cecil/Code/me/wiki-workflow",
     "/Users/cecil/.claude",
     "/Users/cecil/worktrees"
-  ]
+  ],
+  "tui": "fullscreen"
 }

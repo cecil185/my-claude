@@ -16,13 +16,17 @@ Create a single Linear ticket with all required metadata specified up front.
 
 **Core principle:** Every ticket must be classified as feature, chore, or bug. Resolve all required fields before calling the MCP tool.
 
-## Defaults
+## Required Fields
 
-- **Team:** Data & Gen AI
-- **Assignee:** Cecil Ash (`cash@teamworks.com`) — always set, no exceptions
-- **Project:** required — if the user hasn't named one, **ask before creating**
-- **State:** `Todo` for normal work; `Triage` for support/severity-unknown issues
-- **Label:** exactly ONE of `feature`, `chore`, or `bug`
+All seven are required before calling the MCP tool:
+
+1. **Title** — specific outcome, not vague ("Fix table" is bad; "Fix S3 upload returning 500 on retry" is good)
+2. **Description** — use the appropriate template below
+3. **Team** — Data & Gen AI
+4. **Label** — exactly ONE of `feature`, `chore`, `bug`
+5. **Assignee** — always Cecil Ash (`cash@teamworks.com`), no exceptions
+6. **Project** — if the user hasn't named one, **ask before creating**
+7. **State** — `Todo` for normal work; `Triage` for support/severity-unknown issues
 
 ## Ticket Type Classification
 
@@ -33,16 +37,6 @@ Is this changing user-facing or system behavior?
 │         └─ NO  → FEATURE
 └─ NO  → CHORE
 ```
-
-## Required Fields
-
-1. **Title** — specific outcome, not vague ("Fix table" is bad; "Fix S3 upload returning 500 on retry" is good)
-2. **Description** — use the appropriate template below
-3. **Team** — Data & Gen AI
-4. **Label** — exactly ONE of: `feature`, `chore`, `bug`
-5. **Assignee** — always Cecil Ash (`cash@teamworks.com`)
-6. **Project** — always required; ask the user if not specified
-7. **State** — `Todo` (default) or as specified by user
 
 ## Description Templates
 

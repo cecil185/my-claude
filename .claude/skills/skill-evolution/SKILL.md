@@ -8,6 +8,7 @@ description: >-
   gaps", or "what workflows should be automated".
 model: claude-sonnet-4-6
 effort: high
+disable-model-invocation: true
 ---
 
 # Skill Evolution
@@ -92,20 +93,12 @@ For each High-priority item:
 
 ### Creating a new skill
 
-Write a complete `SKILL.md` to `~/.claude/skills/<skill-name>/SKILL.md`.
-
-Follow the skill-writer conventions:
-- `description` is third person, specific, includes trigger phrases
-- `when_to_use` field present with trigger phrases
-- Body under 300 lines
-- At least one concrete example
-- Complex workflows have numbered steps
+Write a complete `SKILL.md` to `~/.claude/skills/<skill-name>/SKILL.md`, following the conventions and quality checklist in the **skill-writer** skill (`~/.claude/skills/skill-writer/SKILL.md`) — don't reinvent them here.
 
 ### Improving an existing skill
 
 Read the current SKILL.md, make targeted improvements:
-- Add `when_to_use` if missing
-- Expand trigger phrases
+- Expand trigger phrases in `description`
 - Fix recurring mistakes observed in sessions
 - Update stale context (team members, tool names, paths)
 - Trim content that exceeds 300 lines to a reference file
@@ -139,4 +132,4 @@ After all changes, output a summary:
 - Never delete sections from an existing skill without explicit approval
 - Only act on patterns actually observed in session history — no hallucinated signals
 - Check before creating that the skill name doesn't conflict with an existing one
-- Preserve Cecil's writing style in all skill content (see `writing-style` skill)
+- Preserve Cecil's writing style in all skill content

@@ -19,7 +19,7 @@ questions, then offer to draft docs for any of them.
 
 ## Step 1 — Fetch messages (parallel)
 
-Compute the date 30 days before today. Call `mcp__claude_ai_Slack__slack_search_public_and_private`
+Compute the date 30 days before today. Call `mcp__slack__slack_search_public_and_private`
 for each channel simultaneously:
 
 - `query: "in:#ai-champions after:<YYYY-MM-DD>"`
@@ -62,8 +62,8 @@ After the list:
 
 ```
 Which of these would you like me to draft documentation for?
-Enter numbers (e.g. 1, 3) or "all" for the top 5.
+Enter numbers (e.g. 1, 3) or "all" for every topic listed.
 ```
 
-For each selected number, invoke the `/write-docs` skill with the topic name and
+For each selected number, invoke the `write-notion-doc` skill with the topic name and
 example questions as context. Process sequentially.

@@ -4,20 +4,16 @@ description: >-
   Write or improve a Notion doc — runbooks, spike specs, architecture notes,
   onboarding pages, or general team docs. First drafts are 300 words: scaffold
   headers and summaries, drill in on follow-up passes. Trigger when user says
-  "write a Notion doc", "draft this for Notion", "create a page for X", or
-  "document X for the team".
-when_to_use: >-
-  Trigger for any Notion page — runbook, design doc, spike spec, team reference,
-  onboarding.
+  "write a Notion doc", "draft this for Notion", "create a page for X",
+  "document X for the team", or asks for a runbook, spike spec, architecture
+  note, or onboarding page.
 ---
 
 # write-notion-doc
 
-> **Word limit (first draft): 300 words.** Scaffold headers and section summaries first — drill into content on follow-up passes.
+> **Word limit (first draft): 300 words.** Scaffold the structure — title, summary callout, section headers, key bullets — then stop. Drill into subsections on follow-up passes once the shape is confirmed.
 
 Always read and apply **[write-style](../write-style/SKILL.md)** first for Cecil's voice. Also read **[examples.md](./examples.md)** for real Notion doc patterns before drafting.
-
-**First draft target: 300 words.** Scaffold the structure — title, summary callout, section headers, key bullets — then stop. Drill into subsections on follow-up passes once the shape is confirmed.
 
 ---
 

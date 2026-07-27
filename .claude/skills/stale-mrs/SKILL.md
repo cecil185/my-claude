@@ -1,8 +1,8 @@
 ---
 name: stale-mrs
 description: >-
-  Identify stale MRs and Linear tickets across the Data Platform team, then send each owner
-  a single Slack nudge. Trigger when user says "check for stale MRs", "find idle tickets",
+  Identifies stale MRs and Linear tickets across the Data Platform team, then sends each
+  owner a single Slack nudge. Trigger when user says "check for stale MRs", "find idle tickets",
   "nudge the team about stale work", "send stale reminders", or "who has work sitting idle".
 model: sonnet
 effort: medium

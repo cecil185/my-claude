@@ -1,7 +1,7 @@
 ---
 name: sourcebot-search
 description: >-
-  Search, read, and analyze code across all ingestion repos using Sourcebot. Covers all repos:
+  Searches, reads, and analyzes code across the Teamworks ingestion repos using Sourcebot:
   ingestion, ingestion-dags, ingestion-helm, ingestion-argo, ingestion-terraform. Trigger when
   user says "find where X is defined", "show me all usages of Y", "read the file at path Z",
   "how does X work", "search the codebase for", "trace the call path for", "diff commits",

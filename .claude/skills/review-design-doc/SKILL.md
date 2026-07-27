@@ -66,24 +66,4 @@ Rules for comments:
 
 ### 5. Output structure
 
-```
-## Summary
-
-**Goals:** …
-**Why / Motivation:** …
-**Approach:** …
-
----
-
-## Suggested Notion Comments
-
-**Comment 1**
-Section/line: "…"
-Type: …
-Comment text: …
-
-**Comment 2**
-…
-```
-
-No preamble, no trailing summary. Output the two sections and stop.
+Two sections only: `## Summary` (step 2's three fields) then `## Suggested Notion Comments` (step 4's blocks). No preamble, no trailing summary.

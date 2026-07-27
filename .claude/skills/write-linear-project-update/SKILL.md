@@ -1,22 +1,18 @@
 ---
-name: write-linear
+name: write-linear-project-update
 description: >-
-  Write a Linear project status update. Outputs a concise, structured update
-  ready to paste. Trigger when user says "write a Linear update", "post a
-  project update", "update the Linear project", or "draft a status update".
+  Writes a Linear project status update and outputs a concise, structured
+  update ready to paste. Trigger when user says "write a Linear update", "post
+  a project update", "update the Linear project", or "draft a status update".
 model: sonnet
 effort: low
-when_to_use: >-
-  Trigger for Linear project updates or status posts.
 ---
 
-# write-linear
+# write-linear-project-update
 
 > **Word limit (first draft): 50–100 words.** Status updates are terse reports, not narratives.
 
 Always read and apply **[write-style](../write-style/SKILL.md)** first for Cecil's voice. Also read **[examples.md](./examples.md)** for real project update patterns before drafting.
-
-**First draft target: 50–100 words.** Status updates are terse reports, not narratives.
 
 ---
 

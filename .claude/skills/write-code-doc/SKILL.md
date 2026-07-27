@@ -4,22 +4,12 @@ description: >-
   Write or improve code documentation — READMEs, inline comments, API docs,
   runbooks, docstrings, or architecture guides that live in a repo. Trigger
   when user says "write a README", "document this function", "add a docstring",
-  "write an API doc", or "document this for the codebase".
-when_to_use: >-
-  Trigger for any documentation that lives in or alongside code — READMEs,
-  inline comments, docstrings, API references, runbooks in a repo.
+  "write an API doc", "write a runbook", or "document this for the codebase".
 ---
 
 # write-code-doc
 
-> **Word limits (first draft)**
-> - Inline comment: **≤ 2 lines**
-> - Docstring: **1-sentence summary** + params only if non-obvious
-> - README: **≤ 400 words**
-> - Runbook: **minimum steps to complete safely**
-> - API doc: **minimum to make each endpoint actionable**
-
-Read the file for the specific doc type being written:
+Read the file for the specific doc type being written — it carries the structure, examples, and word limit for that type:
 
 | Type | File |
 |---|---|
@@ -30,12 +20,7 @@ Read the file for the specific doc type being written:
 | Runbook | [runbook.md](./runbook.md) |
 | API doc | [api-doc.md](./api-doc.md) |
 
-**First draft targets:**
-- Inline comment: ≤ 2 lines — if it needs more, the code probably needs renaming
-- Docstring / function doc: 1 sentence summary + params if non-obvious
-- README: ≤ 400 words
-- API reference: minimum to make each endpoint actionable
-- Runbook: minimum steps to complete the operation safely
+Docstrings have no reference file — see the template below.
 
 ---
 
@@ -55,14 +40,10 @@ One question. If obvious from context, skip and write.
 
 ---
 
-## Doc Type Rules
+## Docstrings / Function Docs
 
-### Inline Comments
-- Write the **why**, never the what: `// skip tables with zero commits — avoids no-op promotions`
-- One line max. If you need two, consider whether the code should be renamed instead.
-- No end-of-line comments on obvious code
+First draft: one sentence summary, plus params only if non-obvious.
 
-### Docstrings / Function Docs
 ```
 One sentence: what this does and when to use it.
 
@@ -76,43 +57,6 @@ Raises:
   ErrorType: when this happens
 ```
 Skip sections that are self-evident from the signature.
-
-### README
-```
-# Project Name
-
-> One sentence: what this does and who it's for.
-
-## Local Setup
-## Architecture  (one paragraph or ASCII diagram)
-## Development Workflow
-## Deployment
-## Contact / On-call
-```
-
-### API Reference
-```
-# API Name
-
-> Summary — what this API does, auth model, base URL.
-
-## Authentication
-## Endpoints  (method, path, params, response, example)
-## Error Codes
-## Examples
-```
-
-### Runbook (in-repo)
-```
-# <Action> — <System>
-
-> Summary — when to run this, what it does, risk level.
-
-## Prerequisites
-## Steps
-## Validation
-## Rollback
-```
 
 ---
 

@@ -9,6 +9,7 @@ description: >-
   until ready", "get this MR ready for review", "resolve CI and coderabbit
   loop", "mr ready loop", or "loop until CI passes and comments are resolved".
 model: sonnet
+disable-model-invocation: true
 ---
 
 # MR Ready Loop

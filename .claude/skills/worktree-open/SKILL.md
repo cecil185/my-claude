@@ -1,15 +1,14 @@
 ---
 name: worktree-open
 description: >
-  Creates a git worktree in ./worktrees/<branch> for the current repo, then opens it in
-  a new Cursor window. Use when the user says "open worktree", "create worktree for DP-XXX",
-  "open this branch in Cursor", or "worktree open".
-when_to_use: >
-  Trigger when user says "open worktree", "create a worktree", "open DP-XXX in Cursor",
-  "worktree open <branch>", or "open this in a new window".
+  Creates a git worktree in ./worktrees/<branch> for the current repo, then opens it in a new
+  Cursor window. Trigger when user says "open worktree", "create a worktree", "create worktree
+  for DP-XXX", "open DP-XXX in Cursor", "worktree open <branch>", "open this branch in Cursor",
+  or "open this in a new window".
 allowed-tools: Bash(git worktree *), Bash(git -C * worktree *), Bash(git branch *), Bash(git rev-parse *), Bash(ls *), Bash(cursor *)
 model: sonnet
 effort: low
+disable-model-invocation: true
 ---
 
 Create a worktree in `./worktrees/<branch>` relative to the current repo root, then open it in Cursor.
@@ -38,35 +37,25 @@ If a worktree at `<repo-root>/worktrees/<branch>` is already listed, skip creati
 
 ## Step 3: Create the worktree
 
-The target path is `<repo-root>/worktrees/<branch>`.
+Check whether the branch exists with `git branch --list <branch>` (empty output = it doesn't), then create the worktree at `<repo-root>/worktrees/<branch>`.
 
-If the branch **already exists** locally:
+Branch exists locally:
 
 ```
 git worktree add <repo-root>/worktrees/<branch> <branch>
 ```
 
-If the branch **does not exist** locally (new branch):
+New branch:
 
 ```
 git worktree add -b <branch> <repo-root>/worktrees/<branch>
 ```
-
-To check whether the branch exists:
-
-```
-git branch --list <branch>
-```
-
-An empty result means the branch doesn't exist yet.
 
 ## Step 4: Open in Cursor
 
 ```
 cursor <repo-root>/worktrees/<branch>
 ```
-
-This opens a new Cursor window pointed at the worktree directory.
 
 ## Step 5: Report
 

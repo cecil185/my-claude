@@ -12,9 +12,7 @@ argument-hint: "[URL or paste article text]"
 
 # Article Critique
 
-Read the article, summarize it, and **answer the critical questions yourself** against Cecil's stack — don't ask him. Output is an evaluation report a caller (Cecil or another skill/agent) can act on without follow-up.
-
-The point: filter the firehose. Tell Cecil whether it's worth his attention, what to extract, and what (if anything) it should change in his world — with a defensible rating.
+Read the article, summarize it, and **answer the critical questions yourself** against Cecil's stack — don't ask him. The output is an evaluation report a caller (Cecil or another skill/agent) can act on without follow-up: whether it's worth his attention, what to extract, and what it should change in his world — with a defensible rating.
 
 ---
 
@@ -87,15 +85,14 @@ Always show the per-axis scores so the rating is auditable.
 
 ## Self-answered critical questions
 
-For every article, answer these inline (in the **Applicability** section). Be honest — "no" / "not applicable" is a valid, valuable answer.
+Answer these inline in the **Applicability** section. "No" / "not applicable" is a valid, valuable
+answer — say so in one clause and move on. Don't pad.
 
-1. **What specifically would Cecil change if he took this seriously?** (file/system/ticket-level concrete, or "nothing").
-2. **Does the failure mode / problem they describe actually exist in his stack today?** (Use stack knowledge; if unknown, say so and name what would tell us.)
-3. **What's the cheapest experiment / verification to test the claim in his environment?** (or "no experiment needed; doesn't apply").
-4. **What does this displace?** (If he adopts it, what current pattern/tool/decision is it competing with?)
-5. **Counterfactual: if he ignores this for 6 months, what breaks?** (Often "nothing" — that's the honest answer for most articles.)
-
-If a question isn't applicable, say so in one clause and move on. Don't pad.
+1. **What would Cecil change if he took this seriously?** (file/system/ticket-level concrete, or "nothing")
+2. **Does the failure mode they describe exist in his stack today?** (If unknown, say so and name what would tell us.)
+3. **Cheapest experiment to test the claim in his environment?** (or "n/a — doesn't apply")
+4. **What does this displace?** (which current pattern/tool/decision it competes with)
+5. **If he ignores this for 6 months, what breaks?** (often "nothing" — the honest answer for most articles)
 
 ---
 
@@ -131,29 +128,32 @@ If a question isn't applicable, say so in one clause and move on. Don't pad.
 **Bottom line (1–2 sentences):** <does he act, file it, or drop it — and the single most valuable thing to take, if any>
 ```
 
-No headers beyond what's above. No closing offer to do more. The report is the deliverable.
+No headers beyond what's above. No closing offer to do more. The report is the deliverable. Keep the
+field names stable — another skill/agent may parse the structure.
 
 ---
 
 ## Tone
 
-Match Cecil's style: direct, economical, dry, no hedging. Call hype hype. Saying "skip — you already do this; their version is worse" is the high-value answer when true. Don't inflate ratings to seem helpful — the skill's credibility comes from honest skips.
+Direct, economical, dry, no hedging. Call hype hype. "Skip — you already do this; their version is
+worse" is the high-value answer when true. Don't inflate ratings to seem helpful; the skill's
+credibility comes from honest skips.
 
-When uncertain about a stack-specific fact (e.g. "does the ForceDecks poller already retry?"), say "unknown — would need to check `<file/component>`" rather than guessing. Calling skills/agents can act on that.
+When uncertain about a stack-specific fact (e.g. "does the ForceDecks poller already retry?"), say
+"unknown — would need to check `<file/component>`" rather than guessing.
 
 ---
 
 ## Edge cases
 
-- **Paper / long-form (>30 min read):** Same format; summary can run to 8 bullets. Rating still on 12-point scale.
-- **Vendor blog / marketing post:** Apply extra skepticism on **Signal**. Flag if the "lesson" is actually a sales pitch in the **Bottom line**.
-- **Paywalled / fetch fails:** Emit a stub report with `Rating: n/a — fetch failed` and the failure reason. Do not fabricate.
-- **Pure-text input (no URL):** Treat as the article; omit the URL line.
-- **Compare 2+ articles:** Emit each report in full, then add a final block:
+- **Paper / long-form (>30 min read):** same format; summary may run to 8 bullets.
+- **Vendor blog / marketing post:** extra skepticism on **Signal**; flag in **Bottom line** if the "lesson" is a sales pitch.
+- **Paywalled / fetch fails:** stub report with `Rating: n/a — fetch failed` and the reason. Never fabricate.
+- **Pure text, no URL:** treat as the article; omit the URL line.
+- **Compare 2+ articles:** each report in full, then a final block:
   ```
   **Compared:**
   - Agree on: <…>
   - Disagree on: <…>
   - More relevant to Cecil: <which, why>
   ```
-- **Caller is another skill/agent:** Same output. The format is parseable by structure (headers + bold labels) — keep field names stable.

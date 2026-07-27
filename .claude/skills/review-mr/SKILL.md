@@ -32,7 +32,7 @@ Do not modify code. Do not post comments to the MR.
 | MR number + repo | `get_merge_request_diffs(project_id, mr_iid)` |
 | Nothing specified | Ask which MR |
 
-For a deep architectural/security review on a large MR, use `Skill(adlc:code-reviewer)` instead.
+For a deep architectural/security review on a large MR, use `Agent(subagent_type: "adlc:code-reviewer")` instead.
 
 ## Output (≤100 words)
 
@@ -55,7 +55,6 @@ Exactly one of these forms. Nothing else.
 
 ### Rules
 
-- **100 words max** for the entire response.
 - Verdict is only `approve` or `request-changes` (no `comment`).
 - Approve ⇒ zero comments. Request-changes ⇒ 1–3 comments max, each with exact `file:line` and a concrete fix.
 - Every comment must cite a line you verified in source. If you can't point to a line, don't raise it.

@@ -62,9 +62,4 @@ env -C /path/to/repo glab mr create \
 - Keep the title under 70 characters: `TICKET: what changed`
 - Do not add "Closes TICKET" — Linear syncs automatically via the branch name
 - Add `--remove-source-branch` to clean up after merge
-
-## CLAUDE.md rules that apply here
-
-- **No compound cd**: always use `env -C /path/to/repo glab ...` — never `cd /path && glab ...`
-- **Never push to main/master directly**
-- **Confirm before pushing** if the user hasn't explicitly asked to push
+- Never push to main/master directly, and confirm before pushing if the user hasn't asked for it

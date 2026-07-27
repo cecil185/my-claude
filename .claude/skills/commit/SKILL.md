@@ -1,10 +1,13 @@
 ---
 name: commit
 description: >-
-  Use when the user asks to commit, stage, or save changes — runs lint, tests,
-  then stages, commits, pushes, and opens a merge request in one chained command.
+  Runs lint and tests, then stages, commits, pushes, and opens a merge request in
+  one chained command, validating the branch against the in-progress Linear ticket
+  first. Trigger when user says "commit", "commit this", "stage and commit",
+  "save changes", "commit and push", or "commit and open an MR".
 model: sonnet
 effort: low
+disable-model-invocation: true
 ---
 
 # Commit Workflow
@@ -19,13 +22,13 @@ effort: low
 
 Run `just lint` from the repo root. If lint fails, fix the issues and re-run until clean.
 
-**If `just lint` is unavailable:**, skip this step.
+If `just lint` is unavailable, skip this step.
 
 ## 3. Run tests
 
 Run `just test` from the repo root. If tests fail, stop and report the failures — do not proceed.
 
-**If `just test` is unavailable:**, skip this step.
+If `just test` is unavailable, skip this step.
 
 ## 4. Stage, commit, push, and open MR
 

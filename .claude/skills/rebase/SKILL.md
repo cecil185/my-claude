@@ -11,8 +11,6 @@ effort: high
 disable-model-invocation: true
 ---
 
-Rebase the current branch onto the latest version of its upstream base branch. Follow these steps carefully:
-
 ## Step 1: Determine context
 
 Run these in parallel:
@@ -44,11 +42,7 @@ If the user provided an argument ($1), use that as the base branch instead.
 If the rebase encounters conflicts:
 
 1. Run `git diff --name-only --diff-filter=U` to list all conflicted files
-2. For each conflicted file:
-   a. Read the file to understand the conflict markers (`<<<<<<<`, `=======`, `>>>>>>>`)
-   b. Analyze both sides of each conflict — understand the intent of the current branch changes vs the base branch changes
-   c. Attempt to resolve the conflict by editing the file to merge both changes correctly
-   d. After resolving, run `git add <file>` to mark it resolved
+2. For each conflicted file: read it, work out the intent of both sides, edit it so both changes survive, then `git add <file>`
 3. After resolving all files, run `git rebase --continue`
 4. If new conflicts arise in subsequent commits, repeat the process
 
@@ -66,10 +60,8 @@ If the rebase encounters conflicts:
 
 ## Step 6: Report result
 
-After successful rebase:
-- Show `git log --oneline -10` so the user can verify the history looks correct
-- Report how many commits were replayed
-- If the branch has a remote tracking branch, print a brief summary that includes:
-  - Number of commits replayed and base branch
-  - Any files that had conflicts and how each was resolved (one line per file)
-  - Then inform the user: "Rebase complete. Run `git push --force-with-lease` to update the remote." Do NOT attempt to run it — `git push --force*` is blocked by the deny list in settings.json. The user must run it in the terminal directly (use `! git push --force-with-lease`).
+After a successful rebase:
+- Show `git log --oneline -10` so the user can verify the history
+- Report the number of commits replayed and the base branch
+- One line per conflicted file: how it was resolved
+- If the branch has a remote tracking branch, tell the user: "Rebase complete. Run `! git push --force-with-lease` to update the remote." Do NOT run it — `git push --force*` is on the deny list in settings.json.
