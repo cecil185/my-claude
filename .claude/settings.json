@@ -757,6 +757,7 @@
     }
   },
   "effortLevel": "medium",
+  "tui": "fullscreen",
   "theme": "light",
   "skipAutoPermissionPrompt": true,
   "autoMode": {
@@ -772,5 +773,5 @@
     "/Users/cecil/.claude",
     "/Users/cecil/worktrees"
   ],
-  "tui": "fullscreen"
+  "skipWorkflowUsageWarning": true
 }

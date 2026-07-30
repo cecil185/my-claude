@@ -1,11 +1,13 @@
 {
   "$schema": "https://raw.githubusercontent.com/google-gemini/gemini-cli/main/schemas/settings.schema.json",
-  "model": {
-    "name": "gemini-1.5-pro"
-  },
   "general": {
     "defaultApprovalMode": "auto_edit"
   },
+  "colorScheme": "light",
+  "trustedWorkspaces": [
+    "/Users/cecil/Code/genai"
+    "/Users/cecil/Code/me"
+  ],
   "ui": {
     "theme": "GitHub"
   },
