@@ -1,15 +1,6 @@
 {
     "$schema": "https://raw.githubusercontent.com/google-gemini/gemini-cli/main/schemas/settings.schema.json",
-    "general": {
-      "defaultApprovalMode": "auto_edit"
-    },
     "colorScheme": "light",
-    "trustedWorkspaces": [
-      "/Users/cecil/Code"
-    ],
-    "ui": {
-      "theme": "GitHub"
-    },
     "context": {
       "additionalDirectories": [
         "/Users/cecil/Code/agenticengineeringacademy",
@@ -18,6 +9,168 @@
         "/Users/cecil/.claude",
         "/Users/cecil/worktrees"
       ]
+    },
+    "experimental": {
+      "agentTeams": true
+    },
+    "general": {
+      "defaultApprovalMode": "auto_edit"
+    },
+    "hooks": {
+      "AfterTool": [
+        {
+          "matcher": "Write|Edit|replace|write_file",
+          "hooks": [
+            {
+              "type": "command",
+              "name": "Ruff Auto-fix",
+              "command": "input=$(cat); file=$(printf \"%s\" \"$input\" | jq -r '.tool_input.file_path // empty'); case \"$file\" in *.py) ruff check --fix \"$file\" ;; esac"
+            }
+          ]
+        }
+      ],
+      "BeforeTool": [
+        {
+          "matcher": "Bash|run_shell_command",
+          "hooks": [
+            {
+              "type": "command",
+              "name": "Compound CD Check",
+              "command": "input=$(cat); cmd=$(printf \"%s\" \"$input\" | jq -r '.tool_input.command // \"\"'); if printf \"%s\" \"$cmd\" | grep -qE 'cd\\s+\\S+.*(\u0026\u0026|;)'; then printf '{\"hookSpecificOutput\":{\"hookEventName\":\"BeforeTool\",\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"Compound cd command blocked. Use separate tool calls for cd and subsequent commands (GEMINI.md rule).\"},\"systemMessage\":\"BLOCKED: Compound cd command. Run cd and subsequent commands as separate tool calls.\"}'; exit 1; fi",
+              "statusMessage": "Checking for compound cd commands..."
+            }
+          ]
+        },
+        {
+          "matcher": ".*save_issue",
+          "hooks": [
+            {
+              "type": "command",
+              "name": "Linear Assignment Enforcer",
+              "command": "$GEMINI_PROJECT_DIR/scripts/enforce-linear-assignment.sh"
+            }
+          ]
+        },
+        {
+          "matcher": "Bash|run_shell_command",
+          "hooks": [
+            {
+              "type": "command",
+              "name": "Pre-commit Gate",
+              "command": "bash \"$GEMINI_PROJECT_DIR\"/.claude/hooks/pre-commit-gate.sh",
+              "timeout": 300,
+              "statusMessage": "Running lint, tests, and snyk before commit/push..."
+            }
+          ]
+        },
+        {
+          "matcher": "Bash|run_shell_command",
+          "hooks": [
+            {
+              "type": "command",
+              "name": "MR Title Enforcer",
+              "command": "$GEMINI_PROJECT_DIR/scripts/enforce-mr-title.sh"
+            },
+            {
+              "type": "command",
+              "name": "Linear Assignment Enforcer",
+              "command": "$GEMINI_PROJECT_DIR/scripts/enforce-linear-assignment.sh"
+            }
+          ]
+        }
+      ]
+    },
+    "ide": {
+      "hasSeenNudge": true
+    },
+    "mcp": {
+      "enableAllProjectMcpServers": true
+    },
+    "mcpServers": {
+      "fff": {
+        "command": "/Users/cecil/.local/bin/fff-mcp",
+        "args": [],
+        "env": {},
+        "trust": true
+      },
+      "aws-docs": {
+        "command": "uvx",
+        "args": [
+          "awslabs.aws-documentation-mcp-server@latest"
+        ],
+        "env": {
+          "AWS_PROFILE": "datalake-stg"
+        },
+        "trust": true
+      },
+      "aws-core": {
+        "command": "uvx",
+        "args": [
+          "awslabs.core-mcp-server@latest"
+        ],
+        "env": {
+          "AWS_PROFILE": "datalake-stg",
+          "AWS_REGION": "us-east-1"
+        },
+        "trust": true
+      },
+      "aws-api": {
+        "command": "uvx",
+        "args": [
+          "awslabs.aws-api-mcp-server@latest"
+        ],
+        "env": {
+          "AWS_PROFILE": "datalake-stg",
+          "AWS_REGION": "us-east-1"
+        },
+        "trust": true
+      },
+      "aws-cloudwatch": {
+        "command": "uvx",
+        "args": [
+          "awslabs.cloudwatch-mcp-server@latest"
+        ],
+        "env": {
+          "AWS_PROFILE": "datalake-stg",
+          "AWS_REGION": "us-east-1"
+        },
+        "trust": true
+      },
+      "aws-eks": {
+        "command": "uvx",
+        "args": [
+          "awslabs.eks-mcp-server@latest"
+        ],
+        "env": {
+          "AWS_PROFILE": "datalake-stg",
+          "AWS_REGION": "us-east-1"
+        },
+        "trust": true
+      },
+      "slack": {
+        "command": "npx",
+        "args": [
+          "-y",
+          "@modelcontextprotocol/server-slack"
+        ],
+        "env": {
+          "SLACK_BOT_TOKEN": "$SLACK_BOT_TOKEN",
+          "SLACK_APP_TOKEN": "$SLACK_APP_TOKEN"
+        },
+        "trust": true
+      }
+    },
+    "permissions": {
+      "allow": [
+        "command(git log)",
+        "command(git diff)",
+        "command(find)"
+      ]
+    },
+    "security": {
+      "auth": {
+        "selectedType": "oauth-personal"
+      }
     },
     "tools": {
       "allowed": [
@@ -694,156 +847,13 @@
         "Bash(aws kafka reboot-broker *)"
       ]
     },
-    "hooks": {
-      "AfterTool": [
-        {
-          "matcher": "Write|Edit|replace|write_file",
-          "hooks": [
-            {
-              "type": "command",
-              "name": "Ruff Auto-fix",
-              "command": "input=$(cat); file=$(printf \"%s\" \"$input\" | jq -r '.tool_input.file_path // empty'); case \"$file\" in *.py) ruff check --fix \"$file\" ;; esac"
-            }
-          ]
-        }
-      ],
-      "BeforeTool": [
-        {
-          "matcher": "Bash|run_shell_command",
-          "hooks": [
-            {
-              "type": "command",
-              "name": "Compound CD Check",
-              "command": "input=$(cat); cmd=$(printf \"%s\" \"$input\" | jq -r '.tool_input.command // \"\"'); if printf \"%s\" \"$cmd\" | grep -qE 'cd\\s+\\S+.*(&&|;)'; then printf '{\"hookSpecificOutput\":{\"hookEventName\":\"BeforeTool\",\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"Compound cd command blocked. Use separate tool calls for cd and subsequent commands (GEMINI.md rule).\"},\"systemMessage\":\"BLOCKED: Compound cd command. Run cd and subsequent commands as separate tool calls.\"}'; exit 1; fi",
-              "statusMessage": "Checking for compound cd commands..."
-            }
-          ]
-        },
-        {
-          "matcher": ".*save_issue",
-          "hooks": [
-            {
-              "type": "command",
-              "name": "Linear Assignment Enforcer",
-              "command": "$GEMINI_PROJECT_DIR/scripts/enforce-linear-assignment.sh"
-            }
-          ]
-        },
-        {
-          "matcher": "Bash|run_shell_command",
-          "hooks": [
-            {
-              "type": "command",
-              "name": "Pre-commit Gate",
-              "command": "bash \"$GEMINI_PROJECT_DIR\"/.claude/hooks/pre-commit-gate.sh",
-              "timeout": 300,
-              "statusMessage": "Running lint, tests, and snyk before commit/push..."
-            }
-          ]
-        },
-        {
-          "matcher": "Bash|run_shell_command",
-          "hooks": [
-            {
-              "type": "command",
-              "name": "MR Title Enforcer",
-              "command": "$GEMINI_PROJECT_DIR/scripts/enforce-mr-title.sh"
-            },
-            {
-              "type": "command",
-              "name": "Linear Assignment Enforcer",
-              "command": "$GEMINI_PROJECT_DIR/scripts/enforce-linear-assignment.sh"
-            }
-          ]
-        }
-      ]
-    },
-    "mcpServers": {
-      "fff": {
-        "command": "/Users/cecil/.local/bin/fff-mcp",
-        "args": [],
-        "env": {},
-        "trust": true
-      },
-      "aws-docs": {
-        "command": "uvx",
-        "args": [
-          "awslabs.aws-documentation-mcp-server@latest"
-        ],
-        "env": {
-          "AWS_PROFILE": "datalake-stg"
-        },
-        "trust": true
-      },
-      "aws-core": {
-        "command": "uvx",
-        "args": [
-          "awslabs.core-mcp-server@latest"
-        ],
-        "env": {
-          "AWS_PROFILE": "datalake-stg",
-          "AWS_REGION": "us-east-1"
-        },
-        "trust": true
-      },
-      "aws-api": {
-        "command": "uvx",
-        "args": [
-          "awslabs.aws-api-mcp-server@latest"
-        ],
-        "env": {
-          "AWS_PROFILE": "datalake-stg",
-          "AWS_REGION": "us-east-1"
-        },
-        "trust": true
-      },
-      "aws-cloudwatch": {
-        "command": "uvx",
-        "args": [
-          "awslabs.cloudwatch-mcp-server@latest"
-        ],
-        "env": {
-          "AWS_PROFILE": "datalake-stg",
-          "AWS_REGION": "us-east-1"
-        },
-        "trust": true
-      },
-      "aws-eks": {
-        "command": "uvx",
-        "args": [
-          "awslabs.eks-mcp-server@latest"
-        ],
-        "env": {
-          "AWS_PROFILE": "datalake-stg",
-          "AWS_REGION": "us-east-1"
-        },
-        "trust": true
-      },
-      "slack": {
-        "command": "npx",
-        "args": [
-          "-y",
-          "@modelcontextprotocol/server-slack"
-        ],
-        "env": {
-          "SLACK_BOT_TOKEN": "$SLACK_BOT_TOKEN",
-          "SLACK_APP_TOKEN": "$SLACK_APP_TOKEN"
-        },
-        "trust": true
-      }
-    },
-    "mcp": {
-      "enableAllProjectMcpServers": true
-    },
-    "experimental": {
-      "agentTeams": true
-    },
-    "ide": {
-      "hasSeenNudge": true
-    },
-    "security": {
-      "auth": {
-        "selectedType": "oauth-personal"
-      }
+    "trustedWorkspaces": [
+      "/Users/cecil/Code",
+      "/Users/cecil/Code/genai",
+      "/Users/cecil/Code/me"
+    ],
+    "ui": {
+      "theme": "GitHub"
     }
   }
+  
