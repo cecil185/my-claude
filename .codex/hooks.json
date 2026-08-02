@@ -1,0 +1,48 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "/usr/local/bin/aicodemetricsd hook codex --hook-input stdin",
+            "timeout": 10,
+            "type": "command"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "/usr/local/bin/aicodemetricsd hook codex --hook-input stdin",
+            "timeout": 10,
+            "type": "command"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "command": "/usr/local/bin/aicodemetricsd hook codex --hook-input stdin",
+            "timeout": 10,
+            "type": "command"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "command": "/usr/local/bin/aicodemetricsd hook codex --hook-input stdin",
+            "timeout": 10,
+            "type": "command"
+          }
+        ]
+      }
+    ]
+  }
+}

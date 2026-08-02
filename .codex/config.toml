@@ -1,0 +1,20 @@
+[features]
+  hooks = true
+
+[projects."/Users/cecil/Code/me/harness"]
+trust_level = "trusted"
+
+[hooks.state."/Users/cecil/.codex/hooks.json:post_tool_use:0:0"]
+trusted_hash = "sha256:f4d24a92ecd41841f4872a4a19961a78232462e2f40147df0c8a56ada6779023" # aicodemetricsd:managed
+
+[hooks.state."/Users/cecil/.codex/hooks.json:pre_tool_use:0:0"]
+trusted_hash = "sha256:625210aafbd3dfa32aa6e667dfe511ef68a37803687da9b35578c6ccd94b66c2" # aicodemetricsd:managed
+
+[hooks.state."/Users/cecil/.codex/hooks.json:session_start:0:0"]
+trusted_hash = "sha256:7e222295f1c9fd7b1edbf68fda0c95fb2fce8f22ee33cefb1bd0bc71e847d058" # aicodemetricsd:managed
+
+[hooks.state."/Users/cecil/.codex/hooks.json:stop:0:0"]
+trusted_hash = "sha256:1ac4959a4bb2dfb80dfb17c56be9035397f663192d020f0c0994915a7038ebe7" # aicodemetricsd:managed
+
+[apps.connector_76869538009648d5b282a4bb21c3d157.tools."github.update_pull_request"]
+approval_mode = "approve"
