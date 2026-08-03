@@ -23,8 +23,8 @@ PAIRS=(
 )
 
 cmd="${1:-}"
-if [[ "$cmd" != "pull" && "$cmd" != "diff" ]]; then
-  echo "Usage: $0 {pull|diff}" >&2
+if [[ "$cmd" != "pull" && "$cmd" != "diff" && "$cmd" != "push" ]]; then
+  echo "Usage: $0 {pull|diff|push}" >&2
   exit 1
 fi
 
@@ -41,6 +41,14 @@ for pair in "${PAIRS[@]}"; do
   if [[ "$cmd" == "diff" ]]; then
     echo "--- $repo_rel ---"
     diff -u "$repo_path" "$root_path" 2>/dev/null || true
+  elif [[ "$cmd" == "push" ]]; then
+    if [[ ! -f "$repo_path" ]]; then
+      echo "skip (missing in repo): $repo_rel"
+      continue
+    fi
+    mkdir -p "$(dirname "$root_path")"
+    cp "$repo_path" "$root_path"
+    echo "pushed: $repo_rel -> $root_path"
   else
     mkdir -p "$(dirname "$repo_path")"
     cp "$root_path" "$repo_path"
