@@ -2,12 +2,6 @@
 name: create-linear-ticket
 description: >-
   Creates a single Linear ticket with specified project, assignee, status, and description.
-  Trigger when user says "create a ticket", "file a Linear issue", "add a ticket for X",
-  "log a bug in Linear", "create a chore for X", or "make a Linear ticket". Also trigger
-  when user describes a task/bug/feature and says "track this" or "let's ticket this".
-model: sonnet
-effort: low
-disable-model-invocation: true
 ---
 
 # Create Linear Ticket
@@ -25,7 +19,7 @@ All seven are required before calling the MCP tool:
 3. **Team** — Data & Gen AI
 4. **Label** — exactly ONE of `feature`, `chore`, `bug`
 5. **Assignee** — always Cecil Ash (`cash@teamworks.com`), no exceptions
-6. **Project** — if the user hasn't named one, **ask before creating**
+6. **Project** — use the user's project if named; otherwise default to **Improve Production Resiliency** (`https://linear.app/teamworks/project/improve-production-resiliency-6b1052fc3cd7/overview`)
 7. **State** — `Todo` for normal work; `Triage` for support/severity-unknown issues
 
 ## Ticket Type Classification
@@ -110,7 +104,7 @@ mcp__linear-server__save_issue(
     description="[Use appropriate template above]",
     teamName="Data & Gen AI",
     assigneeName="Cecil Ash",
-    projectName="[Project name]",   # REQUIRED
+    projectName="Improve Production Resiliency",  # default; override if user names another
     stateName="Todo",               # or as specified
     labelNames=["feature"],         # REQUIRED: exactly one of feature/chore/bug
 )
@@ -122,7 +116,7 @@ mcp__linear-server__save_issue(
 
 - [ ] Title is specific (not vague)
 - [ ] Exactly one type label: feature, chore, or bug
-- [ ] Project is specified (ask if not)
+- [ ] Project is set (user-named, or default Improve Production Resiliency)
 - [ ] Description uses the correct template for the type
 - [ ] Assignee is Cecil Ash
 
