@@ -1,5 +1,5 @@
 ---
-name: explain-diff-html
+name: quiz-html
 description: >
   Use when the user asks for a rich, interactive explanation of a code change, diff, branch, PR, or repository feature.
   Produces a self-contained HTML file with diagrams and an interactive JS quiz, and automatically opens it in the browser.
