@@ -203,7 +203,29 @@
       "Bash(helm template *)",
       "Bash(helm list *)",
       "Bash(helm get *)",
-      "Bash(glab api *)"
+      "Bash(glab api *)",
+      "Bash(python /Users/cecil/.claude/skills/test-gap-scan/parse_coverage.py /Users/cecil/Code/genai/ingestion/.coverage.json)",
+      "Bash(ls /Users/ceil/Code/genai/ingestion/tests/ 2>/dev/null || ls /Users/cecil/Code/genai/ingestion/tests/ | head -60)",
+      "mcp__58256ddd-4c89-4048-b3d7-d17929ea7587__list_projects",
+      "mcp__58256ddd-4c89-4048-b3d7-d17929ea7587__list_teams",
+      "Bash(git -C /Users/cecil/Code/genai/ingestion checkout main)",
+      "Bash(git -C /Users/cecil/Code/genai/ingestion branch)",
+      "mcp__58256ddd-4c89-4048-b3d7-d17929ea7587__list_users",
+      "mcp__58256ddd-4c89-4048-b3d7-d17929ea7587__save_issue",
+      "Bash(git -C /Users/cecil/Code/genai/ingestion fetch origin main)",
+      "Bash(git -C /Users/cecil/Code/genai/ingestion worktree add worktrees/DP-1377 -b DP-1377 origin/main)",
+      "Bash(git -C /Users/cecil/Code/genai/ingestion/worktrees/DP-1377 add tests/test_base_sqs_worker.py tests/test_kv_store.py)",
+      "Bash(git -C /Users/cecil/Code/genai/ingestion/worktrees/DP-1377 commit -m ' *)",
+      "mcp__d6b953b5-7765-46ac-9f3a-bf86d8bec629__create_merge_request",
+      "mcp__7c90849a-db9a-4895-90c5-1cc1f5596e71__slack_search_channels",
+      "mcp__58256ddd-4c89-4048-b3d7-d17929ea7587__list_issue_statuses",
+      "mcp__58256ddd-4c89-4048-b3d7-d17929ea7587__list_issues",
+      "Bash(git *)",
+      "mcp__claude_ai_Notion__notion-fetch",
+      "Bash(ENV=dev GLUE_REGISTRY_NAME=tw-platform-vendor-integrations-ams-usgw1-dev AWS_REGION=us-gov-west-1 PYTHONPATH=/Users/cecil/Code/genai/ingestion uv run *)",
+      "Bash(SQS_QUEUE_URL=\"https://sqs.us-gov-west-1.amazonaws.com/579989729780/tw-platform-sportlogiq-physical-metrics-tasks-usgw1-dev\" AWS_REGION=us-gov-west-1 AWS_PROFILE=datalake-dev PYTHONPATH=/Users/cecil/Code/genai/ingestion uv run *)",
+      "Bash(databricks auth *)",
+      "mcp__aws-api__call_aws"
     ],
     "deny": [
       "mcp__GitLab__*",
@@ -717,6 +739,18 @@
           {
             "type": "command",
             "command": "$CLAUDE_PROJECT_DIR/scripts/enforce-linear-assignment.sh"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/cecil/.local/bin/headroom wrap selfheal --marker headroom-wrap-selfheal",
+            "timeout": 10
           }
         ]
       }
