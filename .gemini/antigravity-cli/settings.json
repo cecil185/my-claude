@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/google-gemini/gemini-cli/main/schemas/settings.schema.json",
-  "mode": "accept-edits",
+  "allowNonWorkspaceAccess": true,
   "autoMode": {
     "allow": [
       "$defaults",
@@ -168,6 +168,8 @@
       "trust": true
     }
   },
+  "mode": "accept-edits",
+  "model": "Gemini 3.6 Flash (Medium)",
   "permissions": {
     "allow": [
       "command(git log)",
@@ -224,7 +226,17 @@
       "command(helm)",
       "command(pre-commit)",
       "command(tflint)",
-      "command(glab)"
+      "command(glab)",
+      "command(git checkout)",
+      "command(cargo fmt --check)",
+      "command(curl -sI \"https://developers.openai.com/api/docs/pricing\")",
+      "command(curl -sI \"https://ai.google.dev/gemini-api/docs/pricing\")",
+      "command(curl -sI \"https://api-docs.deepseek.com/quick_start/pricing\")",
+      "command(curl -sL -I \"https://api-docs.deepseek.com/quick_start/pricing\")",
+      "command(gh)",
+      "command(pwd)",
+      "command(sleep)",
+      "command(open)"
     ],
     "ask": [
       "Bash(cp *)",
@@ -1286,7 +1298,12 @@
     "/Users/cecil/Code/me/wiki-workflow",
     "/Users/cecil/.claude",
     "/Users/cecil/worktrees",
-    "/Users/cecil/Code/me/harness"
+    "/Users/cecil/Code/me/harness",
+    "/Users/cecil/Code/me/harness/worktrees/feat/planning-skill",
+    "/Users/cecil/Code/me/harness/worktrees/C12",
+    "/Users/cecil/Code/me/harness/worktrees/fix-scrolling",
+    "/Users/cecil/Code/me/harness/worktrees/feat-add-tool-paths-to-tui",
+    "/Users/cecil/Code/me/harness/worktrees/feat-cost-analysis-end-of-session"
   ],
   "ui": {
     "theme": "GitHub"

@@ -1,6 +1,6 @@
 #!/bin/bash
-# Pulls the live, app-owned settings files (Antigravity/Gemini, Codex) into
-# this repo so they can be diffed and version-controlled.
+# Pulls the live, app-owned settings files (Claude, Antigravity/Gemini, Codex)
+# into this repo so they can be diffed and version-controlled.
 #
 # These files are rewritten in place by their apps (write-temp + rename), which
 # destroys a symlink sitting at that path and forks it into a plain file. So we
@@ -17,6 +17,7 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 # root_path:repo_relative_path
 PAIRS=(
+  "$HOME/.claude/settings.json:.claude/settings.json"
   "$HOME/.gemini/antigravity-cli/settings.json:.gemini/antigravity-cli/settings.json"
   "$HOME/.codex/config.toml:.codex/config.toml"
   "$HOME/.codex/hooks.json:.codex/hooks.json"

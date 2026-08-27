@@ -1,3 +1,5 @@
+model = "gpt-5.6-sol"
+model_reasoning_effort = "medium"
 [features]
   hooks = true
 
@@ -18,3 +20,17 @@ trusted_hash = "sha256:1ac4959a4bb2dfb80dfb17c56be9035397f663192d020f0c0994915a7
 
 [apps.connector_76869538009648d5b282a4bb21c3d157.tools."github.update_pull_request"]
 approval_mode = "approve"
+
+[mcp_servers.openaiDeveloperDocs]
+url = "https://developers.openai.com/mcp"
+
+[tui.model_availability_nux]
+"gpt-5.6-sol" = 2
+
+[marketplaces.databricks-agent-skills]
+last_updated = "2026-08-24T12:23:27Z"
+source_type = "git"
+source = "https://github.com/databricks/databricks-agent-skills.git"
+
+[plugins."databricks@databricks-agent-skills"]
+enabled = true

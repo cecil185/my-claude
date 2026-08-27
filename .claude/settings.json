@@ -680,7 +680,7 @@
       "Bash(aws storagegateway delete-gateway *)",
       "Bash(aws kafka reboot-broker *)"
     ],
-    "defaultMode": "auto"
+    "defaultMode": "acceptEdits"
   },
   "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
@@ -694,6 +694,57 @@
           {
             "type": "command",
             "command": "case \"$CLAUDE_TOOL_INPUT_FILE_PATH\" in *.py) ruff check --fix \"$CLAUDE_TOOL_INPUT_FILE_PATH\" ;; esac"
+          }
+        ]
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/usr/local/bin/aicodemetricsd",
+            "args": [
+              "hook",
+              "claude",
+              "--hook-input",
+              "stdin"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/usr/local/bin/aicodemetricsd",
+            "args": [
+              "hook",
+              "claude",
+              "--hook-input",
+              "stdin"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/usr/local/bin/aicodemetricsd",
+            "args": [
+              "hook",
+              "claude",
+              "--hook-input",
+              "stdin"
+            ],
+            "timeout": 10
           }
         ]
       }
@@ -741,6 +792,22 @@
             "command": "$CLAUDE_PROJECT_DIR/scripts/enforce-linear-assignment.sh"
           }
         ]
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/usr/local/bin/aicodemetricsd",
+            "args": [
+              "hook",
+              "claude",
+              "--hook-input",
+              "stdin"
+            ],
+            "timeout": 10
+          }
+        ]
       }
     ],
     "SessionStart": [
@@ -750,6 +817,38 @@
           {
             "type": "command",
             "command": "/Users/cecil/.local/bin/headroom wrap selfheal --marker headroom-wrap-selfheal",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/usr/local/bin/aicodemetricsd",
+            "args": [
+              "hook",
+              "claude",
+              "--hook-input",
+              "stdin"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/usr/local/bin/aicodemetricsd",
+            "args": [
+              "hook",
+              "claude",
+              "--hook-input",
+              "stdin"
+            ],
             "timeout": 10
           }
         ]
@@ -765,18 +864,12 @@
     "code-review@claude-plugins-official": false,
     "flywheel@teamworks-claude": true,
     "foundations@teamworks-claude": true,
-    "review@claude-plugins-official": false,
-    "worktrees@teamworks-claude": true,
     "imbue-code-guardian@imbue-code-guardian": true,
-    "imbue-mngr-skills@imbue-mngr": true
+    "imbue-mngr-skills@imbue-mngr": true,
+    "review@claude-plugins-official": false,
+    "worktrees@teamworks-claude": true
   },
   "extraKnownMarketplaces": {
-    "teamworks-claude": {
-      "source": {
-        "source": "directory",
-        "path": "/Users/cecil/Code/agenticengineeringacademy"
-      }
-    },
     "imbue-code-guardian": {
       "source": {
         "source": "github",
@@ -788,10 +881,17 @@
         "source": "github",
         "repo": "imbue-ai/mngr-claude-skills"
       }
+    },
+    "teamworks-claude": {
+      "source": {
+        "source": "directory",
+        "path": "/Users/cecil/Code/agenticengineeringacademy"
+      }
     }
   },
   "effortLevel": "medium",
   "tui": "fullscreen",
+  "skipWorkflowUsageWarning": true,
   "theme": "light",
   "skipAutoPermissionPrompt": true,
   "autoMode": {
@@ -807,5 +907,5 @@
     "/Users/cecil/.claude",
     "/Users/cecil/worktrees"
   ],
-  "skipWorkflowUsageWarning": true
+  "model": "haiku"
 }
