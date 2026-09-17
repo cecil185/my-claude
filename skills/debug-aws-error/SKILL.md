@@ -6,7 +6,6 @@ description: >-
   error, says "AWS is failing", "I'm getting an AccessDenied", "SSO expired",
   "quota exceeded", "resource not found", or any AWS CLI/SDK/Terraform operation
   returns an error code.
-model: sonnet
 effort: high
 ---
 

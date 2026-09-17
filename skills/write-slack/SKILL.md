@@ -5,7 +5,6 @@ description: >-
   ready to send. Trigger when user says "draft a slack message", "write a
   slack post about X", "clean up this message", "DM so-and-so about X", or
   "send a slack message".
-model: sonnet
 effort: low
 ---
 

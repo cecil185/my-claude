@@ -7,7 +7,6 @@ description: >-
   Linear project name or URL to scope the update. Trigger when user says "weekly
   update", "status summary", "sprint recap", "what did I do this week", "weekly
   Linear update", or "what have I been working on".
-model: sonnet
 effort: medium
 ---
 

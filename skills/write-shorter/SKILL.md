@@ -6,7 +6,6 @@ description: >-
   message, Linear update, Notion doc, MR description, or other written content.
   Trigger when user says "make this shorter", "trim this", "too long", "cut this
   down", or "fewer words".
-model: sonnet
 effort: low
 ---
 

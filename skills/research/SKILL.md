@@ -6,7 +6,6 @@ description: >-
   "look this up", "research", "research a topic", "what is X", "compare A vs B",
   "compare options", "what's the current state of X", "find information about", "what's the
   latest on", or "search for".
-model: claude-opus-4-6
 effort: high
 ---
 

@@ -4,7 +4,6 @@ description: >-
   Writes a Linear project status update and outputs a concise, structured
   update ready to paste. Trigger when user says "write a Linear update", "post
   a project update", "update the Linear project", or "draft a status update".
-model: sonnet
 effort: low
 ---
 

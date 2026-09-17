@@ -6,7 +6,6 @@ description: >-
   behavior. Trigger when user says "refactor", "clean up", "clean up this code", "improve
   this code", "improve this function", "this function is getting messy", "this is getting
   messy", "rename and reorganize", or "fix the code smells".
-model: claude-opus-4-6
 effort: high
 disable-model-invocation: true
 ---

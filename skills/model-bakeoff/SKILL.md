@@ -10,7 +10,6 @@ description: >-
   Trigger when user says "model bakeoff", "compare these plans", "compare and contrast these
   outputs", "what's different between these plans", "which of these should I trust", "combine
   the best of these plans", or points at .bakeoff/<TICKET>/*.md candidate files to compare.
-model: claude-opus-4-8
 effort: high
 ---
 

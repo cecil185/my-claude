@@ -6,7 +6,6 @@ description: >-
   finish, outputs a UI test checklist based on what shipped. Trigger when user says
   "run a sprint", "work on axis", "implement ready beads", "run the axis agents",
   "ship ready work on axis", or "parallelize axis work".
-model: sonnet
 effort: high
 disable-model-invocation: true
 ---

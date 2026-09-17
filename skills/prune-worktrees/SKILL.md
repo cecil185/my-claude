@@ -6,7 +6,6 @@ description: >
   "show worktrees", "clean up branches", "what worktrees do I have", "list worktrees",
   "show my worktrees", "what branches are checked out", or "prune worktrees".
 allowed-tools: Bash(git worktree list *), Bash(git worktree prune *), Bash(git -C * worktree list *), Bash(ls *)
-model: sonnet
 effort: low
 ---
 

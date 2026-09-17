@@ -12,7 +12,6 @@ description: >-
   addressing MR feedback until ready", "get this MR/PR ready for review",
   "resolve CI and coderabbit loop", "mr ready loop", "pr ready loop", or "loop
   until CI passes and comments are resolved".
-model: sonnet
 disable-model-invocation: true
 ---
 

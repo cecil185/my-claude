@@ -6,7 +6,6 @@ description: >-
   context at a time. Trigger when user says "learn my writing style", "calibrate
   my writing skills", "here are examples of how I write", "update my writing
   examples", or "write-learn".
-model: sonnet
 effort: medium
 ---
 

@@ -5,7 +5,6 @@ description: >-
   one chained command, validating the branch against the in-progress Linear ticket
   first. Trigger when user says "commit", "commit this", "stage and commit",
   "save changes", "commit and push", or "commit and open an MR".
-model: sonnet
 effort: low
 disable-model-invocation: true
 ---

@@ -8,7 +8,6 @@ description: >-
   "triage Datadog errors", "sort through the noise", "find real errors in Datadog",
   "audit log status accuracy", "what errors are real", "check status:error logs",
   or "clean up Datadog noise".
-model: sonnet
 effort: medium
 ---
 

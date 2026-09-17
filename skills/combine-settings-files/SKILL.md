@@ -5,7 +5,6 @@ description: >-
   into the central my-claude settings.json. Trigger when user says "combine settings",
   "merge permissions", "sync settings files", "clean up local settings", "consolidate
   my settings", or "move permissions to the central file".
-model: sonnet
 effort: low
 disable-model-invocation: true
 ---

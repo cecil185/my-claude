@@ -5,7 +5,6 @@ description: >-
   excerpts with file/branch/date context so you can locate the session. Trigger when user says
   "find a past conversation", "what did we discuss about X", "how did we solve X before", "search
   my history for", "look up a previous session", "recall when we", or "search conversations".
-model: claude-sonnet-4-6
 effort: low
 ---
 

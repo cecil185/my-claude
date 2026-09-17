@@ -7,7 +7,6 @@ description: >-
   a plausible bug to judge coverage. Trigger when user says "what could go wrong", "failure
   modes", "risk review", "review this MR for risks", "what are the risks here", or
   "production risks".
-model: claude-opus-4-6
 effort: high
 ---
 

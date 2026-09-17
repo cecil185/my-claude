@@ -7,7 +7,6 @@ description: >-
   Does not write docs or skills. Trigger when user says "find doc gaps", "what needs documenting",
   "doc scan", "doc opportunity scan", "skill gap scan", "identify documentation opportunities",
   "what should we document", "doc audit", "team skill opportunities", or "post doc gaps to Slack".
-model: sonnet
 effort: medium
 ---
 

@@ -4,7 +4,6 @@ description: >-
   Generate a daily standup Slack message from Linear ticket status changes and merged GitLab
   MRs in the last 24 hours. Trigger when user says "standup", "daily update", "status summary",
   "what did I do yesterday", "write my standup", or "generate a standup".
-model: sonnet
 effort: low
 ---
 

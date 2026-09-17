@@ -11,7 +11,6 @@ description: >-
   error", "triage this failure", "look into this Datadog alert", "why did X fail",
   or pastes a Slack permalink from #alerts-data-platform-datadog. Also triggers with
   no input — runs against the latest alert in the channel.
-model: sonnet
 effort: medium
 ---
 

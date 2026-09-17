@@ -8,7 +8,6 @@ description: >-
   Sends report to user via private slack messages.
   Trigger when user says "communication audit", "audit my Slack", "how am I
   communicating", "review my messages", or "how are my tickets written".
-model: claude-opus-4-8
 effort: high
 disable-model-invocation: true
 ---

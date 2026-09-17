@@ -6,7 +6,6 @@ description: >-
   urgent items, filtering out everything else. Trigger when user says "anything
   urgent?", "check for blockers", "focus check", "safe to go heads-down?",
   "anyone waiting on me?", or "scan for urgent messages".
-model: sonnet
 effort: medium
 ---
 

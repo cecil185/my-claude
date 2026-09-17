@@ -6,7 +6,6 @@ description: >
   for DP-XXX", "open DP-XXX in Cursor", "worktree open <branch>", "open this branch in Cursor",
   or "open this in a new window".
 allowed-tools: Bash(git worktree *), Bash(git -C * worktree *), Bash(git branch *), Bash(git rev-parse *), Bash(ls *), Bash(cursor *)
-model: sonnet
 effort: low
 disable-model-invocation: true
 ---

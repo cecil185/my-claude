@@ -8,7 +8,6 @@ description: >-
   attention. Trigger when user says "check for unanswered threads", "any open questions in slack",
   "find stale threads", "who's still waiting", "follow up on open threads", or "scan data platform
   channels for unanswered messages".
-model: opus
 effort: high
 disable-model-invocation: true
 ---

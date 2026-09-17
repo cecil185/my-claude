@@ -6,7 +6,6 @@ description: >-
   user says "find where X is defined", "show me all usages of Y", "read the file at path Z",
   "how does X work", "search the codebase for", "trace the call path for", "diff commits",
   or "what changed in commit".
-model: claude-sonnet-4-6
 effort: high
 ---
 

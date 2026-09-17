@@ -6,7 +6,6 @@ description: >
   "rebase my branch", "bring my branch up to date", "bring up to date with main",
   "sync with main", "rebase onto main", or "I have conflicts to resolve".
 allowed-tools: Bash(git *), Read, Edit, Grep, Glob
-model: sonnet
 effort: high
 disable-model-invocation: true
 ---

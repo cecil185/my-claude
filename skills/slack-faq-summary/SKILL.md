@@ -6,7 +6,6 @@ description: >-
   Trigger when user says "slack faq", "summarize AI questions", "what are people asking in AI
   slack", "what should we document from slack", "common questions from slack", or "faq from
   ai channels".
-model: sonnet
 effort: medium
 ---
 

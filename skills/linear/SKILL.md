@@ -4,7 +4,6 @@ description: >
   Applies best practices when creating or updating Linear tickets: correct team, assignee,
   project, state, and description format. Trigger when user says "create a Linear ticket",
   "add a ticket", "log this in Linear", "update the Linear issue", or "file this as an issue".
-model: sonnet
 effort: low
 disable-model-invocation: true
 ---

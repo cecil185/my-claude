@@ -7,7 +7,6 @@ description: >-
   merge request", "push and open MR", "create merge request for DP-XXX", or "open
   a review". Also trigger after commits are complete and user asks to submit work
   for review.
-model: sonnet
 effort: low
 disable-model-invocation: true
 ---

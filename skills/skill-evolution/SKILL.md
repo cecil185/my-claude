@@ -6,7 +6,6 @@ description: >-
   skills and writes them to disk. Trigger when user says "evolve my skills", "analyze my
   usage", "improve my skills", "what skills should I add", "run skill evolution", "find skill
   gaps", or "what workflows should be automated".
-model: claude-sonnet-4-6
 effort: high
 disable-model-invocation: true
 ---

@@ -6,7 +6,6 @@ description: >-
   creates GitLab MRs for completed work, and leaves investigation notes on tickets that could
   not be fully resolved. Trigger when user provides a Linear project URL and asks to "sprint
   through the backlog", "work through this project", "execute all tickets", or "run the sprint".
-model: sonnet
 effort: medium
 disable-model-invocation: true
 ---

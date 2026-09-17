@@ -5,7 +5,6 @@ description: >-
   with line-level comments. Trigger when user says "review this MR", "review
   the merge request", "critique this diff", "look at MR !123", "look at merge
   request !123" or provides a GitLab MR URL.
-model: claude-opus-4-6
 effort: high
 ---
 
