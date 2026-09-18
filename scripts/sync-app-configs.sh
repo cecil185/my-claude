@@ -1,6 +1,6 @@
 #!/bin/bash
-# Pulls the live, app-owned settings files (Claude, Antigravity/Gemini, Codex)
-# into this repo so they can be diffed and version-controlled.
+# Pulls the live, app-owned settings files (Claude, Antigravity/Gemini, Codex,
+# VS Code, Cursor) into this repo so they can be diffed and version-controlled.
 #
 # These files are rewritten in place by their apps (write-temp + rename), which
 # destroys a symlink sitting at that path and forks it into a plain file. So we
@@ -21,6 +21,10 @@ PAIRS=(
   "$HOME/.gemini/antigravity-cli/settings.json:.gemini/antigravity-cli/settings.json"
   "$HOME/.codex/config.toml:.codex/config.toml"
   "$HOME/.codex/hooks.json:.codex/hooks.json"
+  "$HOME/Library/Application Support/Code/User/settings.json:.vscode/settings.json"
+  "$HOME/Library/Application Support/Code/User/keybindings.json:.vscode/keybindings.json"
+  "$HOME/Library/Application Support/Cursor/User/settings.json:.cursor/settings.json"
+  "$HOME/Library/Application Support/Cursor/User/keybindings.json:.cursor/keybindings.json"
 )
 
 cmd="${1:-}"

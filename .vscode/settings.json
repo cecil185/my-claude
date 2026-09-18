@@ -1,3 +1,10 @@
 {
-  "workbench.colorTheme": "Red"
+  "workbench.colorTheme": "Dark Modern",
+  "chat.useHooks": true,
+  "chat.hookFilesLocations": {
+    "~/.copilot/hooks": true
+  },
+  "chat.pluginLocations": {
+    "/opt/homebrew/lib/node_modules/lavish-axi": true
+  }
 }

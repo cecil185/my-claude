@@ -1,0 +1,29 @@
+{
+    "window.commandCenter": 1,
+    "workbench.colorTheme": "Quiet Light",
+    "diffEditor.ignoreTrimWhitespace": false,
+    "cursor.composer.shouldChimeAfterChatFinishes": true,
+    "cursor.cpp.enablePartialAccepts": true,
+    "git.enableSmartCommit": true,
+    "git.autofetch": true,
+    "githubPullRequests.pullBranch": "never",
+    "git.confirmSync": false,
+    "terminal.external.osxExec": "Warp.app",
+    "editor.detectIndentation": false,
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    "terminal.integrated.profiles.osx": {
+    "zsh": {
+        "path": "/opt/homebrew/bin/zsh",
+        "args": ["-l"]
+        }
+    },
+    "makefile.configureOnOpen": false,
+    "redhat.telemetry.enabled": false,
+    "git.ignoreRebaseWarning": true,
+    "terminal.integrated.tabs.location": "left",
+    "terminal.integrated.tabs.enabled": false,
+    "window.autoDetectColorScheme": false,
+    "git.openRepositoryInParentFolders": "never",
+    "git.replaceTagsWhenPull": true,
+    "cursor.composer.queueMessageDefaultBehavior": "steer",
+}

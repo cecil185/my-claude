@@ -1,7 +1,28 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "env": {
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+    "ANTHROPIC_BASE_URL": "https://api.fireworks.ai/inference",
+    "ANTHROPIC_DEFAULT_FABLE_MODEL": "kimi-latest[1m]",
+    "ANTHROPIC_DEFAULT_FABLE_MODEL_DESCRIPTION": "Fireworks serverless (Kimi K3 (Latest)): $3 in / $15 out per Mtok ($0.3 cached in).",
+    "ANTHROPIC_DEFAULT_FABLE_MODEL_NAME": "Kimi K3 (Latest)",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "deepseek-flash-latest[1m]",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL_DESCRIPTION": "Fireworks serverless (DeepSeek-V4-Flash-0731 (Latest)): $0.22 in / $0.66 out per Mtok ($0.007 cached in).",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL_NAME": "DeepSeek-V4-Flash-0731 (Latest)",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "deepseek-pro-latest[1m]",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL_DESCRIPTION": "Fireworks serverless (DeepSeek-V4-Pro-0813 (Latest)): $1.32 in / $3.96 out per Mtok ($0.044 cached in).",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL_NAME": "DeepSeek-V4-Pro-0813 (Latest)",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "glm-fast-latest[1m]",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL_DESCRIPTION": "Fireworks serverless (GLM-5.3 Fast (Latest)): $2.1 in / $6.6 out per Mtok ($0.39 cached in). Fast tier.",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL_NAME": "GLM-5.3 Fast (Latest)",
+    "CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING": "1",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE": "0",
+    "CLAUDE_CODE_SUBAGENT_MODEL": "deepseek-flash-latest[1m]",
+    "DISABLE_TELEMETRY": "1",
+    "DO_NOT_TRACK": "1",
+    "ENABLE_TOOL_SEARCH": "true",
+    "ANTHROPIC_CUSTOM_HEADERS": "X-Fireworks-Api-Key: fw_R9sDuX4Xqb5S1ZdSg32HKV\nX-Title: Claude Code\nHTTP-Referer: fireconnect/v0.9.6"
   },
   "permissions": {
     "allow": [
@@ -375,7 +396,9 @@
       "Read(/etc/shadow)",
       "Read(/etc/passwd)",
       "Edit(/usr/**)",
-      "Edit(/System/**)"
+      "Edit(/System/**)",
+      "WebSearch",
+      "WebFetch"
     ],
     "ask": [
       "Bash(cp *)",
@@ -680,8 +703,9 @@
       "Bash(aws storagegateway delete-gateway *)",
       "Bash(aws kafka reboot-broker *)"
     ],
-    "defaultMode": "acceptEdits"
+    "defaultMode": "auto"
   },
+  "model": "fable",
   "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "linear-server"
@@ -810,6 +834,23 @@
         ]
       }
     ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/usr/local/bin/aicodemetricsd",
+            "args": [
+              "hook",
+              "claude",
+              "--hook-input",
+              "stdin"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
+    ],
     "SessionStart": [
       {
         "matcher": "startup|resume",
@@ -862,6 +903,7 @@
   "enabledPlugins": {
     "adlc@teamworks-claude": true,
     "code-review@claude-plugins-official": false,
+    "databricks@claude-plugins-official": true,
     "flywheel@teamworks-claude": true,
     "foundations@teamworks-claude": true,
     "imbue-code-guardian@imbue-code-guardian": true,

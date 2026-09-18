@@ -236,7 +236,9 @@
       "command(gh)",
       "command(pwd)",
       "command(sleep)",
-      "command(open)"
+      "command(open)",
+      "command(echo)",
+      "command(npx -y lavish-axi design)"
     ],
     "ask": [
       "Bash(cp *)",
@@ -1303,7 +1305,8 @@
     "/Users/cecil/Code/me/harness/worktrees/C12",
     "/Users/cecil/Code/me/harness/worktrees/fix-scrolling",
     "/Users/cecil/Code/me/harness/worktrees/feat-add-tool-paths-to-tui",
-    "/Users/cecil/Code/me/harness/worktrees/feat-cost-analysis-end-of-session"
+    "/Users/cecil/Code/me/harness/worktrees/feat-cost-analysis-end-of-session",
+    "/Users/cecil/Code/me/harness/worktrees/fix-stream-end"
   ],
   "ui": {
     "theme": "GitHub"

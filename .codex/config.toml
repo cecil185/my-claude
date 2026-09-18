@@ -6,8 +6,14 @@ model_reasoning_effort = "medium"
 [projects."/Users/cecil/Code/me/harness"]
 trust_level = "trusted"
 
+[projects."/Users/cecil/Code/me/keycard/data-analytics"]
+trust_level = "trusted"
+
+[hooks.state]
+
 [hooks.state."/Users/cecil/.codex/hooks.json:post_tool_use:0:0"]
 trusted_hash = "sha256:f4d24a92ecd41841f4872a4a19961a78232462e2f40147df0c8a56ada6779023" # aicodemetricsd:managed
+enabled = true
 
 [hooks.state."/Users/cecil/.codex/hooks.json:pre_tool_use:0:0"]
 trusted_hash = "sha256:625210aafbd3dfa32aa6e667dfe511ef68a37803687da9b35578c6ccd94b66c2" # aicodemetricsd:managed
@@ -18,6 +24,15 @@ trusted_hash = "sha256:7e222295f1c9fd7b1edbf68fda0c95fb2fce8f22ee33cefb1bd0bc71e
 [hooks.state."/Users/cecil/.codex/hooks.json:stop:0:0"]
 trusted_hash = "sha256:1ac4959a4bb2dfb80dfb17c56be9035397f663192d020f0c0994915a7038ebe7" # aicodemetricsd:managed
 
+[hooks.state."databricks@databricks-agent-skills:hooks/hooks.json:post_tool_use:0:0"]
+trusted_hash = "sha256:cefe8ed8161a36e6591a6fea648084395e994ec35001840e858b89f48fe56eaa"
+
+[hooks.state."databricks@databricks-agent-skills:hooks/hooks.json:session_start:0:0"]
+trusted_hash = "sha256:a9f98cd8cd368d27351a40c07ab2f6c9e534c7098938be54dcc1326af31dbeb3"
+
+[hooks.state."databricks@databricks-agent-skills:hooks/hooks.json:user_prompt_submit:0:0"]
+trusted_hash = "sha256:d79431dd8e25542343f45c6473ebdb9d1eea51e3f5b61996865f9d4ac066d81b"
+
 [apps.connector_76869538009648d5b282a4bb21c3d157.tools."github.update_pull_request"]
 approval_mode = "approve"
 
@@ -25,10 +40,11 @@ approval_mode = "approve"
 url = "https://developers.openai.com/mcp"
 
 [tui.model_availability_nux]
-"gpt-5.6-sol" = 2
+"gpt-5.6-sol" = 3
 
 [marketplaces.databricks-agent-skills]
-last_updated = "2026-08-24T12:23:27Z"
+last_updated = "2026-09-07T20:29:00Z"
+last_revision = "4d17885b0115718b5fb6a7540e908cb4201d4f2d"
 source_type = "git"
 source = "https://github.com/databricks/databricks-agent-skills.git"
 
