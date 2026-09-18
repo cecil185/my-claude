@@ -55,3 +55,6 @@ echo
 echo "Done. Make sure ~/.zshrc sets:"
 echo '  ZSH_THEME="powerlevel10k/powerlevel10k"'
 echo '  plugins=(... zsh-autosuggestions zsh-syntax-highlighting)'
+echo ' if powerlevel10k not found run:'
+echo 'git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
+  ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k'
