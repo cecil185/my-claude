@@ -105,3 +105,4 @@ unset _mngr_completion
 
 # Added by Antigravity CLI installer
 export PATH="/Users/cecil/.local/bin:$PATH"
+eval "$(/opt/homebrew/bin/brew shellenv)"

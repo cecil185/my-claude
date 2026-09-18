@@ -9,3 +9,5 @@ sync:
 sync-diff:
     ./scripts/sync-app-configs.sh diff
 
+sync-zshrc:
+    cp -f ~/.zshrc ./.zshrc
